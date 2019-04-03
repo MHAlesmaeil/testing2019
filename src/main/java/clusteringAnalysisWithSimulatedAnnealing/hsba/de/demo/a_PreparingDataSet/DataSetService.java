@@ -59,6 +59,7 @@ public class DataSetService {
         list = csvReader.readAll();
         reader1.close();
         csvReader.close();
+        // TODO: 03.04.2019 checking the data before prcessing to the next step 
         return list;
     }
 

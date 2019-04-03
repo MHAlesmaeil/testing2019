@@ -16,7 +16,7 @@
                     <div style="margin-bottom: 10px">
                         <table th:if="${!testWithMe.empty}"  class="table table-top table-responsive-md  text-center">
                             <tr th:each="dataSet :${testWithMe}" >
-                                <div th:each="elementNumberInRow :${#numbers.sequence(0, totalcolums)}" >
+                                <div th:if="${!dataSet[0].empty}" th:each="elementNumberInRow :${#numbers.sequence(0, totalcolums)}" >
                                     <td th:text="${dataSet[elementNumberInRow]}"></td>
                                 </div>
                             </tr>
