@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <!-- Masthead -->
+    <div class=" text-center" style="margin-top: 30px;">
+        <div class="container masthead">
+            <div class="row">
+
+                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto" style="background: grey; color: aliceblue">
+                    <div >
+                        <h1>Select Your csv File</h1>
+                    </div>
+                    <div style="margin-bottom: 10px">
+                        <table th:if="${!testWithMe.empty}"  class="table table-top table-responsive-md  text-center">
+                            <tr th:each="dataSet :${testWithMe}" >
+                                <div th:each="elementNumberInRow :${#numbers.sequence(0, totalcolums)}" >
+                                    <td th:text="${dataSet[elementNumberInRow]}"></td>
+                                </div>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- for information and summeries  -->
+                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto row" style="background: #343a40; color:goldenrod;">
+                    <h1 class="darkGrey">Available Data Set</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- down for further information, but just when it is necessary -->
+        <!--<div class="col-md-12 col-lg-12 col-xl-12 mx-auto row" style="margin-top: 30px; background:goldenrod; color: dimgrey; ">
+            <h1 class="mb-5">More Information</h1>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

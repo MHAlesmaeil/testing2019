@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class DataSetDetails {
     private final DataSetService dataSetService;
@@ -22,7 +24,7 @@ public class DataSetDetails {
 
     // here we must show a confirmation if the data were successfully added to the database
     @GetMapping("/dataSets/{id}")
-    public String showDataSet (Model model, @PathVariable("id") Long id){
+    public String showDataSetInformation(Model model, @PathVariable("id") Long id){
         DataSet dataSet = dataSetService.findDataSetById(id);
 
         if (dataSet==null){
@@ -31,9 +33,19 @@ public class DataSetDetails {
         model.addAttribute("dataSetDetails", dataSetService.findDataSetById(id));
         return "data/dataSetDetails";
     }
+
+    @GetMapping("/dataSets/testWithMe/{id}")
+    public String useDataSet(Model model, @PathVariable("id") Long id) throws Exception {
+        List<String[]> dataSet =  dataSetService.dataSetDetails(id);
+        model.addAttribute("totalcolums",dataSetService.getTotalNumberOfColumns(id));
+        model.addAttribute("testWithMe", dataSet);
+        return "data/testWithMe";
+    }
+
     @GetMapping("/dataSets/delete/{id}")
     public String deleteDataSet (Model model, @PathVariable("id") Long id){
         dataSetService.deleteDataSet(id);
         return "redirect:/index";
     }
+
 }

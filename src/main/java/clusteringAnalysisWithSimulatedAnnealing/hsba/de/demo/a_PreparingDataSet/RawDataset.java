@@ -33,7 +33,7 @@ public class RawDataset {
             }*//*
 
             System.out.println(csvReader.verifyReader());
-            List<String[]> records = csvReader.readAll();
+            List<String[]> records = csvReader.dataSetDetails();
             for (String[] record : records) {
                 System.out.println("Name : " + record[0]);
                 System.out.println("Email : " + record[1]);
