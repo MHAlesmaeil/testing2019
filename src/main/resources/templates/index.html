@@ -50,16 +50,15 @@
                         <h1 class="darkGrey">Available Data Set</h1>
                         <table th:if="${!avaibleDataSet.empty}" class="table table-top table-responsive-md  text-center">
                             <tr>
-                                <th>Data Set Id</th>
                                 <th>Data Set Name</th>
                                 <th></th>
-
                             </tr>
                             <tr th:each="dataSet :${avaibleDataSet}" >
-                                <td th:text="${dataSet.getId()}"></td>
+
                                 <td th:text="${dataSet.getDataSetName()}"></td>
                                 <td>
                                     <a th:href="${'/dataSets/'+dataSet.getId()}" role="button" class="btn btn-light">Details</a>
+                                    <a th:href="${'/dataSets/delete/'+dataSet.getId()}" role="button" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         </table>

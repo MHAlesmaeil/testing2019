@@ -12,24 +12,21 @@
                 <div  >
                     <table class="table table-top table-responsive-md text-center">
                         <tr>
-                            <th>ID</th>
+
                             <th>Data Set Name</th>
                             <th>Description</th>
                             <th>Data Set Path</th>
-                            <th>Use for Test</th>
-                            <th>Delete</th>
+                            <th>Options</th>
                         </tr>
                         <tr>
-                            <td th:text="${dataSetDetails.getId()}"></td>
                             <td th:text="${dataSetDetails.getDataSetName()}"></td>
                             <td th:text="${dataSetDetails.getDataSetDescription()}"></td>
                             <td th:text="${dataSetDetails.getDataSetPath()}"></td>
                             <td>
                                 <a th:href="${'/dataSets/testWithMe/'+dataSetDetails.getId()}" role="button" class="btn btn-light">Use It</a>
+                                <a th:href="${'/dataSets/delete/'+dataSetDetails.getId()}" role="button" class="btn btn-danger">Delete</a>
                             </td>
-                            <td>
-                                <a th:href="${'/dataSets/delete/'+dataSetDetails.getId()}" role="button" class="btn btn-light">Delete</a>
-                            </td>
+
                         </tr>
                     </table>
                 </div>
