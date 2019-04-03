@@ -1,10 +1,18 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet;
 
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.fehler.InternalServerError;
 import com.opencsv.CSVReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.PostUpdate;
+import javax.persistence.PrePersist;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,7 +23,6 @@ import java.util.Scanner;
 
 @Service
 @Transactional
-@Component
 public class DataSetService {
     private final DataSetRepository dataSetRepository;
 
@@ -34,8 +41,10 @@ public class DataSetService {
     // relevant columns
     int [] relevantColumns;
 
-    public void saveDataSet (DataSet dataset){
-        dataSetRepository.save(dataset);
+    public void saveDataSet (DataSet dataset)throws Exception{
+        if (verifyPathCorrectness(dataset)==true){
+            dataSetRepository.save(dataset);
+        }
     }
       public void deleteDataSet (Long id){
             dataSetRepository.deleteById(id);
@@ -72,6 +81,17 @@ public class DataSetService {
         reader1.close();
         csvReader.close();
         return list;
+    }
+
+    public boolean verifyPathCorrectness (DataSet dataSet) throws Exception{
+        boolean isItValid;
+        Reader reader = Files.newBufferedReader(Paths.get(dataSet.getDataSetPath()));
+        CSVReader csvReader = new CSVReader(reader);
+        isItValid = csvReader.verifyReader();
+        reader.close();
+        csvReader.close();
+        return isItValid;
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.fehler.InternalServerError;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSet;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSetService;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -28,11 +29,11 @@ public class IndexController {
     }
     @PostMapping("/index")
     public String uploaddata (@ModelAttribute("newDataSet") DataSet dataSet){
-        // TODO: 03.04.2019 if data has been read, then accept it, otherweise throw an exception 
+        // TODO: 03.04.2019 if data has been read, then accept it, otherweise throw an exception
         try{
             this.dataSetService.saveDataSet(dataSet);
         }catch (Exception e){
-            System.out.println("Data was not saved");
+            throw new InternalServerError();
         }
 
         return "redirect:/index";
