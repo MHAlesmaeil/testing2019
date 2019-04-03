@@ -1,0 +1,61 @@
+<form th:object="${trip}" th:fragment="content">
+    <div class="form-group row">
+        <label for="inputStart" class="col-sm-4 col-form-label"><strong>Abfahrtsort:</strong></label>
+        <div class="col-sm-8">
+            <input type="text" id="inputStart" name="start" readonly class="form-control-plaintext"
+                   th:field="*{start}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputEnd" class="col-sm-4 col-form-label"><strong>Ankunftsort:</strong></label>
+        <div class="col-sm-8">
+            <input type="text" id="inputEnd" name="end" readonly class="form-control-plaintext"
+                   th:field="*{end}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputDate" class="col-sm-4 col-form-label"><strong>Datum und Uhrzeit:</strong></label>
+        <div class="col-sm-8">
+            <input type="datetime-local" id="inputDate" name="date" readonly class="form-control-plaintext"
+                   th:field="*{date}"/>
+        </div>
+    </div>
+    <!--Anbieter nur anzeigen wenn Fahrt nicht zum angemeldeten Benutzer gehoert-->
+    <div th:if="${!trip.isOwnedByCurrentUser()}" class="form-group row">
+        <label for="inputOwner" class="col-sm-4 col-form-label"><strong>Fahrer:</strong></label>
+        <div class="col-sm-4">
+            <input type="text" id="inputOwner" name="owner" readonly class="form-control-plaintext"
+                   th:value="${trip.owner.name}"/>
+        </div>
+        <a th:href="${'/users/' + trip.owner.id + '/comments'}" role="button" class="btn btn-secondary"><strong>Kommentare zum Fahrer ansehen</strong></a>
+    </div>
+    <div class="form-group row">
+        <label for="inputPets" class="col-sm-4 col-form-label"><strong>Haustiere:</strong></label>
+        <div class="col-sm-8">
+            <input type="text" id="inputPets" name="pets" readonly class="form-control-plaintext"
+                   th:value="${trip.pet?'Ja':'Nein'}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputSmoking" class="col-sm-4 col-form-label"><strong>Raucher:</strong></label>
+        <div class="col-sm-8">
+            <input type="text" id="inputSmoking" name="smoking" readonly class="form-control-plaintext"
+                   th:value="${trip.smoking?'Ja':'Nein'}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputFreeSeats" class="col-sm-4 col-form-label"><strong>Freie Plätze:</strong></label>
+        <div class="col-sm-8">
+            <input type="text" id="inputFreeSeats" name="freeSeats" readonly class="form-control-plaintext"
+                   th:field="*{remainingSeats}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPrice" class="col-sm-4 col-form-label"><strong>Preis pro Platz (in €):</strong></label>
+        <div class="col-sm-8">
+            <input type="number" id="inputPrice" name="price" readonly class="form-control-plaintext"
+                   th:field="*{price}"/>
+        </div>
+    </div>
+</form>

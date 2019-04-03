@@ -1,0 +1,77 @@
+/* Navbar */
+.nav-element {
+    margin-top: 19px;
+}
+
+/* der Header (Überschriften) */
+.mf-header {
+    margin-top: 13px;
+    margin-bottom: 25px;
+}
+
+/*grauer Hintergrund */
+.grey {
+    background-color:#ffffff;
+}
+
+.darkGrey{
+    background-color: #343a40;
+    color: #E3E3E3;
+}
+
+/*index.html */
+.box {
+    margin-top: 23px;
+    margin-bottom: 20px;
+}
+.box-bottom {
+    margin-bottom: 32px;
+}
+.container{
+	margin-bottom: 100px
+}
+.foot{
+	position: fixed;left: 0;bottom: 0;	text-align: center; height: 70px
+}
+
+/* Masthead index all-data.html - inspiriert vom Bootstrap-Template landing page */
+.masthead{position:relative;background-color:#343a40;background:url(../img/indexbild.jpg) no-repeat center center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;padding-top:8rem;padding-bottom:8rem}header.masthead .overlay{position:absolute;background-color:#212529;height:100%;width:100%;top:0;left:0;opacity:.3}header.masthead h1{font-size:2rem}
+
+ /* Masthead index signup.html - inspiriert vom Bootstrap-Template landing page */
+.masthead2{position:relative;background-color:#343a40;background:url(../img/world.jpg) no-repeat center center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;padding-top:8rem;padding-bottom:2rem}header.masthead .overlay{position:absolute;background-color:#212529;height:100%;width:100%;top:0;left:0;opacity:.3}header.masthead h1{font-size:2rem}
+
+/*login.html */
+.masthead-login{position:relative;background-color:#343a40;background:url(../img/login.jpeg) no-repeat center center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;padding-top:8rem;padding-bottom:8rem}header.masthead .overlay{position:absolute;background-color:#212529;height:100%;width:100%;top:0;left:0;opacity:.3}header.masthead h1{font-size:2rem}
+
+/*signup.html */
+.masthead-signup{position:relative;background-color:#343a40;background:url(../img/signup1.jpg) no-repeat center center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;padding-top:8rem;padding-bottom:8rem}header.masthead .overlay{position:absolute;background-color:#212529;height:100%;width:100%;top:0;left:0;opacity:.3}header.masthead h1{font-size:2rem}
+
+/* book-trip.hmtl */
+.button-right {
+    color: #6f42c1;
+    margin-right: 50px;
+}
+
+/* all-data.html */
+.table-top {
+    margin-top: 15px;
+}
+
+/* comments.html */
+.comment {
+    margin-bottom: 18px;
+}
+.textcomment {
+    font-style: italic;
+}
+
+/* new-trip.html */
+.checkboxes {
+    float: left;
+}
+
+/* rating.html */
+.ratingform {
+    margin-top: 50px;
+}
+

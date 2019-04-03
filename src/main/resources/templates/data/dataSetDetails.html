@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <!-- Masthead -->
+    <div class=" container text-center" style="margin-top: 30px; height: available">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-12 mx-auto" style="background: grey; color: aliceblue">
+                <h1>Data Set Details</h1>
+                <div  >
+                    <table class="table table-top table-responsive-md text-center">
+                        <tr>
+                            <th>ID</th>
+                            <th>Data Set Name</th>
+                            <th>Description</th>
+                            <th>Data Set Path</th>
+                            <th>Use for Test</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${dataSetDetails.getId()}"></td>
+                            <td th:text="${dataSetDetails.getDataSetName()}"></td>
+                            <td th:text="${dataSetDetails.getDataSetDescription()}"></td>
+                            <td th:text="${dataSetDetails.getDataSetPath()}"></td>
+                            <td>
+                                <a th:href="${'/dataSets/testWithMe/'+dataSetDetails.getId()}" role="button" class="btn btn-light">Use It</a>
+                            </td>
+                            <td>
+                                <a th:href="${'/dataSets/delete/'+dataSetDetails.getId()}" role="button" class="btn btn-light">Delete</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- for information and summeries  -->
+        </div>
+    </div>
+    <div>
+        <!-- down for further information, but just when it is necessary -->
+        <div class="col-md-12 col-lg-12 col-xl-12 mx-auto" style="margin-top: 30px; background:goldenrod; color: dimgrey; ">
+            <h1 class="mb-5">Further Information</h1>
+        </div>
+    </div>
+</div>
+</body>
+</div>
+</body>
+</html>
