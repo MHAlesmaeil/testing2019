@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.fehler;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
