@@ -13,6 +13,13 @@
                     <div >
                         <h1>Select Your csv File</h1>
                     </div>
+
+                </div>
+                <!-- for information and summeries  -->
+                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto " style="background: #343a40; color:goldenrod;">
+                    <div>
+                        <h1 class="">Available Data Set</h1>
+                    </div>
                     <div style="margin-bottom: 10px">
                         <table th:if="${!testWithMe.empty}"  class="table table-top table-responsive-md  text-center">
                             <tr th:each="dataSet :${testWithMe}" >
@@ -22,10 +29,6 @@
                             </tr>
                         </table>
                     </div>
-                </div>
-                <!-- for information and summeries  -->
-                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto row" style="background: #343a40; color:goldenrod;">
-                    <h1 class="darkGrey">Available Data Set</h1>
 
                 </div>
             </div>
