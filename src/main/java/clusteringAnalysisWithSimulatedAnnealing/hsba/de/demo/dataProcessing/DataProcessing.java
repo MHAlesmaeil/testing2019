@@ -2,9 +2,13 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "dataProcessing")
 @Component
 public class DataProcessing {
     @Id

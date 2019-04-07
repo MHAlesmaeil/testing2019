@@ -5,10 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class DataProcssingServices {
+public class DataProcessingServices {
     private final DataProcessingRepository processingRepository;
 
-    public DataProcssingServices(DataProcessingRepository processingRepository) {
+    public DataProcessingServices(DataProcessingRepository processingRepository) {
         this.processingRepository = processingRepository;
     }
 
