@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation;
 
 import com.opencsv.CSVReader;
 import org.springframework.stereotype.Service;
@@ -126,7 +126,6 @@ public class DataSetService {
             columnNumber++;
         }
         // Instructions of selecting the columns
-        new Notifications(2);
         // TODO: 02.04.2019 you are here .--> next step to place scaner for 
         return relevantColumns;
     }

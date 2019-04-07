@@ -1,8 +1,8 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.NotFoundException;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSet;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSetService;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSet;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
-public class DataSetDetails {
+public class DataSetDetailsController {
     private final DataSetService dataSetService;
 
-    public DataSetDetails(DataSetService dataSetService) {
+    public DataSetDetailsController(DataSetService dataSetService) {
         this.dataSetService = dataSetService;
     }
 
@@ -35,6 +35,7 @@ public class DataSetDetails {
         List<String[]> dataSet =  dataSetService.dataSetDetails(id);
         model.addAttribute("totalcolums",dataSetService.getTotalNumberOfColumns(id));
         model.addAttribute("testWithMe", dataSet);
+        model.addAttribute("newProcess");
         return "data/testWithMe";
     }
 

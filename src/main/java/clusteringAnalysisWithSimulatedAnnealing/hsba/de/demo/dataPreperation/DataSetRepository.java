@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

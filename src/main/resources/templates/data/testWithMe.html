@@ -11,8 +11,61 @@
 
                 <div class="col-md-6 col-lg-6 col-xl-6 mx-auto" style="background: grey; color: aliceblue">
                     <div >
-                        <h1>Select Your csv File</h1>
+                        <h1>Select Processing Details</h1>
                     </div>
+                    <div class="" style="margin-bottom: 10px">
+                        <form th:object="${newProcess}" action="/index" method="post" class="form-horizontal">
+                            <div class="input-group">
+                                <label for="basic-url">Processing Name</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" >Custer xxx</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="processingName" aria-describedby="basic-addon3" name="processingName" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Select Clustring Method</label>
+                                    </div>
+                                    <select name="clusteringMethod" class="custom-select" id="clusteringMethod">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Simulated Annealing</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Distance Calculation Method</label>
+                                    </div>
+                                    <select name="DistanceCalMethod" class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Euclidean Distance</option>
+                                        <option value="2">Manhattan </option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cluster Number</span>
+                                    </div>
+                                    <input type="number" min="2" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="clustersNumber">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Number Of Iteration</span>
+                                    </div>
+                                    <input type="number" min="1" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="iterationNumber">
+                                </div>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="submit">Button</button>
+                                </div>
+
+
+                        </form>
+                    </div>
+                </div>
 
                 </div>
                 <!-- for information and summeries  -->

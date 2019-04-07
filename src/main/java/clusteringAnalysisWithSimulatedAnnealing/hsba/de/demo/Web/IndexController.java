@@ -1,8 +1,8 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.InternalServerError;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSet;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.a_PreparingDataSet.DataSetService;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSet;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class IndexController {
         this.dataSetService = dataSetService;
     }
 
-    @GetMapping("/index")
+    @GetMapping({"/index","","/"})
     public String index(Model model) {
         model.addAttribute("newDataSet");
         return "index";
