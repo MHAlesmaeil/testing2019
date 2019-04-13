@@ -88,7 +88,7 @@ public class RawDataSetService {
             }
         }else {
             // add the first 5 elements
-            for (int x = 0; x<5; x++){
+            for (int x = 0; x<7; x++){
                 summary.add(list.get(x));
             }
         }
