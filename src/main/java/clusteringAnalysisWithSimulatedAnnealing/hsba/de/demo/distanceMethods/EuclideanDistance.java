@@ -1,6 +1,6 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distenceMethods;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distanceMethods;
 
-public class EuclideanDistance implements DistenceMethod {
+public class EuclideanDistance implements DistanceMethod {
 
     @Override
     public double computeDistance(double[] firstArray, double[] secondArray) {

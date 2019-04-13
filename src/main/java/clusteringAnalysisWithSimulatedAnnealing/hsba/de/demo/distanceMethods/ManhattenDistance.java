@@ -1,7 +1,7 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distenceMethods;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distanceMethods;
 
-public class ManhattenDistence implements DistenceMethod {
-    public ManhattenDistence() {
+public class ManhattenDistance implements DistanceMethod {
+    public ManhattenDistance() {
         System.out.println("ManhattenDisence instance has been created");
     }
 
