@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface DataSetRepository extends JpaRepository<DataSet, Long> {
+public interface RawDataSetRepository extends JpaRepository<RawDataSet, Long> {
 }

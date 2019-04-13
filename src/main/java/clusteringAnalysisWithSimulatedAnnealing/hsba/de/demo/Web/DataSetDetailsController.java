@@ -1,8 +1,8 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.NotFoundException;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSet;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSetService;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSet;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,28 +12,28 @@ import java.util.List;
 
 @Controller
 public class DataSetDetailsController {
-    private final DataSetService dataSetService;
+    private final RawDataSetService rawDataSetService;
 
-    public DataSetDetailsController(DataSetService dataSetService) {
-        this.dataSetService = dataSetService;
+    public DataSetDetailsController(RawDataSetService rawDataSetService) {
+        this.rawDataSetService = rawDataSetService;
     }
 
     // here we must show a confirmation if the data were successfully added to the database
     @GetMapping("/dataSets/{id}")
     public String showDataSetInformation(Model model, @PathVariable("id") Long id){
-        DataSet dataSet = dataSetService.findDataSetById(id);
+        RawDataSet rawDataSet = rawDataSetService.findDataSetById(id);
 
-        if (dataSet==null){
+        if (rawDataSet ==null){
             throw new NotFoundException();
         }
-        model.addAttribute("dataSetDetails", dataSetService.findDataSetById(id));
+        model.addAttribute("dataSetDetails", rawDataSetService.findDataSetById(id));
         return "data/dataSetDetails";
     }
 
     @GetMapping("/dataSets/testWithMe/{id}")
     public String useDataSet(Model model, @PathVariable("id") Long id) throws Exception {
-        List<String[]> dataSet =  dataSetService.dataSetDetails(id);
-        model.addAttribute("totalcolums",dataSetService.getTotalNumberOfColumns(id));
+        List<String[]> dataSet =  rawDataSetService.dataSetSummay(id);
+        model.addAttribute("totalcolums", rawDataSetService.getTotalNumberOfColumns(id));
         model.addAttribute("testWithMe", dataSet);
         model.addAttribute("newProcess");
         return "data/testWithMe";
@@ -41,7 +41,7 @@ public class DataSetDetailsController {
 
     @GetMapping("/dataSets/delete/{id}")
     public String deleteDataSet (Model model, @PathVariable("id") Long id){
-        dataSetService.deleteDataSet(id);
+        rawDataSetService.deleteDataSet(id);
         return "redirect:/index";
     }
 

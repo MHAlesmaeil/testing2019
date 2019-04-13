@@ -16,6 +16,7 @@ public class ClusterMean {
         }
         // when calculation is done, averages can be computer based on te list size.
         for (int computeClusterMeanAverage=1;computeClusterMeanAverage<computeClusterMeanTemp.length; computeClusterMeanAverage++ ){
+            // do division
             computeClusterMeanTemp[computeClusterMeanAverage]= computeClusterMeanTemp[computeClusterMeanAverage]/cluster.size();
         }
         return computeClusterMeanTemp;

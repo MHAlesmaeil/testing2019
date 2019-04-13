@@ -13,14 +13,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DataSetService {
-    private final DataSetRepository dataSetRepository;
+public class RawDataSetService {
+    private final RawDataSetRepository rawDataSetRepository;
     private List<String []> dataSetDetails;
 
 
 
-    public DataSetService(DataSetRepository dataSetRepository) {
-        this.dataSetRepository = dataSetRepository;
+    public RawDataSetService(RawDataSetRepository rawDataSetRepository) {
+        this.rawDataSetRepository = rawDataSetRepository;
     }
 
     // default path for the file
@@ -34,38 +34,79 @@ public class DataSetService {
     // relevant columns
     int [] relevantColumns;
 
-    public void saveDataSet (DataSet dataset)throws Exception{
+    public void saveDataSet (RawDataSet dataset)throws Exception{
         if (verifyPathCorrectness(dataset)==true){
-            dataSetRepository.save(dataset);
+            rawDataSetRepository.save(dataset);
         }
     }
     public void deleteDataSet (Long id){
-            dataSetRepository.deleteById(id);
+            rawDataSetRepository.deleteById(id);
     }
-    public Collection<DataSet> findAllDataSet (){
-           return dataSetRepository.findAll();
+    public Collection<RawDataSet> findAllDataSet (){
+           return rawDataSetRepository.findAll();
     }
-    public DataSet findDataSetById(Long id) {
-        return dataSetRepository.findById(id).orElse(null);
+    public RawDataSet findDataSetById(Long id) {
+        return rawDataSetRepository.findById(id).orElse(null);
     }
 
 
     // Method which is a list that contains all data as List<String[]>
     public List<String[]> dataSetDetails(Long id) throws Exception {
-        DataSet dataSet = findDataSetById(id);
-        Reader reader1 = Files.newBufferedReader(Paths.get(dataSet.getDataSetPath()));
+        RawDataSet rawDataSet = findDataSetById(id);
+        Reader reader1 = Files.newBufferedReader(Paths.get(rawDataSet.getDataSetPath()));
         CSVReader csvReader = new CSVReader(reader1);
         List<String[]> list = new ArrayList<>();
         list = csvReader.readAll();
         reader1.close();
         csvReader.close();
-        // TODO: 03.04.2019 checking the data before prcessing to the next step 
         return list;
     }
+    // Method which is a list that contains all data as List<String[]>
+    public List<String[]> dataSetSummay(Long id) throws Exception {
+        List<String[]> list = new ArrayList<>();
+        list = dataSetDetails(id);
+        List<String []> summary = new ArrayList<>();
+        // add the first 3 rows to the summary
+        for (int x = 0; x<3; x++){
+            summary.add(list.get(x));
+        }
+        if (list.size()>10){
+            for (int x=0; x<1; x++){
+                String [] emptyLine = new String[summary.get(0).length];
+                for (int y= 0; y<summary.get(0).length; y++){
+                    emptyLine[y]=" ... ";
+                }
+                summary.add(emptyLine);
+            }
 
-    public boolean verifyPathCorrectness (DataSet dataSet) throws Exception{
+            for (int x=list.size()-2; x<list.size(); x++){
+                summary.add(list.get(x));
+            }
+        }
+        return summary;
+    }
+
+    // to compute the values
+    public List<double[]> dataSetDoubleWithoutHeader(List<String[]> dataSetToBeConverted ) throws Exception{
+        List<double[]> temp = new ArrayList<>();
+        List<String []> tempString = dataSetToBeConverted;
+        // for loop to call each row in the string dataset
+        // first row will be escaped as the header might not be a double
+        for (int dataSetRowCounter=1; dataSetRowCounter<tempString.size(); dataSetRowCounter++){
+            String [] singleRowString = tempString.get(dataSetRowCounter);
+            double [] singleRowDouble = new double[singleRowString.length];
+            // for loop to call every single attribute in the row and save it in the return List<double []>
+            for (int singleRowStringCounter=0; singleRowStringCounter<singleRowString.length; singleRowStringCounter++){
+                singleRowDouble[singleRowStringCounter]=Double.valueOf(singleRowString[singleRowStringCounter]);
+            }
+            temp.add(singleRowDouble);
+        }
+        return temp;
+    }
+
+    public boolean verifyPathCorrectness (RawDataSet rawDataSet) throws Exception{
         boolean isItValid;
-        Reader reader = Files.newBufferedReader(Paths.get(dataSet.getDataSetPath()));
+        Reader reader = Files.newBufferedReader(Paths.get(rawDataSet.getDataSetPath()));
         CSVReader csvReader = new CSVReader(reader);
         isItValid = csvReader.verifyReader();
         reader.close();
@@ -85,7 +126,6 @@ public class DataSetService {
         }
         return headerOfDataSet;
     }
-
     public void setHeaderOfDataSet(Long id) throws Exception{
         Long aLong= new Long(0);
         List<String []> header = dataSetDetails(id);
@@ -109,7 +149,6 @@ public class DataSetService {
         }
         return totalNumberOfRows;
     }
-
     private void setTotalNumberOfRows(Long id) throws Exception {
         int totalNumberOfRows=0;
         for (String [] tempTotalNumberOfRows: dataSetDetails(id)){
@@ -117,22 +156,4 @@ public class DataSetService {
         }
         this.totalNumberOfRows = totalNumberOfRows-1;
     }
-    // the columns which are not relevant in the next steps will be here eliminated 
-    public int[] getRelevantColumns(Long id) throws Exception {
-        int columnNumber = 1;
-        // show the header row with numbers
-        for (String columnName: getHeaderOfDataSet(id)){
-            System.out.print(columnNumber +" "+ columnName +" | ");
-            columnNumber++;
-        }
-        // Instructions of selecting the columns
-        // TODO: 02.04.2019 you are here .--> next step to place scaner for 
-        return relevantColumns;
-    }
-
-    public void setRelevantColumns(String relevantColumns) throws Exception {
-
-    }
-
-
 }

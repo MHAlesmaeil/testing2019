@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "dataSet")
 @Component
-public class DataSet {
+public class RawDataSet {
     @Basic(optional = false)
     private String dataSetName;
     private String dataSetDescription;

@@ -1,8 +1,8 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.InternalServerError;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSet;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSetService;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSet;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class IndexController {
-    private final DataSetService dataSetService;
+    private final RawDataSetService rawDataSetService;
 
-    public IndexController(DataSetService dataSetService) {
-        this.dataSetService = dataSetService;
+    public IndexController(RawDataSetService rawDataSetService) {
+        this.rawDataSetService = rawDataSetService;
     }
 
     @GetMapping({"/index","","/"})
@@ -24,13 +24,13 @@ public class IndexController {
     }
     @ModelAttribute
     public void showAvaibaleDataSet(Model model){
-        model.addAttribute("avaibleDataSet", dataSetService.findAllDataSet());
+        model.addAttribute("avaibleDataSet", rawDataSetService.findAllDataSet());
     }
     @PostMapping("/index")
-    public String uploaddata (@ModelAttribute("newDataSet") DataSet dataSet){
+    public String uploaddata (@ModelAttribute("newDataSet") RawDataSet rawDataSet){
         // TODO: 03.04.2019 if data has been read, then accept it, otherweise throw an exception
         try{
-            this.dataSetService.saveDataSet(dataSet);
+            this.rawDataSetService.saveDataSet(rawDataSet);
         }catch (Exception e){
             throw new InternalServerError();
         }
