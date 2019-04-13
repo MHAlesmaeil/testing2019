@@ -39,10 +39,10 @@ public class DataSetService {
             dataSetRepository.save(dataset);
         }
     }
-      public void deleteDataSet (Long id){
+    public void deleteDataSet (Long id){
             dataSetRepository.deleteById(id);
     }
-      public Collection<DataSet> findAllDataSet (){
+    public Collection<DataSet> findAllDataSet (){
            return dataSetRepository.findAll();
     }
     public DataSet findDataSetById(Long id) {

@@ -2,7 +2,6 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.InternalServerError;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.DataSet;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing.DataProcessing;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing.DataProcessingServices;
 import org.springframework.stereotype.Controller;
@@ -20,13 +19,13 @@ public class ProcessingDataController {
     }
 
     @GetMapping("/ProcssingData")
-    public String showPage (){
+    public String showPage (Model model){
+        model.addAttribute("something", "here is the value");
         return "data/dataIsInProcess";
     }
 
     @PostMapping("/ProcssingData")
     public String uploaddata (@ModelAttribute("newProcess") DataProcessing newProcess){
-        // TODO: 03.04.2019 if data has been read, then accept it, otherweise throw an exception
         try{
             this.dataProcessingServices.saveNewProcess(newProcess);
         }catch (Exception e){
