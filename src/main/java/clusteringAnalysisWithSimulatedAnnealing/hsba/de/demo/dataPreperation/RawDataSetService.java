@@ -67,10 +67,12 @@ public class RawDataSetService {
         list = dataSetDetails(id);
         List<String []> summary = new ArrayList<>();
         // add the first 3 rows to the summary
-        for (int x = 0; x<3; x++){
-            summary.add(list.get(x));
-        }
+
+        // if the points/elements of a dataset is greater than 10, then add an empty line and the last two elements
         if (list.size()>10){
+            for (int x = 0; x<3; x++){
+                summary.add(list.get(x));
+            }
             for (int x=0; x<1; x++){
                 String [] emptyLine = new String[summary.get(0).length];
                 for (int y= 0; y<summary.get(0).length; y++){
@@ -80,6 +82,10 @@ public class RawDataSetService {
             }
 
             for (int x=list.size()-2; x<list.size(); x++){
+                summary.add(list.get(x));
+            }
+        }else {
+            for (int x = 0; x<5; x++){
                 summary.add(list.get(x));
             }
         }
