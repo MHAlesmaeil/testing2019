@@ -1,8 +1,9 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distenceMethods;
 
 public class ManhattenDistence implements DistenceMethod {
-    double [] something1={01,3,5,10};
-    double [] something2={02,6,5,10};
+    public ManhattenDistence() {
+        System.out.println("ManhattenDisence instance has been created");
+    }
 
     @Override
     public double computeDistance(double[] firstArray, double[] secondArray) {
