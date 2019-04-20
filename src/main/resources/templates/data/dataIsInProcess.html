@@ -9,21 +9,31 @@
         <div class="container masthead">
             <div class="row">
 
-                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto" style="background: grey; color: aliceblue">
-                    <h1 th:text="${something}"></h1>
-
-                </div>
-
-                </div>
                 <!-- for information and summeries  -->
-                <div class="col-md-6 col-lg-6 col-xl-6 mx-auto " style="background: #343a40; color:goldenrod;">
+                <div class="col-md-12 col-lg-12 col-xl-12 mx-auto " style="background: #343a40; color:goldenrod;">
                     <div>
-                        <h1 class="">Available Data Set</h1>
+                        <h1 class="">Available Processes</h1>
                     </div>
-                    <div style="margin-bottom: 10px">
+                    <div>
+                        <table th:if="${!dataProcesses.empty}"  class="table table-top table-responsive-md  text-center">
+                            <tr th:each="dataProcess :${dataProcesses}" >
+                                <div  >
+                                    <td th:text="${dataProcess.getProcessingId()}"></td>
+                                    <td th:text="${dataProcess.getProcessingName()}"></td>
+                                    <td th:text="${dataProcess.getClusteringMethod()}"></td>
+                                    <td th:text="${dataProcess.getDistanceCalMethod()}"></td>
+                                    <td th:text="${dataProcess.getNumberOfCluster()}"></td>
+                                    <td th:text="${dataProcess.getNumberOfIteration()}"></td>
+                                    <td th:text="${dataProcess.getDataSetNumber()}"></td>
+                                    <td>
+                                        <a th:href="${'/ProcessingData/Executing/'+dataProcess.getProcessingId()}" role="button" class="btn btn-light">Execute</a>
+                                       <a th:href="${'/ProcessingData/delete/'+dataProcess.getProcessingId()}" role="button" class="btn btn-danger">Delete</a>
+                                   </td>
 
+                                </div>
+                            </tr>
+                        </table>
                     </div>
-
                 </div>
             </div>
         </div>

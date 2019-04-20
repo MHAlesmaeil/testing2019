@@ -49,19 +49,24 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Cluster Number</span>
                                     </div>
-                                    <input type="number" min="2" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="clustersNumber">
+                                    <input type="number" min="2" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="numberOfCluster">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Number Of Iteration</span>
                                     </div>
-                                    <input type="number" min="1" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="iterationNumber">
+                                    <input type="number" min="1" class="form-control" id="basic-url" aria-describedby="basic-addon3" required name="numberOfIteration">
+                                </div>
+                                <div class="input-group mb-3" hidden>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Data Set Number</span>
+                                    </div>
+                                    <input type="number" min="1" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly hidden  name="dataSetNumber" th:value="${dataSetNumber}" th:placeholder="${dataSetNumber}">
                                 </div>
 
                                 <div class="input-group-append">
                                     <button class="btn btn-success" type="submit">Button</button>
                                 </div>
-
 
                         </form>
                     </div>

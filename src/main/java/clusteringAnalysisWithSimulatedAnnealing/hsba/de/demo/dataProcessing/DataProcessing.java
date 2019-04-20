@@ -14,11 +14,20 @@ public class DataProcessing {
     @Id
     @GeneratedValue
     private Long processingId;
+    private Long dataSetNumber;
     private String processingName;
-    private int clusteringMethod;
-    private int distanceCalMethod;
+    private String clusteringMethod;
+    private String distanceCalMethod;
     private int numberOfCluster;
     private int numberOfIteration;
+
+    public Long getDataSetNumber() {
+        return dataSetNumber;
+    }
+
+    public void setDataSetNumber(Long dataSetNumber) {
+        this.dataSetNumber = dataSetNumber;
+    }
 
     public Long getProcessingId() {
         return processingId;
@@ -36,19 +45,19 @@ public class DataProcessing {
         this.processingName = processingName;
     }
 
-    public int getClusteringMethod() {
+    public String getClusteringMethod() {
         return clusteringMethod;
     }
 
-    public void setClusteringMethod(int clusteringMethod) {
+    public void setClusteringMethod(String clusteringMethod) {
         this.clusteringMethod = clusteringMethod;
     }
 
-    public int getDistanceCalMethod() {
+    public String getDistanceCalMethod() {
         return distanceCalMethod;
     }
 
-    public void setDistanceCalMethod(int distanceCalMethod) {
+    public void setDistanceCalMethod(String distanceCalMethod) {
         this.distanceCalMethod = distanceCalMethod;
     }
 

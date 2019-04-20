@@ -34,13 +34,15 @@ public class DataSetDetailsController {
     public String useDataSet(Model model, @PathVariable("id") Long id) throws Exception {
         List<String[]> dataSet =  rawDataSetService.dataSetSummay(id);
         model.addAttribute("totalcolums", rawDataSetService.getTotalNumberOfColumns(id));
+        model.addAttribute("dataSetNumber", id);
+
         model.addAttribute("testWithMe", dataSet);
         model.addAttribute("newProcess");
         return "data/testWithMe";
     }
 
     @GetMapping("/dataSets/delete/{id}")
-    public String deleteDataSet (Model model, @PathVariable("id") Long id){
+    public String deleteDataSet ( @PathVariable("id") Long id){
         rawDataSetService.deleteDataSet(id);
         return "redirect:/index";
     }
