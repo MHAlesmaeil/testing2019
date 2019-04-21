@@ -1,12 +1,13 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSet;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+
 
 @Service
 @Transactional
@@ -26,5 +27,9 @@ public class DataProcessingServices {
     }
     public void deleteDataProcessing (Long id){
         processingRepository.deleteById(id);
+    }
+
+    public void processExecution(){
+
     }
 }

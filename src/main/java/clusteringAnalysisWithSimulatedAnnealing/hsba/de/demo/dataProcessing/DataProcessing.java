@@ -1,11 +1,13 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing;
 
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "dataProcessing")
@@ -20,6 +22,8 @@ public class DataProcessing {
     private String distanceCalMethod;
     private int numberOfCluster;
     private int numberOfIteration;
+
+    private List<Cluster> clusters;
 
     public Long getDataSetNumber() {
         return dataSetNumber;
@@ -75,5 +79,22 @@ public class DataProcessing {
 
     public void setNumberOfIteration(int numberOfIteration) {
         this.numberOfIteration = numberOfIteration;
+    }
+
+    // dataset number is to be used to generate empty Clusters
+
+    public List<Cluster> getClusters() {
+        return clusters;
+    }
+    // this method will be called one time from the constructor when the data comes there
+    public void setClusters(int clusterNumber) {
+        // create a for loop to generate clusters, which is equal to clusterNumber and inject each instance in the clusters
+        clusters = new ArrayList<>();
+        for (int x = 1;x<=clusterNumber;x++){
+            Cluster cluster= new Cluster();
+            cluster.setClusterName("cluster"+x);
+            clusters.add(cluster);
+            System.out.println(clusters.size());
+        }
     }
 }
