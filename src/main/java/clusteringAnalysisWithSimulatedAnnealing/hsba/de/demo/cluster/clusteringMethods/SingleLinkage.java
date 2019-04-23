@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.clusteringMethods;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods;
 
 public class SingleLinkage implements ClusteringMethod {
     @Override

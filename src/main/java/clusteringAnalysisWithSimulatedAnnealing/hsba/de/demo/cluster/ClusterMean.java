@@ -4,8 +4,9 @@ import java.util.List;
 
 public class ClusterMean {
     public double [] computeClusterMean(List<double[]> cluster){
+        // initiate array variable with specific length
         double [] computeClusterMeanTemp = new double[cluster.get(1).length];
-        // average array has no id, therefore an ID will be given
+        // Id will not be computed, therefore it will be given the number 1
         computeClusterMeanTemp[0]= 1;
         for (int computeClusterMeanCounter=0; computeClusterMeanCounter<cluster.size(); computeClusterMeanCounter++){
             double [] clusterPoint = cluster.get(computeClusterMeanCounter);

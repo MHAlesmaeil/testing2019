@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.distanceMethods;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods;
 
 public class EuclideanDistance implements DistanceMethod {
 

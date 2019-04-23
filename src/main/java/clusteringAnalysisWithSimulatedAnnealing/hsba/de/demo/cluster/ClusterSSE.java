@@ -7,7 +7,7 @@ import static javax.swing.UIManager.get;
 
 public class ClusterSSE {
 
-    public double computeSSE(List<double[]> cluster, double [] average){
+    public double computeSSE(List<double[]> cluster, Double [] average){
         // initiate a variable with 0
         double computeSSETemp=0;
         // loop through cluster points

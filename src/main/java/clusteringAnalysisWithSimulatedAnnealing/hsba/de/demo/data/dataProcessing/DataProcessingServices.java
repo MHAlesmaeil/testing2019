@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing;
 
 
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.NotFoundException;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSet;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation.RawDataSetService;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation.RawDataSet;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation.RawDataSetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataPreperation;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation;
 
 import com.opencsv.CSVReader;
 import org.springframework.stereotype.Service;
@@ -93,24 +93,6 @@ public class RawDataSetService {
             }
         }
         return summary;
-    }
-
-    // to compute the values
-    public List<double[]> dataSetDoubleWithoutHeader(List<String[]> dataSetToBeConverted ) throws Exception{
-        List<double[]> temp = new ArrayList<>();
-        List<String []> tempString = dataSetToBeConverted;
-        // for loop to call each row in the string dataset
-        // first row will be escaped as the header might not be a double
-        for (int dataSetRowCounter=1; dataSetRowCounter<tempString.size(); dataSetRowCounter++){
-            String [] singleRowString = tempString.get(dataSetRowCounter);
-            double [] singleRowDouble = new double[singleRowString.length];
-            // for loop to call every single attribute in the row and save it in the return List<double []>
-            for (int singleRowStringCounter=0; singleRowStringCounter<singleRowString.length; singleRowStringCounter++){
-                singleRowDouble[singleRowStringCounter]=Double.valueOf(singleRowString[singleRowStringCounter]);
-            }
-            temp.add(singleRowDouble);
-        }
-        return temp;
     }
 
     public boolean verifyPathCorrectness (RawDataSet rawDataSet) throws Exception{

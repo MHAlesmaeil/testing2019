@@ -1,12 +1,10 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -24,6 +22,11 @@ public class DataProcessing {
     private int numberOfIteration;
 
     private List<Cluster> clusters;
+    private List<Cluster> clusterSolution;
+
+    public DataProcessing() {
+
+    }
 
     public Long getDataSetNumber() {
         return dataSetNumber;
@@ -94,7 +97,6 @@ public class DataProcessing {
             Cluster cluster= new Cluster();
             cluster.setClusterName("cluster"+x);
             clusters.add(cluster);
-            System.out.println(clusters.size());
         }
     }
 }

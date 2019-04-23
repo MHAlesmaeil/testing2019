@@ -2,8 +2,8 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web;
 
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.Web.errorHandlers.InternalServerError;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing.DataProcessing;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.dataProcessing.DataProcessingServices;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessingServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

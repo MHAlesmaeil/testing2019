@@ -12,8 +12,8 @@ public class Cluster {
     @Id @GeneratedValue
     private Long clusterId;
     private String clusterName;
-    List<Double[]> clusterPoints;
-    List<Double> clusterMean;
+    List<double[]> clusterPoints = new ArrayList<>();
+    List<Double> clusterMean = new ArrayList<>();
 
     // constructor
 
@@ -37,26 +37,26 @@ public class Cluster {
         this.clusterName = clusterName;
     }
 
-    public List<Double[]> getClusterPoints() {
-        if (clusterPoints==null){
-            clusterPoints= new ArrayList<>();
-        }
+    public List<double[]> getClusterPoints() {
+
         return clusterPoints;
     }
 
-    public void setClusterPoints(List<Double[]> clusterPoints) {
+    public void setClusterPoints(List<double[]> clusterPoints) {
         this.clusterPoints = clusterPoints;
     }
 
     public List<Double> getClusterMean() {
-        if (clusterMean==null){
-            clusterMean= new ArrayList<>();
-        }
+
         return clusterMean;
     }
 
     public void setClusterMean(List<Double> clusterMean) {
         this.clusterMean = clusterMean;
+    }
+    public void addPointToCluster(double [] pointToBeAdded){
+        clusterPoints = getClusterPoints();
+        clusterPoints.add(pointToBeAdded);
     }
 
 }
