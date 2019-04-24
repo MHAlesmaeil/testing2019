@@ -21,7 +21,7 @@ public class DataProcessing {
     private int numberOfCluster;
     private int numberOfIteration;
 
-    private List<Cluster> clusters;
+    private List<Cluster> createdClusters;
     private List<Cluster> clusterSolution;
 
     public DataProcessing() {
@@ -86,17 +86,17 @@ public class DataProcessing {
 
     // dataset number is to be used to generate empty Clusters
 
-    public List<Cluster> getClusters() {
-        return clusters;
+    public List<Cluster> getCreatedClusters() {
+        return createdClusters;
     }
     // this method will be called one time from the constructor when the data comes there
-    public void setClusters(int clusterNumber) {
-        // create a for loop to generate clusters, which is equal to clusterNumber and inject each instance in the clusters
-        clusters = new ArrayList<>();
+    public void setCreatedClusters(int clusterNumber) {
+        // create a for loop to generate createdClusters, which is equal to clusterNumber and inject each instance in the createdClusters
+        createdClusters = new ArrayList<>();
         for (int x = 1;x<=clusterNumber;x++){
             Cluster cluster= new Cluster();
             cluster.setClusterName("cluster"+x);
-            clusters.add(cluster);
+            createdClusters.add(cluster);
         }
     }
 }

@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.methods;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
@@ -6,7 +6,6 @@ import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneralMethods {
     // to compute the values
@@ -26,26 +25,30 @@ public class GeneralMethods {
         }
         return temp;
     }
-    public void ProcessExecution (int numberOfClusters, List<String[]> dataSet)throws Exception{
-            List<Cluster> listToBeOptimized= initialSolution(numberOfClusters,dataSet);
 
-    }
     public List<Cluster> initialSolution(int numberOfClusters, List<String[]> dataSet) throws Exception {
         // change the List<String[]> to List<Double[]> to start the process
         List<double[]> dataSetDouble = dataSetStringToDoubleWithoutHeaders(dataSet);
         // create an instance of dataProcessing
         DataProcessing dataProcessing = new DataProcessing();
         // Set the Number of Cluster to generate the empty ones
-        dataProcessing.setClusters(numberOfClusters);
+        dataProcessing.setCreatedClusters(numberOfClusters);
         // Looping through the dataset and assign each point to one cluster randomly
         for (int x = 0; x<dataSet.size()-1; x++){
             // through a random between 1 and number of cluster and inject the point from dataset in the cluster
             int randomNum = new Random().nextInt(numberOfClusters);
-            dataProcessing.getClusters().get(randomNum).addPointToCluster(dataSetDouble.get(x));
+            dataProcessing.getCreatedClusters().get(randomNum).addPointToCluster(dataSetDouble.get(x));
             // test
             // once a point is added, we would like to see the name of the cluster and number of assigned points
-            System.out.println("cluster name is "+ dataProcessing.getClusters().get(randomNum).getClusterName()+ " and number of point of this cluster is "+ dataProcessing.getClusters().get(randomNum).getClusterPoints().size());
+            System.out.println("cluster name is "+ dataProcessing.getCreatedClusters().get(randomNum).getClusterName()+ " and number of point of this cluster is "+ dataProcessing.getCreatedClusters().get(randomNum).getClusterPoints().size());
         }
-        return dataProcessing.getClusters();
+        return dataProcessing.getCreatedClusters();
     }
+    // the values of the list will be converted to new one between 0 und 1
+    /*public List<Cluster> normalizeIt (List<String[]> dataSetToBeNormalized)throws Exception{
+        List<double[]> dataSetDouble = dataSetStringToDoubleWithoutHeaders(dataSetToBeNormalized);
+
+        DataProcessing dataProcessing = new DataProcessing();
+
+    }*/
 }

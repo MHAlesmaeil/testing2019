@@ -6,8 +6,10 @@ import java.util.List;
 import static javax.swing.UIManager.get;
 
 public class ClusterSSE {
-
-    public double computeSSE(List<double[]> cluster, Double [] average){
+    private ClusterMean clusterMean = new ClusterMean();
+    public double computeSSE(List<double[]> cluster){
+        // calculating the mean of the cluster
+        double[] average = clusterMean.computeClusterMean(cluster);
         // initiate a variable with 0
         double computeSSETemp=0;
         // loop through cluster points

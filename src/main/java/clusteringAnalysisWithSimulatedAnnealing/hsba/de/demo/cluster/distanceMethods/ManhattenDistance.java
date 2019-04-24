@@ -1,9 +1,6 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods;
 
 public class ManhattenDistance implements DistanceMethod {
-    public ManhattenDistance() {
-        System.out.println("ManhattenDisence instance has been created");
-    }
 
     @Override
     public double computeDistance(double[] firstArray, double[] secondArray) {
