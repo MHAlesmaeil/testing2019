@@ -1,25 +1,32 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Generated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.*;
 
-@Component
+@Entity
 public class Cluster {
     @Id @GeneratedValue
     private Long clusterId;
     private String clusterName;
+    @ElementCollection
+    @Column
     List<double[]> clusterPoints = new ArrayList<>();
+    @ElementCollection
+    @Column
     List<Double> clusterMean = new ArrayList<>();
+    @ManyToOne(optional = false, targetEntity = DataProcessing.class)
+    DataProcessing dataProcessing;
 
     // constructor
 
 
     public Cluster() {
     }
+
 
     public Long getClusterId() {
         return clusterId;

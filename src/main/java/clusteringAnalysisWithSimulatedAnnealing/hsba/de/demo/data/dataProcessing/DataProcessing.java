@@ -20,8 +20,11 @@ public class DataProcessing {
     private String distanceCalMethod;
     private int numberOfCluster;
     private int numberOfIteration;
-
-    private List<Cluster> createdClusters;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dataProcessing", targetEntity = Cluster.class)
+    private List<Cluster> clusters;
+    /*@ElementCollection
+    @Column
+    private List<String> something;*/
 
     public DataProcessing() {
 
@@ -85,17 +88,17 @@ public class DataProcessing {
 
     // dataset number is to be used to generate empty Clusters
 
-    public List<Cluster> getCreatedClusters() {
-        return createdClusters;
+    public List<Cluster> getClusters() {
+        return clusters;
     }
     // this method will be called one time from the constructor when the data comes there
-    public void setCreatedClusters(int clusterNumber) {
-        // create a for loop to generate createdClusters, which is equal to clusterNumber and inject each instance in the createdClusters
-        createdClusters = new ArrayList<>();
+    public void setClusters(int clusterNumber) {
+        // create a for loop to generate clusters, which is equal to clusterNumber and inject each instance in the clusters
+        clusters = new ArrayList<>();
         for (int x = 1;x<=clusterNumber;x++){
             Cluster cluster= new Cluster();
             cluster.setClusterName("cluster"+x);
-            createdClusters.add(cluster);
+            clusters.add(cluster);
         }
     }
 }

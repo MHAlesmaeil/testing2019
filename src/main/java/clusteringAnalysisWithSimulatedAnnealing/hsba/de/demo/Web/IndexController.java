@@ -17,11 +17,17 @@ public class IndexController {
         this.rawDataSetService = rawDataSetService;
     }
 
-    @GetMapping({"/index","","/"})
+    @GetMapping({"/index"})
     public String index(Model model) {
         model.addAttribute("newDataSet");
         return "index";
     }
+    @GetMapping({"","/"})
+    public String redirectToIndex(Model model) {
+        model.addAttribute("newDataSet");
+        return  "redirect:/index";
+    }
+
     @ModelAttribute
     public void showAvaibaleDataSet(Model model){
         model.addAttribute("avaibleDataSet", rawDataSetService.findAllDataSet());
