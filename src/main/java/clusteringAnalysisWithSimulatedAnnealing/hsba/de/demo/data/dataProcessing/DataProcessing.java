@@ -22,7 +22,6 @@ public class DataProcessing {
     private int numberOfIteration;
 
     private List<Cluster> createdClusters;
-    private List<Cluster> clusterSolution;
 
     public DataProcessing() {
 
