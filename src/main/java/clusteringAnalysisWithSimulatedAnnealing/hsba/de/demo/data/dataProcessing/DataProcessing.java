@@ -16,8 +16,8 @@ public class DataProcessing {
     private Long processingId;
     private Long dataSetNumber;
     private String processingName;
-    private String clusteringMethod;
-    private String distanceCalMethod;
+    private int clusteringMethod;
+    private int distanceCalMethod;
     private int numberOfCluster;
     private int numberOfIteration;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dataProcessing", targetEntity = Cluster.class)
@@ -54,19 +54,19 @@ public class DataProcessing {
         this.processingName = processingName;
     }
 
-    public String getClusteringMethod() {
+    public int getClusteringMethod() {
         return clusteringMethod;
     }
 
-    public void setClusteringMethod(String clusteringMethod) {
+    public void setClusteringMethod(int clusteringMethod) {
         this.clusteringMethod = clusteringMethod;
     }
 
-    public String getDistanceCalMethod() {
+    public int getDistanceCalMethod() {
         return distanceCalMethod;
     }
 
-    public void setDistanceCalMethod(String distanceCalMethod) {
+    public void setDistanceCalMethod(int distanceCalMethod) {
         this.distanceCalMethod = distanceCalMethod;
     }
 

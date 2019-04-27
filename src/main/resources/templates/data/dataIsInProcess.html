@@ -16,12 +16,23 @@
                     </div>
                     <div>
                         <table th:if="${!dataProcesses.empty}"  class="table table-top table-responsive-md  text-center">
+                            <!-- Process number will be removed later on  -->
+                            <tr>
+                                <td>Process#</td>
+                                <td>Pro. Name</td>
+                                <td>Cluster Method</td>
+                                <td>Distance Method</td>
+                                <td>Cluster #</td>
+                                <td>Iteration #</td>
+                                <td>Dataset #</td>
+                                <td>Options</td>
+                            </tr>
                             <tr th:each="dataProcess :${dataProcesses}" >
                                 <div  >
                                     <td th:text="${dataProcess.getProcessingId()}"></td>
                                     <td th:text="${dataProcess.getProcessingName()}"></td>
-                                    <td th:text="${dataProcess.getClusteringMethod()}"></td>
-                                    <td th:text="${dataProcess.getDistanceCalMethod()}"></td>
+                                    <td th:text="${dataProcess.getClusteringMethod()==1?'Simulated Annealing':'Single Linkage'}"></td>
+                                    <td th:text="${dataProcess.getDistanceCalMethod()==1?'Euclidean Distance':'Manhattan Distance'}"></td>
                                     <td th:text="${dataProcess.getNumberOfCluster()}"></td>
                                     <td th:text="${dataProcess.getNumberOfIteration()}"></td>
                                     <td th:text="${dataProcess.getDataSetNumber()}"></td>
