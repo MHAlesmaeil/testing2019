@@ -41,4 +41,10 @@ public class ProcessingDataController {
           dataProcessingServices.deleteDataProcessing(id);
           return  "redirect:/ProcssingData";
     }
+    @GetMapping("/ProcessingData/Executing/{id}")
+    public String showProcess(@PathVariable("id") Long id, Model model){
+        model.addAttribute("showProcess", dataProcessingServices.findProcessById(id));
+        return "data/showProcess";
+    }
+
 }

@@ -22,12 +22,21 @@ public class DataProcessing {
     private int numberOfIteration;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dataProcessing", targetEntity = Cluster.class)
     private List<Cluster> clusters;
-    /*@ElementCollection
+    @ElementCollection
     @Column
-    private List<String> something;*/
+    private List<String[]> listOfPoints;
 
-    public DataProcessing() {
+    public void setClusters(List<Cluster> clusters) {
+        System.out.println("String oints has been set");
+        this.clusters = clusters;
+    }
 
+    public List<String[]> getListOfPoints() {
+        return listOfPoints;
+    }
+
+    public void setListOfPoints(List<String[]> listOfPoints) {
+        this.listOfPoints = listOfPoints;
     }
 
     public Long getDataSetNumber() {
@@ -89,16 +98,18 @@ public class DataProcessing {
     // dataset number is to be used to generate empty Clusters
 
     public List<Cluster> getClusters() {
-        return clusters;
-    }
-    // this method will be called one time from the constructor when the data comes there
-    public void setClusters(int clusterNumber) {
-        // create a for loop to generate clusters, which is equal to clusterNumber and inject each instance in the clusters
-        clusters = new ArrayList<>();
-        for (int x = 1;x<=clusterNumber;x++){
+        if (clusters == null){
+            clusters = new ArrayList<>();
+        }
+        List<Cluster> clusters = new ArrayList<>();
+
+        for (int x = 1;x<=getNumberOfCluster();x++){
             Cluster cluster= new Cluster();
             cluster.setClusterName("cluster"+x);
             clusters.add(cluster);
         }
+
+        return clusters;
     }
+
 }

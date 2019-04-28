@@ -87,7 +87,7 @@ public class GeneralMethods {
   public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
-        dataProcessing.setClusters(numberOfCluster);
+
         // first numer im temp refer to the cluster and the second one refer to the point, which need to be clustered
         // for example [0,199]: it means the point 199 needs to be clustered in cluster number 0
 

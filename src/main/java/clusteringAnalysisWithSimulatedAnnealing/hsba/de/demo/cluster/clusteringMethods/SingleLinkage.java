@@ -13,7 +13,7 @@ public class SingleLinkage implements ClusteringMethod {
     @Override
     public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber) throws Exception {
         // create empty clusters
-        dataProcessing.setClusters(numberOfCluter);
+
         List<Cluster> clusterList = dataProcessing.getClusters();
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getClusters();
