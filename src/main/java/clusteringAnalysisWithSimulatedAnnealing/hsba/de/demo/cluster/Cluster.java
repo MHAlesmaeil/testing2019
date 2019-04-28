@@ -14,11 +14,11 @@ public class Cluster {
     private String clusterName;
     @ElementCollection
     @Column
-    List<double[]> clusterPoints = new ArrayList<>();
+    List<double[]> clusterPoints ;
     @ElementCollection
     @Column
-    List<Double> clusterMean = new ArrayList<>();
-    @ManyToOne(optional = false, targetEntity = DataProcessing.class)
+    List<Double> clusterMean ;
+    @ManyToOne
     DataProcessing dataProcessing;
 
     // constructor
@@ -27,6 +27,13 @@ public class Cluster {
     public Cluster() {
     }
 
+    public DataProcessing getDataProcessing() {
+        return dataProcessing;
+    }
+
+    public void setDataProcessing(DataProcessing dataProcessing) {
+        this.dataProcessing = dataProcessing;
+    }
 
     public Long getClusterId() {
         return clusterId;
@@ -45,6 +52,9 @@ public class Cluster {
     }
 
     public List<double[]> getClusterPoints() {
+        if (clusterPoints == null){
+            clusterPoints = new ArrayList<>();
+        }
 
         return clusterPoints;
     }
@@ -54,6 +64,9 @@ public class Cluster {
     }
 
     public List<Double> getClusterMean() {
+        if (clusterMean == null){
+            clusterMean = new ArrayList<>();
+        }
 
         return clusterMean;
     }

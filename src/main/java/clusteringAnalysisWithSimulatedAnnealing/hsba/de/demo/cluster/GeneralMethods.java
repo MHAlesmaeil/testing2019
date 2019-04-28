@@ -56,38 +56,12 @@ public class GeneralMethods {
         }
         return temp;
     }
-    /**
-     * this method was not used
-    */
-    /*public double [] clusterIndexWithLeastValue(List<Cluster> listOfClusterToCheck,double[] elementToCheck, int distanceMethodNumber){
-        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
-        double [] temp = new double[2];
-        double oldValue = -1;
-        double newValue;
-        // loop through the list of list of clusters
-        for (int x = 0; x<listOfClusterToCheck.size(); x++){
-            for (int y = 0; y<listOfClusterToCheck.get(x).getClusterPoints().size();y++){
-                newValue = distanceMethod.computeDistance(listOfClusterToCheck.get(x).getClusterPoints().get(y),elementToCheck);
-                if (oldValue==-1){
-                    // first solution
-                    oldValue = newValue;
-                    temp = new double[]{oldValue,new Double(x)};
-                }else{
-                    if (newValue<oldValue){
-                        // update solution
-                        oldValue = newValue;
-                        temp = new double[]{oldValue,new Double(x)};
-                    }
-                }
-            }
-        }
-        return temp;
-    }*/
+
     // return an array with the element index and the cluster number
   public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
-        dataProcessing.setClusters(numberOfCluster);
+        dataProcessing.SetClusterNumber(numberOfCluster);
         // first numer im temp refer to the cluster and the second one refer to the point, which need to be clustered
         // for example [0,199]: it means the point 199 needs to be clustered in cluster number 0
 
@@ -278,6 +252,33 @@ public class GeneralMethods {
             System.out.println("Cluster # "+temp[0]);
             System.out.println("Point index in the list "+temp[1]);
             System.out.println("Value of function "+temp[2]);
+        }
+        return temp;
+    }*/
+    /**
+     * this method was not used
+     */
+    /*public double [] clusterIndexWithLeastValue(List<Cluster> listOfClusterToCheck,double[] elementToCheck, int distanceMethodNumber){
+        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
+        double [] temp = new double[2];
+        double oldValue = -1;
+        double newValue;
+        // loop through the list of list of clusters
+        for (int x = 0; x<listOfClusterToCheck.size(); x++){
+            for (int y = 0; y<listOfClusterToCheck.get(x).getClusterPoints().size();y++){
+                newValue = distanceMethod.computeDistance(listOfClusterToCheck.get(x).getClusterPoints().get(y),elementToCheck);
+                if (oldValue==-1){
+                    // first solution
+                    oldValue = newValue;
+                    temp = new double[]{oldValue,new Double(x)};
+                }else{
+                    if (newValue<oldValue){
+                        // update solution
+                        oldValue = newValue;
+                        temp = new double[]{oldValue,new Double(x)};
+                    }
+                }
+            }
         }
         return temp;
     }*/

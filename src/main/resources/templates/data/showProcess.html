@@ -15,8 +15,15 @@
                         <h1 class="">Available Processes</h1>
                     </div>
                     <div>
-                        <table th:if="${!dataProcesses.empty}"  class="table table-top table-responsive-md  text-center">
-                            <!-- Process number will be removed later on  -->
+                        <h1 th:text="${showmesssage}"></h1>
+                        <h1 th:text="${dataProcess.getProcessingName()}"></h1>
+                        <h1 th:text="${dataProcess.getDataSetNumber()}"></h1>
+                        <h1 th:text="${dataProcess.getClusteringMethod()}"></h1>
+                        <h1 th:text="${dataProcess.getSomething().size()}"></h1>
+                        <h1 th:if="${!dataProcess.getSomething().empty}">Clusters are not empty</h1>
+
+
+                        <!--<table class="table table-top table-responsive-md  text-center">
                             <tr>
                                 <td>Process#</td>
                                 <td>Pro. Name</td>
@@ -25,9 +32,9 @@
                                 <td>Cluster #</td>
                                 <td>Iteration #</td>
                                 <td>Dataset #</td>
-                                <td>Options</td>
+                                <td>Further Information</td>
                             </tr>
-                            <tr th:each="dataProcess :${dataProcesses}" >
+                            <tr >
                                 <div  >
                                     <td th:text="${dataProcess.getProcessingId()}"></td>
                                     <td th:text="${dataProcess.getProcessingName()}"></td>
@@ -37,13 +44,20 @@
                                     <td th:text="${dataProcess.getNumberOfIteration()}"></td>
                                     <td th:text="${dataProcess.getDataSetNumber()}"></td>
                                     <td>
-                                        <a th:href="${'/ProcessingData/Executing/'+dataProcess.getProcessingId()}" role="button" class="btn btn-light">Show Result</a>
-                                       <a th:href="${'/ProcessingData/delete/'+dataProcess.getProcessingId()}" role="button" class="btn btn-danger">Delete</a>
+                                       &lt;!&ndash; <a th:href="${'/ProcessingData/Executing/'+dataProcess.getProcessingId()}" role="button" class="btn btn-light">Execute</a>
+                                       <a th:href="${'/ProcessingData/delete/'+dataProcess.getProcessingId()}" role="button" class="btn btn-danger">Delete</a>&ndash;&gt;
                                    </td>
 
                                 </div>
                             </tr>
-                        </table>
+                            <br>
+                           &lt;!&ndash; <tr th:each="cluster :${dataProcess.getClusters()}">
+                                <td th:text="${cluster.getClusterId()}"></td>
+                                <td th:text="${cluster.getClusterName()}"></td>
+                                <td th:text="${cluster.getClusterMean()}"></td>
+                                <td th:each="point:${cluster.getClusterPoints()}"></td>
+                            </tr>&ndash;&gt;
+                        </table>-->
                     </div>
                 </div>
             </div>
