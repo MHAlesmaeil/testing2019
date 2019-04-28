@@ -58,7 +58,7 @@
                             <div  >
                                 <td th:text="${cluster.getClusterName()}"></td>
                                 <td th:if="${!cluster.getClusterPoints().empty}" th:each="points :${cluster.getClusterPoints()}">
-                                    <p th:text="${points[0]}"></p>
+                                    <p th:text="${#numbers.formatDecimal(points[0],0,0)}"></p>
                                 </td>
                                 <td th:if="${cluster.getClusterPoints().empty}">
                                     <p> There are no Points yets</p>

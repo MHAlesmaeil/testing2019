@@ -84,7 +84,7 @@ public class GeneralMethods {
         return temp;
     }*/
     // return an array with the element index and the cluster number
-  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
+  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole) throws Exception{
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
 
