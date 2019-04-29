@@ -21,7 +21,7 @@ public class SingleLinkage implements ClusteringMethod {
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered);
 
-        while (initialList.size()>0){
+        while (initialList.size()>1){
             generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
         }
         generalMethods.showFormedClusters(listOfCreatedClusters,true);

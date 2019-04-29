@@ -1,11 +1,13 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.ChooseDistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.DistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GeneralMethods {
     // to compute the values
@@ -23,41 +25,7 @@ public class GeneralMethods {
             }
             temp.add(singleRowDouble);
         }
-        // here, we need an array, which would save the smallest as well as the greatest number within a column
-        // loop through each column starting from the number one, as the first number is key
-        List<Double[]> listOfSmallestAndGreatestValues= new ArrayList<>();
-        // By each double array, the first value will be the smallest values whereas the second one is the greatest
-        for (int normalizing = 1; normalizing<temp.get(1).length;normalizing++){
-            // loop through the list of element
-            Double greatestValue=null; Double smallestValue = null;
-            for (int listOfDouble = 0; listOfDouble<temp.size(); listOfDouble++){
-                // loop through each element in the double array and check if
-                if (normalizing==1 && listOfDouble==0){
-                    // first solution
-                    greatestValue = temp.get(listOfDouble)[normalizing];
-                    smallestValue = temp.get(listOfDouble)[normalizing];
-                }else{
-                    Double temporal = temp.get(listOfDouble)[normalizing];
-                    if (temporal<smallestValue){
-                        // update the smallest value
-                        smallestValue = temporal;
-                    }else if (temporal>greatestValue){
-                        // update the geatest value
-                        greatestValue = temporal;
-                    }
-                }
-
-            }
-            Double[] tempo= {smallestValue,greatestValue};
-            listOfSmallestAndGreatestValues.add(tempo);
-            System.out.println("show Reault");
-            // loop through list of smallest and greated values
-            for (int x =0;x<listOfSmallestAndGreatestValues.size();x++){
-                System.out.println("Column number "+ x);
-                System.out.println("Smallest Value is "+ listOfSmallestAndGreatestValues.get(x)[0]);
-                System.out.println("Greatest Value is "+ listOfSmallestAndGreatestValues.get(x)[1]);
-            }
-        }
+        // TODO: 29.04.2019 normalize the value in the points array
         temp = normalizeDoubleList(temp);
         return temp;
     }
@@ -90,14 +58,41 @@ public class GeneralMethods {
             System.out.println("The index in the list "+ temp[0]);
             System.out.println("The Least value "+ temp[1]);
         }
+
         return temp;
     }
-
+    /**
+     * this method was not used
+    */
+    /*public double [] clusterIndexWithLeastValue(List<Cluster> listOfClusterToCheck,double[] elementToCheck, int distanceMethodNumber){
+        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
+        double [] temp = new double[2];
+        double oldValue = -1;
+        double newValue;
+        // loop through the list of list of clusters
+        for (int x = 0; x<listOfClusterToCheck.size(); x++){
+            for (int y = 0; y<listOfClusterToCheck.get(x).getClusterPoints().size();y++){
+                newValue = distanceMethod.computeDistance(listOfClusterToCheck.get(x).getClusterPoints().get(y),elementToCheck);
+                if (oldValue==-1){
+                    // first solution
+                    oldValue = newValue;
+                    temp = new double[]{oldValue,new Double(x)};
+                }else{
+                    if (newValue<oldValue){
+                        // update solution
+                        oldValue = newValue;
+                        temp = new double[]{oldValue,new Double(x)};
+                    }
+                }
+            }
+        }
+        return temp;
+    }*/
     // return an array with the element index and the cluster number
-  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole) throws Exception{
+  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
-
+        dataProcessing.setCreatedClusters(numberOfCluster);
         // first numer im temp refer to the cluster and the second one refer to the point, which need to be clustered
         // for example [0,199]: it means the point 199 needs to be clustered in cluster number 0
 
@@ -135,7 +130,7 @@ public class GeneralMethods {
                 }
             }
         }
-        return dataProcessing.getClusters();
+        return dataProcessing.getCreatedClusters();
 
     }
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
@@ -245,6 +240,52 @@ public class GeneralMethods {
         return temp;
     }
 
+    /**
+     * Repeated, we do not really need it
+    */
+    /*public int [] whichPointIntoWhichCluster(List<Cluster> listOfClusters,List<double[]> listOfPoints, int distanceMethodNumber, boolean showResultInConsole){
+        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
+        // initiate the variables
+        double oldValue = -1;
+        double newValue;
+        // first numer im temp refer to the cluster and the second one refer to the point, which need to be clustered
+        // for example [0,199]: it means the point 199 needs to be clustered in cluster number 0
+        int[] temp =null;
+
+        // loop through listOfPoints
+        for (int x = 0; x<listOfPoints.size();x++){
+            // Loop through the list of clusters
+            for (int y = 0; y<listOfClusters.size();y++){
+                // loop through the points those within a cluster
+                for (int z=0; z<listOfClusters.get(y).getClusterPoints().size();z++){
+                    // calculate the value
+                    newValue = distanceMethod.computeDistance(listOfPoints.get(x), listOfClusters.get(y).getClusterPoints().get(z));
+
+                    if (oldValue==-1){
+                        // first solution
+                        oldValue = newValue;
+                        temp = new int[]{y,x};
+
+                    }else{
+                        if (newValue<oldValue){
+                            // update solution
+                            oldValue = newValue;
+                            temp = new int[]{y,x};
+                        }
+                    }
+                }
+            }
+            if (oldValue==0){
+                break;
+            }
+        }
+        if (showResultInConsole==true){
+            System.out.println("Cluster # "+temp[0]);
+            System.out.println("Point index in the list "+temp[1]);
+            System.out.println("Value of function "+temp[2]);
+        }
+        return temp;
+    }*/
     public List<double[]> smallestAndGreatestValues(List<double[]> listOfDouble){
         List<double[]> temp = new ArrayList<>();
         // add a 0 column instead of the key of elements
@@ -291,7 +332,7 @@ public class GeneralMethods {
         temp = (doubleToBeNormalized-smallestValue)/(greatestValue-smallestValue);
         return temp;
     }
-    public List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized){
+    public  List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized){
         List<double[]> temp = new ArrayList<>();
         List<double[]> smallAndGreatestValuesList = smallestAndGreatestValues(listToBeNormalized);
         // loop through the elements
