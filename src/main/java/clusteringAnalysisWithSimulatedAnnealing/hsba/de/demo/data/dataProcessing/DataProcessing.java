@@ -1,25 +1,39 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.GeneralMethods;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DataProcessing {
     private Long processingId;
     private Long dataSetNumber;
     private String processingName;
-    private String clusteringMethod;
-    private String distanceCalMethod;
+    private int clusteringMethod;
+    private int distanceCalMethod;
     private int numberOfCluster;
     private int numberOfIteration;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dataProcessing", targetEntity = Cluster.class)
+    private List<Cluster> clusters;
+    @ElementCollection
+    @Column
+    private List<String[]> listOfPoints;
 
-    private List<Cluster> createdClusters;
+    public void setClusters(List<Cluster> clusters) {
+        System.out.println("String oints has been set");
+        this.clusters = clusters;
+    }
 
-    public DataProcessing() {
+    public List<String[]> getListOfPoints() {
+        return listOfPoints;
+    }
 
+    public void setListOfPoints(List<String[]> listOfPoints) {
+        this.listOfPoints = listOfPoints;
     }
 
     public Long getDataSetNumber() {
@@ -46,19 +60,19 @@ public class DataProcessing {
         this.processingName = processingName;
     }
 
-    public String getClusteringMethod() {
+    public int getClusteringMethod() {
         return clusteringMethod;
     }
 
-    public void setClusteringMethod(String clusteringMethod) {
+    public void setClusteringMethod(int clusteringMethod) {
         this.clusteringMethod = clusteringMethod;
     }
 
-    public String getDistanceCalMethod() {
+    public int getDistanceCalMethod() {
         return distanceCalMethod;
     }
 
-    public void setDistanceCalMethod(String distanceCalMethod) {
+    public void setDistanceCalMethod(int distanceCalMethod) {
         this.distanceCalMethod = distanceCalMethod;
     }
 
@@ -80,17 +94,31 @@ public class DataProcessing {
 
     // dataset number is to be used to generate empty Clusters
 
-    public List<Cluster> getCreatedClusters() {
-        return createdClusters;
-    }
-    // this method will be called one time from the constructor when the data comes there
-    public void setCreatedClusters(int clusterNumber) {
-        // create a for loop to generate createdClusters, which is equal to clusterNumber and inject each instance in the createdClusters
-        createdClusters = new ArrayList<>();
-        for (int x = 1;x<=clusterNumber;x++){
-            Cluster cluster= new Cluster();
-            cluster.setClusterName("cluster"+x);
-            createdClusters.add(cluster);
+    public List<Cluster> getClusters() throws Exception {
+        if (clusters == null){
+            clusters = new ArrayList<>();
         }
+        List<Cluster> clusters = new ArrayList<>();
+        for (int x = 1;x<=getNumberOfCluster();x++){
+            Cluster cluster= new Cluster();
+            cluster.setClusterName("Cluster "+x);
+            clusters.add(cluster);
+        }
+        GeneralMethods generalMethods = new GeneralMethods();
+        clusters = randomMe(clusters,getListOfPoints());
+
+
+        return clusters;
     }
+    public List<Cluster> randomMe(List<Cluster> clusters, List<String[]> listOfPoints)throws Exception{
+        GeneralMethods generalMethods = new GeneralMethods();
+        List<double []> doubleList= generalMethods.dataSetStringToDoubleWithoutHeaders(listOfPoints);
+        List<Cluster> clusterss = clusters;
+        for (int x =0; x<doubleList.size();x++){
+            int random = new Random().nextInt(clusterss.size());
+            clusterss.get(random).addPointToCluster(doubleList.get(x));
+        }
+        return clusterss;
+    }
+
 }

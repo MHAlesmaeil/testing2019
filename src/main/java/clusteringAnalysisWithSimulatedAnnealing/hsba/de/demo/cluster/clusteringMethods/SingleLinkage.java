@@ -2,8 +2,6 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clustering
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.GeneralMethods;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.ChooseDistanceMethod;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.DistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
 
 import java.util.List;
@@ -15,10 +13,11 @@ public class SingleLinkage implements ClusteringMethod {
     @Override
     public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber) throws Exception {
         // create empty clusters
-        dataProcessing.setCreatedClusters(numberOfCluter);
-        List<Cluster> clusterList = dataProcessing.getCreatedClusters();
+
+        List<Cluster> clusterList = dataProcessing.getClusters();
+        System.out.println("Number of clusters is "+ clusterList.size());
         // created clusters
-        List<Cluster> listOfCreatedClusters = dataProcessing.getCreatedClusters();
+        List<Cluster> listOfCreatedClusters = dataProcessing.getClusters();
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered);
 
@@ -28,7 +27,7 @@ public class SingleLinkage implements ClusteringMethod {
         generalMethods.showFormedClusters(listOfCreatedClusters,true);
 
 
-        return dataProcessing.getCreatedClusters();
+        return dataProcessing.getClusters();
     }
 
 }

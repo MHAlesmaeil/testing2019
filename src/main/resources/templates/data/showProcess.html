@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <!-- Masthead -->
+    <div class=" text-center" style="margin-top: 30px;">
+        <div class="container masthead">
+            <div class="row">
+
+                <!-- for information and summeries  -->
+                <div class="col-md-12 col-lg-12 col-xl-12 mx-auto " style="background: #343a40; color:goldenrod;">
+                    <div>
+                        <h1>Data Processing Information <a th:href="${'/ProcessingData/Executing/'+showProcess.getProcessingId()+'/generate'}" role="button" class="btn btn-light">Refresh</a></h1>
+
+                    </div>
+                    <div>
+                        <table   class="table table-top table-responsive-md  text-center">
+                            <!-- Process number will be removed later on  -->
+                            <tr>
+                                <th>Process#</th>
+                                 <th>Pro. Name</th>
+                                 <th>Cluster Method</th>
+                                 <th>Distance Method</th>
+                                 <th>Cluster #</th>
+                                 <th>Iteration #</th>
+                                 <th>Dataset #</th>
+                                 <th>cluster size</th>
+                                 <th>Points size</th>
+                             </tr>
+                             <tr  >
+                                 <div  >
+                                     <td th:text="${showProcess.getProcessingId()}"></td>
+                                     <td th:text="${showProcess.getProcessingName()}"></td>
+                                     <td th:text="${showProcess.getClusteringMethod()==1?'Simulated Annealing':'Single Linkage'}"></td>
+                                     <td th:text="${showProcess.getDistanceCalMethod()==1?'Euclidean Distance':'Manhattan Distance'}"></td>
+                                     <td th:text="${showProcess.getNumberOfCluster()}"></td>
+                                     <td th:text="${showProcess.getNumberOfIteration()}"></td>
+                                     <td th:text="${showProcess.getDataSetNumber()}"></td>
+                                     <td th:text="${showProcess.getClusters().size()}"></td>
+                                     <td th:text="${showProcess.getListOfPoints().size()}"></td>
+
+
+                                </div>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-12 mx-auto "  style="background: grey; color: aliceblue">
+                    <table   class="table table-top table-responsive-md  text-center" >
+                        <!-- Process number will be removed later on  -->
+                        <tr>
+                            <th>cluster #</th>
+                            <th > Cluster Name</th>
+                            <th > # Points</th>
+                            <th > SSE value</th>
+                            <th >Points</th>
+
+                        </tr>
+                        <tr  th:each="cluster :${showProcess.getClusters()}" >
+
+                                <td th:text="${cluster.getClusterId()}"></td>
+                                <td th:text="${cluster.getClusterName()}"></td>
+                                <td th:text="${cluster.getClusterPoints().size()}"></td>
+                                <td th:text="${#numbers.formatDecimal(cluster.getSseValue(),2,3)}"></td>
+                                <td th:if="${!cluster.getClusterPoints().empty}" th:each="elementNumberInRow :${#numbers.sequence(0, 1)}">
+                                    <span th:text="${#numbers.formatDecimal(cluster.getClusterPoints().get(elementNumberInRow),0,0)}"></span>
+                                </td>
+                                <td th:if="${cluster.getClusterPoints().empty}">
+                                    <p> There are no Points yets</p>
+                                </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- down for further information, but just when it is necessary -->
+        <!--<div class="col-md-12 col-lg-12 col-xl-12 mx-auto row" style="margin-top: 30px; background:goldenrod; color: dimgrey; ">
+            <h1 class="mb-5">More Information</h1>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

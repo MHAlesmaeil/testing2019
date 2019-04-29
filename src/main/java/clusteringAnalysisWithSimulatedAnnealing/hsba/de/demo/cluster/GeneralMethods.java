@@ -1,13 +1,11 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.ChooseDistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.DistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GeneralMethods {
     // to compute the values
@@ -87,10 +85,10 @@ public class GeneralMethods {
         return temp;
     }*/
     // return an array with the element index and the cluster number
-  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
+  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole) throws Exception{
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
-        dataProcessing.setCreatedClusters(numberOfCluster);
+
         // first numer im temp refer to the cluster and the second one refer to the point, which need to be clustered
         // for example [0,199]: it means the point 199 needs to be clustered in cluster number 0
 
@@ -128,7 +126,7 @@ public class GeneralMethods {
                 }
             }
         }
-        return dataProcessing.getCreatedClusters();
+        return dataProcessing.getClusters();
 
     }
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
