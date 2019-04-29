@@ -25,7 +25,8 @@ public class GeneralMethods {
             }
             temp.add(singleRowDouble);
         }
-        // TODO: 29.04.2019 normalize the value in the points array 
+        // TODO: 29.04.2019 normalize the value in the points array
+        temp = normalizeDoubleList(temp);
         return temp;
     }
     // passed
@@ -284,4 +285,83 @@ public class GeneralMethods {
         }
         return temp;
     }*/
+
+    public List<double[]> smallestAndGreatestValues(List<double[]> listOfDouble){
+        List<double[]> temp = new ArrayList<>();
+        // add a 0 column instead of the key of elements
+        temp.add(new double[]{0,0});
+        // go though each column and start from 1
+        for (int x =1;x<listOfDouble.get(0).length;x++){
+            double smallestValue =0;
+            double greatestValue =0;
+            // loop through the elements of the column
+            for (int y=0; y<listOfDouble.size();y++){
+                double tempoo = listOfDouble.get(y)[x];
+                if (y==0){
+                    // first solution
+                    smallestValue = listOfDouble.get(y)[x];
+                    greatestValue = listOfDouble.get(y)[x];
+                    System.out.println("First Solution is "+ listOfDouble.get(y)[x]);
+                }else{
+                    if (tempoo<smallestValue){
+                        // update the smallest value
+                        smallestValue = tempoo;
+                    }else if (tempoo>greatestValue){
+                        // update the greatest value
+                        greatestValue = tempoo;
+                    }
+                }
+            }
+            // build an array from the least and greatest value
+            double[] tempArray = {smallestValue,greatestValue};
+            // add it to the list of double array
+            temp.add(tempArray);
+        }
+        // show the result
+        for (int x =0; x<temp.size(); x++){
+            System.out.println("Column "+x);
+            System.out.println("Smallest value is "+ temp.get(x)[0]);
+            System.out.println("Greatest value is "+ temp.get(x)[1]);
+        }
+
+
+        return temp;
+    }
+    public double normalizeMe(double smallestValue, double greatestValue, double doubleToBeNormalized){
+        double temp = 0;
+        temp = (doubleToBeNormalized-smallestValue)/(greatestValue-smallestValue);
+        return temp;
+    }
+    public List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized){
+        List<double[]> temp = new ArrayList<>();
+        List<double[]> smallAndGreatestValuesList = smallestAndGreatestValues(listToBeNormalized);
+        // loop through the elements
+        for (int x=0; x<listToBeNormalized.size();x++){
+            // loop through columns
+            double [] elemetToBeaddedToTheArray = new double[listToBeNormalized.get(x).length];
+            for (int y = 0; y<listToBeNormalized.get(x).length;y++){
+                double smallestValue = smallAndGreatestValuesList.get(y)[0];
+                double greatestValue = smallAndGreatestValuesList.get(y)[1];
+                if (y==0){
+                    // for the first column, copy it as no changes are needed
+                    elemetToBeaddedToTheArray[y] = listToBeNormalized.get(x)[y];
+                }else{
+                    // normlize the value through the function
+                    elemetToBeaddedToTheArray[y] = normalizeMe(smallestValue,greatestValue,listToBeNormalized.get(x)[y]);
+                }
+            }
+            temp.add(elemetToBeaddedToTheArray);
+        }
+        // Loop through the list for test purposes
+        for (int x = 0; x<temp.size();x++){
+            System.out.println("Point # "+ temp.get(x)[0]);
+            // loop through each element in the arrary
+            for (int y = 1; y<temp.get(x).length;y++){
+                System.out.print(temp.get(x)[y]+",");
+            }
+            System.out.println("__");
+        }
+
+        return temp;
+    }
 }
