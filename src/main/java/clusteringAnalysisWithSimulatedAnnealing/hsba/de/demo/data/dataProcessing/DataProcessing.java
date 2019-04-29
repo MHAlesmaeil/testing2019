@@ -7,12 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "dataProcessing")
-@Component
 public class DataProcessing {
-    @Id
-    @GeneratedValue
     private Long processingId;
     private Long dataSetNumber;
     private String processingName;

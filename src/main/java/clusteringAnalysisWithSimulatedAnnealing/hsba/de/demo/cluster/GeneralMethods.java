@@ -25,6 +25,7 @@ public class GeneralMethods {
             }
             temp.add(singleRowDouble);
         }
+        // TODO: 29.04.2019 normalize the value in the points array 
         return temp;
     }
     // passed
