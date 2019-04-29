@@ -104,12 +104,12 @@ public class DataProcessing {
             clusters = new ArrayList<>();
         }
         List<Cluster> clusters = new ArrayList<>();
-
         for (int x = 1;x<=getNumberOfCluster();x++){
             Cluster cluster= new Cluster();
-            cluster.setClusterName("cluster"+x);
+            cluster.setClusterName("Cluster "+x);
             clusters.add(cluster);
         }
+        GeneralMethods generalMethods = new GeneralMethods();
         clusters = randomMe(clusters,getListOfPoints());
 
 

@@ -46,5 +46,10 @@ public class ProcessingDataController {
         model.addAttribute("showProcess", dataProcessingServices.findProcessById(id));
         return "data/showProcess";
     }
+    @GetMapping("/ProcessingData/Executing/{id}/generate")
+    public String generateClusters(@PathVariable("id") Long id){
+        return "redirect:/ProcessingData/Executing/{id}";
+
+    }
 
 }

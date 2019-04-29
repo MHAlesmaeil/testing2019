@@ -12,21 +12,22 @@
                 <!-- for information and summeries  -->
                 <div class="col-md-12 col-lg-12 col-xl-12 mx-auto " style="background: #343a40; color:goldenrod;">
                     <div>
-                        <h1 class="">Process Information</h1>
+                        <h1>Data Processing Information <a th:href="${'/ProcessingData/Executing/'+showProcess.getProcessingId()+'/generate'}" role="button" class="btn btn-light">Refresh</a></h1>
+
                     </div>
                     <div>
                         <table   class="table table-top table-responsive-md  text-center">
                             <!-- Process number will be removed later on  -->
                             <tr>
-                                <td>Process#</td>
-                                 <td>Pro. Name</td>
-                                 <td>Cluster Method</td>
-                                 <td>Distance Method</td>
-                                 <td>Cluster #</td>
-                                 <td>Iteration #</td>
-                                 <td>Dataset #</td>
-                                 <td>cluster size</td>
-                                 <td>Points size</td>
+                                <th>Process#</th>
+                                 <th>Pro. Name</th>
+                                 <th>Cluster Method</th>
+                                 <th>Distance Method</th>
+                                 <th>Cluster #</th>
+                                 <th>Iteration #</th>
+                                 <th>Dataset #</th>
+                                 <th>cluster size</th>
+                                 <th>Points size</th>
                              </tr>
                              <tr  >
                                  <div  >
@@ -50,20 +51,25 @@
                     <table   class="table table-top table-responsive-md  text-center" >
                         <!-- Process number will be removed later on  -->
                         <tr>
-                            <td> Clsuter Name</td>
-                            <td class="col-md-9 col-lg-9 col-xl-9 mx-auto ">Points</td>
+                            <th>cluster #</th>
+                            <th > Cluster Name</th>
+                            <th > # Points</th>
+                            <th > SSE value</th>
+                            <th >Points</th>
 
                         </tr>
                         <tr  th:each="cluster :${showProcess.getClusters()}" >
-                            <div  >
+
+                                <td th:text="${cluster.getClusterId()}"></td>
                                 <td th:text="${cluster.getClusterName()}"></td>
-                                <td th:if="${!cluster.getClusterPoints().empty}" th:each="points :${cluster.getClusterPoints()}">
-                                    <p th:text="${#numbers.formatDecimal(points[0],0,0)}"></p>
+                                <td th:text="${cluster.getClusterPoints().size()}"></td>
+                                <td th:text="${#numbers.formatDecimal(cluster.getSseValue(),2,3)}"></td>
+                                <td th:if="${!cluster.getClusterPoints().empty}" th:each="elementNumberInRow :${#numbers.sequence(0, 1)}">
+                                    <span th:text="${#numbers.formatDecimal(cluster.getClusterPoints().get(elementNumberInRow),0,0)}"></span>
                                 </td>
                                 <td th:if="${cluster.getClusterPoints().empty}">
                                     <p> There are no Points yets</p>
                                 </td>
-                            </div>
                         </tr>
                     </table>
                 </div>

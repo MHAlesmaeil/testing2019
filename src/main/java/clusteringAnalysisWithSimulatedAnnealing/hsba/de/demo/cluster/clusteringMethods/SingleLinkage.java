@@ -15,6 +15,7 @@ public class SingleLinkage implements ClusteringMethod {
         // create empty clusters
 
         List<Cluster> clusterList = dataProcessing.getClusters();
+        System.out.println("Number of clusters is "+ clusterList.size());
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getClusters();
         // empty clusters are created. Now, we need to call the points

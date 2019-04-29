@@ -20,6 +20,7 @@ public class Cluster {
     List<Double> clusterMean = new ArrayList<>();
     @ManyToOne(optional = false, targetEntity = DataProcessing.class)
     DataProcessing dataProcessing;
+    private Double sseValue;
 
     // constructor
 
@@ -27,6 +28,25 @@ public class Cluster {
     public Cluster() {
     }
 
+    public DataProcessing getDataProcessing() {
+        return dataProcessing;
+    }
+
+    public void setDataProcessing(DataProcessing dataProcessing) {
+        this.dataProcessing = dataProcessing;
+    }
+
+    public double getSseValue() {
+        if (sseValue == null){
+            ClusterSSE clusterSSE = new ClusterSSE();
+            sseValue = clusterSSE.computeSSE(getClusterPoints());
+        }
+        return sseValue;
+    }
+
+    public void setSseValue(double sseValue) {
+        this.sseValue = sseValue;
+    }
 
     public Long getClusterId() {
         return clusterId;
