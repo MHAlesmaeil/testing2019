@@ -22,11 +22,12 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters = 4;
+        int numberOfClusters = 1;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
+        boolean showResultInConsole = true;
         String pathToFileOfData = "C:/Java/TestFolder/MallCustomers.csv";
         /**
          * After reading the file of data, the points of data will be
@@ -36,7 +37,13 @@ public class Run {
 
         ClusteringMethod clusteringMethod1 = new ChooseClusteringMethod().distenceMethodSwitcher(clusteringMethod);
 
-        clusteringMethod1.computeCluster(numberOfClusters,listOfPoints,distanceMehods,true);
+        if (clusteringMethod ==1){
+            clusteringMethod1.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
+        } else if (clusteringMethod ==2){
+            // Implement Simulated Annealing
+            //clusteringMethod1.computeCluster();
+        }
+
 
 
 

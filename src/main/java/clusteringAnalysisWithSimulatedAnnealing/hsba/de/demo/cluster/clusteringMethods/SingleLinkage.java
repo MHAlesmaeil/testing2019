@@ -6,6 +6,8 @@ import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMet
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.DistanceMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing.DataProcessing;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 public class SingleLinkage implements ClusteringMethod {
@@ -19,6 +21,7 @@ public class SingleLinkage implements ClusteringMethod {
 
     @Override
     public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
+        Instant start = Instant.now();
         // create empty clusters
         dataProcessing.setCreatedClusters(numberOfCluter);
         // created clusters
@@ -31,7 +34,9 @@ public class SingleLinkage implements ClusteringMethod {
         }
         generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
 
-
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
+        System.out.println("Execution Time is "+ timeElapsed+ " (ms)");
         return dataProcessing.getCreatedClusters();
     }
 

@@ -118,16 +118,29 @@ public class GeneralMethods {
      * This Method shows the formed clusters in the console if the boolean showResultInConsole is true.
     */
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
+        ClusterSSE clusterSSE = new ClusterSSE();
       if (showResultInConsole==true){
           // loop throug the clusters
           for (int x = 0; x<listOfClusters.size();x++){
-              System.out.println("##Cluster number "+ x + " and points' keys are:");
-              // loop through each point within each cluster
-              for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
-                  System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
+              if (listOfClusters.get(x).getClusterPoints().size()==0 ){
+                  System.out.println("##Cluster number "+ x + " has no points to be shown");
+              }else if(listOfClusters.get(x).getClusterPoints().size()==1){
+                  System.out.println("##Cluster number "+ x + " has just one point");
+                  for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
+                      System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
+                  }
+                  System.out.println();
+                  System.out.println("__________");
               }
-              System.out.println();
-              System.out.println("__________");
+              else{
+                  System.out.println("##Cluster number "+ x + " and its SSE value is "+ clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints()));
+                  // loop through each point within each cluster
+                  for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
+                      System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
+                  }
+                  System.out.println();
+                  System.out.println("__________");
+              }
           }
       }
     }
