@@ -22,7 +22,7 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters = 2;
+        int numberOfClusters =3;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv

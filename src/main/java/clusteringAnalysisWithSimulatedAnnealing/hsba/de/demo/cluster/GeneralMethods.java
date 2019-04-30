@@ -49,12 +49,12 @@ public class GeneralMethods {
                 if (oldValue==-1){
                     // first solution
                     oldValue = newValue;
-                    temp = new double[] {new Double(x), oldValue};
+                    temp = new double[] {new Double(x), oldValue, new Double(y)};
                 }else{
                     if (newValue<oldValue){
                         // update solution
                         oldValue = newValue;
-                        temp = new double[] {new Double(x), oldValue};
+                        temp = new double[] {new Double(x), oldValue, new Double(y)};
                     }
                 }
 
@@ -98,15 +98,22 @@ public class GeneralMethods {
                 double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber, showResultInConsole);
                 int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
                 addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
+
                 if (showResultInConsole==true){
                     System.out.println("point added to an exists cluster");
                 }
             }else{
-                // find the next empty cluster
+                List<double[]> domething = new ArrayList<>();
+                /*domething.add(listOfPoints.get(new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]).intValue()));
+                domething.add(listOfPoints.get(new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[2]).intValue()));
+                System.out.println(" POints "+ indexWithLeastValue(listOfPoints,1, showResultInConsole)[2]+ " and the x point " + indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]+ "Their SSE is" + new ClusterSSE().computeSSE(domething));*/
+                // find the next empty cluster and add two points at once
                 double sometin = indexWithLeastValue(listOfPoints,1, showResultInConsole)[1];
                 int into = new Double(sometin).intValue();
-                int [] keyForAdding ={nextEmptyCluser(listOfClusters,showResultInConsole),new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]).intValue()};
-                addPointToAClusterAndDeleteFromList(keyForAdding,listOfClusters,listOfPoints,showResultInConsole);
+                int nextEmptyCluster = nextEmptyCluser(listOfClusters,showResultInConsole);
+                int [] keyForAddingX ={nextEmptyCluster,new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]).intValue()};
+                addPointToAClusterAndDeleteFromList(keyForAddingX,listOfClusters,listOfPoints,showResultInConsole);
+
                 if (showResultInConsole==true){
                     System.out.println("point is added to a new one");
                 }
