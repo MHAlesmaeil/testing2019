@@ -18,7 +18,7 @@ public class Run {
          * Choose 1 for Euclidean Distance
          * Choose 2 for Manhattan Distance
         */
-        int distanceMehods = 2;
+        int distanceMehods = 1;
         /**
          * Choose a number, which is greater than 2
         */

@@ -95,6 +95,7 @@ public class GeneralMethods {
             // check which one gives the least value
             // if least value resulted from an item with in cluster, then repeat if statement
             if (bestValueCluster<bestValueList || bestValueCluster==bestValueList){
+                // TODO: 01.05.2019 review what is happening here especially in the first round 
                 double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber, showResultInConsole);
                 int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
                 addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
@@ -103,10 +104,7 @@ public class GeneralMethods {
                     System.out.println("point added to an exists cluster");
                 }
             }else{
-                List<double[]> domething = new ArrayList<>();
-                /*domething.add(listOfPoints.get(new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]).intValue()));
-                domething.add(listOfPoints.get(new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[2]).intValue()));
-                System.out.println(" POints "+ indexWithLeastValue(listOfPoints,1, showResultInConsole)[2]+ " and the x point " + indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]+ "Their SSE is" + new ClusterSSE().computeSSE(domething));*/
+                
                 // find the next empty cluster and add two points at once
                 double sometin = indexWithLeastValue(listOfPoints,1, showResultInConsole)[1];
                 int into = new Double(sometin).intValue();
