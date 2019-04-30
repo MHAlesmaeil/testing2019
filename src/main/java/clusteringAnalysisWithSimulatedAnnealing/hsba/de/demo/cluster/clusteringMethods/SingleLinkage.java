@@ -15,7 +15,7 @@ public class SingleLinkage implements ClusteringMethod {
     private GeneralMethods generalMethods = new GeneralMethods();
 
     @Override
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double tempratureToStopTheProcess, double alphaValue, boolean showResultInConsole) throws Exception {
+    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double numberOfIterationPerTemprature, double alphaValue, boolean showResultInConsole) throws Exception {
         return null;
     }
 

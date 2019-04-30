@@ -20,7 +20,7 @@ public class SimulatedAnnealing implements ClusteringMethod {
     }
 
     @Override
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double tempratureToStopTheProcess, double alphaValue, boolean showResultInConsole) throws Exception {
+    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double numberOfIterationPerTemprature, double alphaValue, boolean showResultInConsole) throws Exception {
         Instant start = Instant.now();
         // create empty clusters
         dataProcessing.setCreatedClusters(numberOfCluter);
@@ -29,8 +29,12 @@ public class SimulatedAnnealing implements ClusteringMethod {
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
 
-        while (initialList.size()>1){
+        while (numberOfItration>1){
             //generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
+            simAnMethods.clusterCenterInitialization(true);
+
+
+            numberOfItration = numberOfItration-1;
         }
         generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
 

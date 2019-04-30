@@ -27,7 +27,7 @@ public class GeneralMethods {
             }
             temp.add(singleRowDouble);
         }
-        temp = normalizeDoubleList(temp,showResultInConsole );
+        //temp = normalizeDoubleList(temp,showResultInConsole );
         return temp;
     }
     /**
@@ -35,6 +35,7 @@ public class GeneralMethods {
      *
      * Distance Method: 1 for Euclidean Distance and 2 for Manhattan Distance
     */
+    // TODO: 30.04.2019 this array must also load the position of y in case that the best solution found in the list of arrays and one cluster is still with no points
     public double [] indexWithLeastValue(List<double[]> listToCheck, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         double [] temp = new double[listToCheck.size()];
@@ -119,6 +120,7 @@ public class GeneralMethods {
     */
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
         ClusterSSE clusterSSE = new ClusterSSE();
+        double totalSSE =0;
       if (showResultInConsole==true){
           // loop throug the clusters
           for (int x = 0; x<listOfClusters.size();x++){
@@ -133,6 +135,7 @@ public class GeneralMethods {
                   System.out.println("__________");
               }
               else{
+                  totalSSE += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
                   System.out.println("##Cluster number "+ x + " and its SSE value is "+ clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints()));
                   // loop through each point within each cluster
                   for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
@@ -142,6 +145,7 @@ public class GeneralMethods {
                   System.out.println("__________");
               }
           }
+          System.out.println("Total SSE is " + totalSSE);
       }
     }
     /**
