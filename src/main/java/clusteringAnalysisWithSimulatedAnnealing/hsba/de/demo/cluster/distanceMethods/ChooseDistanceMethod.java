@@ -9,7 +9,7 @@ public class ChooseDistanceMethod {
             distanceMethod = new EuclideanDistance();
         }
         else if(chosenMethod==2){
-            distanceMethod = new ManhattenDistance();
+            distanceMethod = new ManhattanDistance();
         }
         return distanceMethod;
 

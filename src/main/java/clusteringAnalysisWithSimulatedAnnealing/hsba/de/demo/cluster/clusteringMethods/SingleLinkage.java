@@ -13,19 +13,23 @@ public class SingleLinkage implements ClusteringMethod {
     private GeneralMethods generalMethods = new GeneralMethods();
 
     @Override
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber) throws Exception {
+    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double tempratureToStopTheProcess, double alphaValue, boolean showResultInConsole) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
         // create empty clusters
         dataProcessing.setCreatedClusters(numberOfCluter);
-        List<Cluster> clusterList = dataProcessing.getCreatedClusters();
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getCreatedClusters();
         // empty clusters are created. Now, we need to call the points
-        List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered);
+        List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
 
-        while (initialList.size()>0){
+        while (initialList.size()>1){
             generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
         }
-        generalMethods.showFormedClusters(listOfCreatedClusters,true);
+        generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
 
 
         return dataProcessing.getCreatedClusters();

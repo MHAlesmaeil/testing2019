@@ -1,21 +1,27 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo;
 
+import com.opencsv.CSVReader;
+
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FactoryClass {
 
-    public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        int choiceNumber = 0;
+    public List<String[]> execute(String pathToFileOfData)throws Exception {
+        String SAMPLE_CSV_FILE_PATH = pathToFileOfData;
 
-        while(choiceNumber!=-1){
-            System.out.println("Welcome to Cluster Analysis With Simulated Annealing");
-            System.out.println("To Stop running you can enter '-1'");
-
-            choiceNumber = scanner.nextInt();
-            System.out.println("Number you have entered is: "+ choiceNumber);
-        }
+        Reader reader1 = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
+        CSVReader csvReader = new CSVReader(reader1);
+        List<String[]> listOfStrings = new ArrayList<>();
+        listOfStrings = csvReader.readAll();
+        reader1.close();
+        csvReader.close();
+        return listOfStrings;
 
     }
 }

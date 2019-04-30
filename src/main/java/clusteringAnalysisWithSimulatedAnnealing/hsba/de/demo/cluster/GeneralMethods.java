@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Random;
 
 public class GeneralMethods {
-    // to compute the values
-    public List<double[]> dataSetStringToDoubleWithoutHeaders(List<String[]> dataSetToBeConverted ) throws Exception{
+    /**
+     * This method convert a list of array of strings and return a list of array of double
+    */
+    public List<double[]> dataSetStringToDoubleWithoutHeaders(List<String[]> dataSetToBeConverted,boolean showResultInConsole ) throws Exception{
         List<double[]> temp = new ArrayList<>();
         List<String []> tempString = dataSetToBeConverted;
         // for loop to call each row in the string dataset
@@ -25,11 +27,14 @@ public class GeneralMethods {
             }
             temp.add(singleRowDouble);
         }
-        // TODO: 29.04.2019 normalize the value in the points array
-        temp = normalizeDoubleList(temp);
+        temp = normalizeDoubleList(temp,showResultInConsole );
         return temp;
     }
-    // passed
+    /**
+     * This method checks a list of arrays of double and return an array of double, which has the least SSE value, when it compared with the rest of array of double within the list
+     *
+     * Distance Method: 1 for Euclidean Distance and 2 for Manhattan Distance
+    */
     public double [] indexWithLeastValue(List<double[]> listToCheck, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         double [] temp = new double[listToCheck.size()];
@@ -61,32 +66,9 @@ public class GeneralMethods {
         return temp;
     }
     /**
-     * this method was not used
+     * The main method in the Single Linkage
+     * This method checks a list of arrays of double and decide which array from this list will be injected into which cluster and delete it from the list of arrays of double
     */
-    /*public double [] clusterIndexWithLeastValue(List<Cluster> listOfClusterToCheck,double[] elementToCheck, int distanceMethodNumber){
-        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
-        double [] temp = new double[2];
-        double oldValue = -1;
-        double newValue;
-        // loop through the list of list of clusters
-        for (int x = 0; x<listOfClusterToCheck.size(); x++){
-            for (int y = 0; y<listOfClusterToCheck.get(x).getClusterPoints().size();y++){
-                newValue = distanceMethod.computeDistance(listOfClusterToCheck.get(x).getClusterPoints().get(y),elementToCheck);
-                if (oldValue==-1){
-                    // first solution
-                    oldValue = newValue;
-                    temp = new double[]{oldValue,new Double(x)};
-                }else{
-                    if (newValue<oldValue){
-                        // update solution
-                        oldValue = newValue;
-                        temp = new double[]{oldValue,new Double(x)};
-                    }
-                }
-            }
-        }
-        return temp;
-    }*/
     // return an array with the element index and the cluster number
   public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
         DataProcessing dataProcessing = new DataProcessing();
@@ -132,6 +114,9 @@ public class GeneralMethods {
         return dataProcessing.getCreatedClusters();
 
     }
+    /**
+     * This Method shows the formed clusters in the console if the boolean showResultInConsole is true.
+    */
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
       if (showResultInConsole==true){
           // loop throug the clusters
@@ -146,7 +131,10 @@ public class GeneralMethods {
           }
       }
     }
-    // passed
+    /**
+     * This function checks if all created clusters have at least one point
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
     public boolean allClustersHaveAtLeastOnePoint(List<Cluster> listOfClusters,boolean showResultInConsole ){
         boolean temp = true;
         for (int x =0; x<listOfClusters.size();x++){
@@ -164,7 +152,10 @@ public class GeneralMethods {
         }
         return temp;
     }
-    // passed : assumption is that at least one cluster is empty
+    /**
+     * This method return the next empty cluster. Empty here means that the cluster has no points
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
     public int nextEmptyCluser(List<Cluster> listOfClusters, boolean showResultInConsole){
         Integer temp = null;
         // loop through the clusters and return the first empty cluster
@@ -179,7 +170,10 @@ public class GeneralMethods {
         }
         return temp;
     }
-    // passed
+    /**
+     * This method adds an array to a cluster from the list of arrays of double
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
     public void addPointToAClusterAndDeleteFromList(int[] keyClusterAndPoint, List<Cluster> listOfClusters,List<double[]> listOfPoints, boolean showResultInConsole){
         int [] keyCluster = keyClusterAndPoint;
         int clusterNumber = keyCluster[0];
@@ -194,7 +188,10 @@ public class GeneralMethods {
             System.out.println("Number of Points in cluster "+ clusterNumber + " before adding a new point " + numberOfPointsBeforeAdding + " and after adding the new point " +listOfClusters.get(clusterNumber).getClusterPoints().size() );
         }
     }
-    // passed
+    /**
+     * This Method decides which array within list of arrays of double must injected in which cluster
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
     public double [] whichPointToWhichClusterPlusFuncValue(List<Cluster> listOfClusters,List<double[]> listOfPoints, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         // initiate the variables
@@ -238,10 +235,130 @@ public class GeneralMethods {
         }
         return temp;
     }
+    /**
+     * This method returns an array of double with the greatest value and smallest value of each column and it helps to normalize the list of arrays of double
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
+    public List<double[]> smallestAndGreatestValues(List<double[]> listOfDouble, boolean showResultInConsole){
+        List<double[]> temp = new ArrayList<>();
+        // add a 0 column instead of the key of elements
+        temp.add(new double[]{0,0});
+        // go though each column and start from 1
+        for (int x =1;x<listOfDouble.get(0).length;x++){
+            double smallestValue =0;
+            double greatestValue =0;
+            // loop through the elements of the column
+            for (int y=0; y<listOfDouble.size();y++){
+                double tempoo = listOfDouble.get(y)[x];
+                if (y==0){
+                    // first solution
+                    smallestValue = listOfDouble.get(y)[x];
+                    greatestValue = listOfDouble.get(y)[x];
+                    System.out.println("First Solution is "+ listOfDouble.get(y)[x]);
+                }else{
+                    if (tempoo<smallestValue){
+                        // update the smallest value
+                        smallestValue = tempoo;
+                    }else if (tempoo>greatestValue){
+                        // update the greatest value
+                        greatestValue = tempoo;
+                    }
+                }
+            }
+            // build an array from the least and greatest value
+            double[] tempArray = {smallestValue,greatestValue};
+            // add it to the list of double array
+            temp.add(tempArray);
+        }
+        // show the result
+        if (showResultInConsole==true){
+            for (int x =0; x<temp.size(); x++){
+                System.out.println("Column "+x);
+                System.out.println("Smallest value is "+ temp.get(x)[0]);
+                System.out.println("Greatest value is "+ temp.get(x)[1]);
+            }
+        }
+
+
+        return temp;
+    }
+    /**
+     * This method returns the normalized value (between 0 and 1) of a double after giving the greatest and smallest value
+    */
+    public double normalizeMe(double smallestValue, double greatestValue, double doubleToBeNormalized){
+        double temp = 0;
+        temp = (doubleToBeNormalized-smallestValue)/(greatestValue-smallestValue);
+        return temp;
+    }
+    /**
+     * This methods converts a list with double arrays to a normalized one
+     * If the boolean showResultInConsole is true, then the result will be shown in the console
+    */
+    public List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized, boolean showResultInConsole){
+        List<double[]> temp = new ArrayList<>();
+        List<double[]> smallAndGreatestValuesList = smallestAndGreatestValues(listToBeNormalized,showResultInConsole);
+        // loop through the elements
+        for (int x=0; x<listToBeNormalized.size();x++){
+            // loop through columns
+            double [] elemetToBeaddedToTheArray = new double[listToBeNormalized.get(x).length];
+            for (int y = 0; y<listToBeNormalized.get(x).length;y++){
+                double smallestValue = smallAndGreatestValuesList.get(y)[0];
+                double greatestValue = smallAndGreatestValuesList.get(y)[1];
+                if (y==0){
+                    // for the first column, copy it as no changes are needed
+                    elemetToBeaddedToTheArray[y] = listToBeNormalized.get(x)[y];
+                }else{
+                    // normlize the value through the function
+                    elemetToBeaddedToTheArray[y] = normalizeMe(smallestValue,greatestValue,listToBeNormalized.get(x)[y]);
+                }
+            }
+            temp.add(elemetToBeaddedToTheArray);
+        }
+        // Loop through the list for test purposes
+        if (showResultInConsole== true){
+            for (int x = 0; x<temp.size();x++){
+                System.out.println("Point # "+ temp.get(x)[0]);
+                // loop through each element in the arrary
+                for (int y = 1; y<temp.get(x).length;y++){
+                    System.out.print(temp.get(x)[y]+",");
+                }
+                System.out.println("__");
+            }
+        }
+
+        return temp;
+    }
 
     /**
+     * this method was not used
+     */
+    /*public double [] clusterIndexWithLeastValue(List<Cluster> listOfClusterToCheck,double[] elementToCheck, int distanceMethodNumber){
+        DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
+        double [] temp = new double[2];
+        double oldValue = -1;
+        double newValue;
+        // loop through the list of list of clusters
+        for (int x = 0; x<listOfClusterToCheck.size(); x++){
+            for (int y = 0; y<listOfClusterToCheck.get(x).getClusterPoints().size();y++){
+                newValue = distanceMethod.computeDistance(listOfClusterToCheck.get(x).getClusterPoints().get(y),elementToCheck);
+                if (oldValue==-1){
+                    // first solution
+                    oldValue = newValue;
+                    temp = new double[]{oldValue,new Double(x)};
+                }else{
+                    if (newValue<oldValue){
+                        // update solution
+                        oldValue = newValue;
+                        temp = new double[]{oldValue,new Double(x)};
+                    }
+                }
+            }
+        }
+        return temp;
+    }*/
+    /**
      * Repeated, we do not really need it
-    */
+     */
     /*public int [] whichPointIntoWhichCluster(List<Cluster> listOfClusters,List<double[]> listOfPoints, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         // initiate the variables
@@ -286,82 +403,4 @@ public class GeneralMethods {
         return temp;
     }*/
 
-    public List<double[]> smallestAndGreatestValues(List<double[]> listOfDouble){
-        List<double[]> temp = new ArrayList<>();
-        // add a 0 column instead of the key of elements
-        temp.add(new double[]{0,0});
-        // go though each column and start from 1
-        for (int x =1;x<listOfDouble.get(0).length;x++){
-            double smallestValue =0;
-            double greatestValue =0;
-            // loop through the elements of the column
-            for (int y=0; y<listOfDouble.size();y++){
-                double tempoo = listOfDouble.get(y)[x];
-                if (y==0){
-                    // first solution
-                    smallestValue = listOfDouble.get(y)[x];
-                    greatestValue = listOfDouble.get(y)[x];
-                    System.out.println("First Solution is "+ listOfDouble.get(y)[x]);
-                }else{
-                    if (tempoo<smallestValue){
-                        // update the smallest value
-                        smallestValue = tempoo;
-                    }else if (tempoo>greatestValue){
-                        // update the greatest value
-                        greatestValue = tempoo;
-                    }
-                }
-            }
-            // build an array from the least and greatest value
-            double[] tempArray = {smallestValue,greatestValue};
-            // add it to the list of double array
-            temp.add(tempArray);
-        }
-        // show the result
-        for (int x =0; x<temp.size(); x++){
-            System.out.println("Column "+x);
-            System.out.println("Smallest value is "+ temp.get(x)[0]);
-            System.out.println("Greatest value is "+ temp.get(x)[1]);
-        }
-
-
-        return temp;
-    }
-    public double normalizeMe(double smallestValue, double greatestValue, double doubleToBeNormalized){
-        double temp = 0;
-        temp = (doubleToBeNormalized-smallestValue)/(greatestValue-smallestValue);
-        return temp;
-    }
-    public List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized){
-        List<double[]> temp = new ArrayList<>();
-        List<double[]> smallAndGreatestValuesList = smallestAndGreatestValues(listToBeNormalized);
-        // loop through the elements
-        for (int x=0; x<listToBeNormalized.size();x++){
-            // loop through columns
-            double [] elemetToBeaddedToTheArray = new double[listToBeNormalized.get(x).length];
-            for (int y = 0; y<listToBeNormalized.get(x).length;y++){
-                double smallestValue = smallAndGreatestValuesList.get(y)[0];
-                double greatestValue = smallAndGreatestValuesList.get(y)[1];
-                if (y==0){
-                    // for the first column, copy it as no changes are needed
-                    elemetToBeaddedToTheArray[y] = listToBeNormalized.get(x)[y];
-                }else{
-                    // normlize the value through the function
-                    elemetToBeaddedToTheArray[y] = normalizeMe(smallestValue,greatestValue,listToBeNormalized.get(x)[y]);
-                }
-            }
-            temp.add(elemetToBeaddedToTheArray);
-        }
-        // Loop through the list for test purposes
-        for (int x = 0; x<temp.size();x++){
-            System.out.println("Point # "+ temp.get(x)[0]);
-            // loop through each element in the arrary
-            for (int y = 1; y<temp.get(x).length;y++){
-                System.out.print(temp.get(x)[y]+",");
-            }
-            System.out.println("__");
-        }
-
-        return temp;
-    }
 }

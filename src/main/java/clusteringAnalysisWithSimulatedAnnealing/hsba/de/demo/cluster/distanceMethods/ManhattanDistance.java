@@ -1,6 +1,6 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods;
 
-public class ManhattenDistance implements DistanceMethod {
+public class ManhattanDistance implements DistanceMethod {
 
     @Override
     public double computeDistance(double[] firstArray, double[] secondArray) {
