@@ -1,7 +1,5 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.ChooseClusteringMethod;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.ClusteringMethod;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SimulatedAnnealing;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SingleLinkage;
 
@@ -24,12 +22,12 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters =10;
+        int numberOfClusters =16;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
-        boolean showResultInConsole = true;
+        boolean showResultInConsole = false;
         String pathToFileOfData = "C:/Java/TestFolder/MallCustomers1.csv";
         /**
          * After reading the file of data, the points of data will be

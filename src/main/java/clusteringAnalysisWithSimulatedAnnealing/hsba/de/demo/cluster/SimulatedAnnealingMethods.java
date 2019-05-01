@@ -83,7 +83,10 @@ public class SimulatedAnnealingMethods {
         double temp = 0;
         // loop through the clusters
         for (int x = 0; x<listOfClusters.size();x++){
+            // if a cluster does not have any point, then escape it
+            if (listOfClusters.get(x).getClusterPoints().size()!=0){
             temp += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
+            }
         }
         return temp;
     }
