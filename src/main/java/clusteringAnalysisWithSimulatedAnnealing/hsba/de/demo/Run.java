@@ -24,12 +24,12 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters =5;
+        int numberOfClusters =10;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
-        boolean showResultInConsole = false;
+        boolean showResultInConsole = true;
         String pathToFileOfData = "C:/Java/TestFolder/MallCustomers1.csv";
         /**
          * After reading the file of data, the points of data will be

@@ -9,17 +9,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
-public class SimulatedAnnealing implements ClusteringMethod {
+public class SimulatedAnnealing {
     private DataProcessing dataProcessing = new DataProcessing();
     private GeneralMethods generalMethods = new GeneralMethods();
     private SimulatedAnnealingMethods simAnMethods = new SimulatedAnnealingMethods();
 
-    @Override
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
-        return null;
-    }
-
-    @Override
     public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double numberOfIterationPerTemprature, double alphaValue, boolean showResultInConsole) throws Exception {
         Instant start = Instant.now();
         // create empty clusters
@@ -32,6 +26,8 @@ public class SimulatedAnnealing implements ClusteringMethod {
         initialList = generalMethods.normalizeDoubleList(initialList, true);
 
         simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
+        simAnMethods.assignPointsToClusters(listOfCreatedClusters,initialList,showResultInConsole);
+        System.out.println("Total cost is "+ simAnMethods.costFunctionOfClusterList(listOfCreatedClusters));
 
 
         /*// start temprature

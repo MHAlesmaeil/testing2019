@@ -2,9 +2,9 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clustering
 
 public class ChooseClusteringMethod {
 
-    // in the implementation class, a new created instance can be set to this method
+   /*  // in the implementation class, a new created instance can be set to this method
     public ClusteringMethod distenceMethodSwitcher(int chosenMethod){
-        ClusteringMethod clusteringMethod = null;
+       ClusteringMethod clusteringMethod = null;
         // if 1, create a new SingleLinkage instance
         if (chosenMethod==1){
             clusteringMethod = new SingleLinkage();
@@ -15,5 +15,5 @@ public class ChooseClusteringMethod {
         }
         return clusteringMethod;
 
-    }
+    }*/
 }

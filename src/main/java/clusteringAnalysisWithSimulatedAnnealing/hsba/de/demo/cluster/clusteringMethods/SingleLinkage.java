@@ -10,16 +10,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
-public class SingleLinkage implements ClusteringMethod {
+public class SingleLinkage {
     private DataProcessing dataProcessing = new DataProcessing();
     private GeneralMethods generalMethods = new GeneralMethods();
 
-    @Override
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double numberOfIterationPerTemprature, double alphaValue, boolean showResultInConsole) throws Exception {
-        return null;
-    }
 
-    @Override
     public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
         Instant start = Instant.now();
         // create empty clusters
