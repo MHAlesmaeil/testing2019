@@ -307,7 +307,7 @@ public class GeneralMethods {
                     // first solution
                     smallestValue = listOfDouble.get(y)[x];
                     greatestValue = listOfDouble.get(y)[x];
-                    System.out.println("First Solution is "+ listOfDouble.get(y)[x]);
+
                 }else{
                     if (tempoo<smallestValue){
                         // update the smallest value

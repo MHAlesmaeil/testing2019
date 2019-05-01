@@ -26,17 +26,23 @@ public class SimulatedAnnealing implements ClusteringMethod {
         dataProcessing.setCreatedClusters(numberOfCluter);
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getCreatedClusters();
+        System.out.println("Cluster number is "+ listOfCreatedClusters.size());
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
+        initialList = generalMethods.normalizeDoubleList(initialList, true);
 
-        while (numberOfItration>1){
+        simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
+
+
+        /*// start temprature
+        while (numberOfItration*10>1){
             //generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
-            simAnMethods.clusterCenterInitialization(true);
+
 
 
             numberOfItration = numberOfItration-1;
-        }
-        generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
+        }*/
+        generalMethods.showFormedClusters(listOfCreatedClusters,true);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis

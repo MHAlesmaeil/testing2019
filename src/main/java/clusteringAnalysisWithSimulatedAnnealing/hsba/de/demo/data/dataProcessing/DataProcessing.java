@@ -22,7 +22,6 @@ public class DataProcessing {
         createdClusters = new ArrayList<>();
         for (int x = 1;x<=clusterNumber;x++){
             Cluster cluster= new Cluster();
-            cluster.setClusterName("cluster"+x);
             createdClusters.add(cluster);
         }
     }
