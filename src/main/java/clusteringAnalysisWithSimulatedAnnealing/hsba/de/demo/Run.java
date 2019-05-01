@@ -18,11 +18,11 @@ public class Run {
          * Choose 1 for Euclidean Distance
          * Choose 2 for Manhattan Distance
         */
-        int distanceMehods = 1;
+        int distanceMehods = 2;
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters =3;
+        int numberOfClusters =10;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
