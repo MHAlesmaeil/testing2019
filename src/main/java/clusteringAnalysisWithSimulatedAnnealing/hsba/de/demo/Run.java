@@ -41,7 +41,6 @@ public class Run {
         List<String[]> listOfPoints = new FactoryClass().execute(pathToFileOfData);
 
 
-
         if (clusteringMethod ==1){
             SingleLinkage singleLinkage= new SingleLinkage();
             singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
