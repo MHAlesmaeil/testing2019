@@ -72,6 +72,7 @@ public class SimulatedAnnealingMethods {
             // inject the solution of the point of array in the cluster and check the next point
             injectPointIntoCluster(listOfClusters,bestClusterCenter,listOfPoints,indexOfPointInListOfPoints,showResultInConsole);
         }
+        // TODO: 01.05.2019 check if there any cluster withno points and try to identify them to adjust their centers to get at least one point
     }
     public void injectPointIntoCluster(List<Cluster> listOfClusters, int clusterNumber, List<double[]> listOfPoints, int positionOfPointInListOfPoints, boolean showResultInConsole){
         listOfClusters.get(clusterNumber).addPointToCluster(listOfPoints.get(positionOfPointInListOfPoints));
