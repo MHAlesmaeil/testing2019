@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Cluster {
 
-    List<double[]> clusterPoints = new ArrayList<>();
+    List<double[]> clusterPoints;
     double[] cluserCenter ;
 
     // constructor
@@ -17,7 +17,9 @@ public class Cluster {
     }
 
     public List<double[]> getClusterPoints() {
-
+        if (clusterPoints==null){
+            clusterPoints = new ArrayList<>();
+        }
         return clusterPoints;
     }
     public void setClusterPoints(List<double[]> clusterPoints) {

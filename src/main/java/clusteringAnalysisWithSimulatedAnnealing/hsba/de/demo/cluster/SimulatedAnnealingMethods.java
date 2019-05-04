@@ -8,6 +8,7 @@ import java.util.Random;
 public class SimulatedAnnealingMethods {
     EuclideanDistance euclideanDistance = new EuclideanDistance();
     ClusterSSE clusterSSE = new ClusterSSE();
+    Random random = new Random();
     /**
      * Generate the initial center
     */
@@ -47,6 +48,9 @@ public class SimulatedAnnealingMethods {
         System.out.println("New Centers have been generated");
     }
     public void assignPointsToClusters(List<Cluster> listOfClusters, List<double[]> listOfPoints, boolean showResultInConsole){
+        for (int x = 0; x<listOfClusters.size();x++){
+            listOfClusters.get(x).setClusterPoints(null);
+        }
         // loop through the points in the list of arrays
         int indexOfPointInListOfPoints = -1;
         int bestClusterCenter = -1;
@@ -80,15 +84,65 @@ public class SimulatedAnnealingMethods {
             System.out.println("A point has been added to the cluster # "+ clusterNumber);
         }
     }
+
     public double costFunctionOfClusterList(List<Cluster> listOfClusters){
         double temp = 0;
         // loop through the clusters
         for (int x = 0; x<listOfClusters.size();x++){
-            // if a cluster does not have any point, then escape it
-            if (listOfClusters.get(x).getClusterPoints().size()!=0){
-            temp += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
-            }
+            // if a cluster does not have any point, it will through an exception
+            try {
+                temp += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
+            }catch (Exception e){}
+
         }
         return temp;
+    }
+    // choose a center randomly
+    public void chooseRandomCenterAndAlterIt(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints,double acceptanceTemperature,double mutationFactor, boolean showResultInConsole){
+        int randomCluster = random.nextInt(listOfClusters.size());
+        // save old cluster values in case, that a revise is necessary
+        double [] chosenCenterOldValues = listOfClusters.get(randomCluster).getCluserCenter();
+        double sseValueOld = costFunctionOfClusterList(listOfClusters);
+        System.out.println("SSE Old is "+ sseValueOld);
+        double [] alteredCenter = new double[chosenCenterOldValues.length];
+        // alter the chosen cluster center and start from second values, as the one is not set to be optimized
+        for (int x = 1; x<alteredCenter.length;x++){
+            alteredCenter[x] = chosenCenterOldValues[x] + random.nextGaussian()* mutationFactor;
+            System.out.println("Old value is "+ chosenCenterOldValues[x]+" new value "+alteredCenter[x]);
+        }
+        // inject the new center instead the old one and calculate the sse value
+        injectNewCenterInCluster(listOfClusters,randomCluster,alteredCenter,showResultInConsole);
+        // remove all points from clusters
+
+        assignPointsToClusters(listOfClusters,listOfNormalizedPoints,showResultInConsole);
+        double sseValueNew = costFunctionOfClusterList(listOfClusters);
+        System.out.println("SSE new is "+ sseValueNew);
+        // if seeValueNew gives a greater value than the old one then reverse the process and later on accept it as to Metropolis criterion
+        if (sseValueNew>sseValueOld){
+
+            System.out.println("No improvement and the chance to accept it is ");
+            // check if the solution can be accepted
+            if (canNewSolutionBeAccepted(sseValueOld,sseValueNew,acceptanceTemperature)){
+                System.out.println("However, the solution has been accepted");
+            }else{
+                injectNewCenterInCluster(listOfClusters,randomCluster,chosenCenterOldValues,showResultInConsole);
+                assignPointsToClusters(listOfClusters,listOfNormalizedPoints,showResultInConsole);
+                System.out.println("Solution has been reversed");
+            }
+        }else if (sseValueNew<sseValueOld){
+            System.out.println("An improvement has been detected for cluster "+ randomCluster);
+        }else{
+            System.out.println("Both are equal, so keep changes");
+
+        }
+    }
+    public boolean canNewSolutionBeAccepted(double oldValue, double newValue,double acceptanceTemperature){
+        double randomToMeasureAgainst = random.nextDouble();
+        double probabilityOfAcceptingNewSolution = Math.exp(-(Math.abs(oldValue-newValue)/acceptanceTemperature));
+        if (randomToMeasureAgainst>probabilityOfAcceptingNewSolution){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

@@ -22,21 +22,21 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters =16;
+        int numberOfClusters =6;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
         boolean showResultInConsole = false;
-        String pathToFileOfData = "C:/Java/TestFolder/MallCustomers1.csv";
+        String pathToFileOfData = "C:/Java/TestFolder/MallCustomers.csv";
         /**
          * After reading the file of data, the points of data will be
          * Saved as a List of String arrays
         */
 
-        int numberOfIteration = 100;
+        int numberOfIteration = 2000;
 
-        double temperature = 9;
+        double acceptanceTemperature = 0.001;
 
         List<String[]> listOfPoints = new FactoryClass().execute(pathToFileOfData);
 
@@ -47,11 +47,7 @@ public class Run {
         } else if (clusteringMethod ==2){
             // Implement Simulated Annealing
             SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing();
-            simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration,temperature,4,0.5,showResultInConsole);
+            simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,0.05,showResultInConsole);
         }
-
-
-
-
     }
 }

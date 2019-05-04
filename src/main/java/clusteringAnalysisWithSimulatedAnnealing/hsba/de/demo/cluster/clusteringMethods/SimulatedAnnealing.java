@@ -14,35 +14,35 @@ public class SimulatedAnnealing {
     private GeneralMethods generalMethods = new GeneralMethods();
     private SimulatedAnnealingMethods simAnMethods = new SimulatedAnnealingMethods();
 
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int numberOfItration, double startTemprature, double numberOfIterationPerTemprature, double alphaValue, boolean showResultInConsole) throws Exception {
+    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int  singleMarkovChainLength, double acceptanceTemperatureT0, double mutationFactor, boolean showResultInConsole) throws Exception {
         Instant start = Instant.now();
         // create empty clusters
         dataProcessing.setCreatedClusters(numberOfCluter);
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getCreatedClusters();
-        System.out.println("Cluster number is "+ listOfCreatedClusters.size());
+
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
         initialList = generalMethods.normalizeDoubleList(initialList, true);
 
         simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
         simAnMethods.assignPointsToClusters(listOfCreatedClusters,initialList,showResultInConsole);
-        System.out.println("Total cost is "+ simAnMethods.costFunctionOfClusterList(listOfCreatedClusters));
-
-
-        /*// start temprature
-        while (numberOfItration*10>1){
-            //generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
+        double oldvalue = simAnMethods.costFunctionOfClusterList(listOfCreatedClusters);
 
 
 
-            numberOfItration = numberOfItration-1;
-        }*/
+
+        while (singleMarkovChainLength>1){
+            simAnMethods.chooseRandomCenterAndAlterIt(listOfCreatedClusters,initialList,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
+
+            singleMarkovChainLength = singleMarkovChainLength-1;
+        }
         generalMethods.showFormedClusters(listOfCreatedClusters,true);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
         System.out.println("Execution Time is "+ timeElapsed+ " (ms)");
+        System.out.println("Old value is " + oldvalue);
         return dataProcessing.getCreatedClusters();
     }
 }

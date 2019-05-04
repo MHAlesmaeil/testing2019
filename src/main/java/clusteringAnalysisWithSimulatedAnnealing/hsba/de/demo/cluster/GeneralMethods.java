@@ -59,7 +59,7 @@ public class GeneralMethods {
 
             }
         }
-        if (showResultInConsole==true){
+        if (showResultInConsole==showResultInConsole){
             System.out.println("The index in the list "+ temp[0]);
             System.out.println("The Least value "+ temp[1]);
         }
@@ -79,11 +79,11 @@ public class GeneralMethods {
 
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         // if cluster size is reached search in the current one
-        if (areAllClustersHavingAtLeastOnePoint(listOfClusters,showResultInConsole)==true){
+        if (areAllClustersHavingAtLeastOnePoint(listOfClusters,showResultInConsole)==showResultInConsole){
             double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber,showResultInConsole);
             int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
             addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
-            if (showResultInConsole==true){
+            if (showResultInConsole==showResultInConsole){
                 System.out.println("No empty cluster");
             }
         }
@@ -97,7 +97,7 @@ public class GeneralMethods {
              * which would cause of clustering the first point in a cluster, it would
              * not be probably fitting the single linkage method
             */
-            if (areAllClusterHavingNoPointsAtAll(listOfClusters,showResultInConsole)==true){
+            if (areAllClusterHavingNoPointsAtAll(listOfClusters,showResultInConsole)==showResultInConsole){
                 bestValueCluster = 10*bestValueList;
             }
             // check which one gives the least value
@@ -105,7 +105,7 @@ public class GeneralMethods {
             if (bestValueCluster<bestValueList || bestValueCluster==bestValueList){
                 double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber, showResultInConsole);
                 int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
-                if (showResultInConsole==true){
+                if (showResultInConsole==showResultInConsole){
                     System.out.println("point "+ listOfPoints.get(new Double(temp[1]).intValue())[0] +"added to cluster "+ temp[0]);
                 }
                 addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
@@ -116,7 +116,7 @@ public class GeneralMethods {
                 int nextEmptyCluster = nextEmptyCluser(listOfClusters,showResultInConsole);
                 int [] keyForAddingX ={nextEmptyCluster,new Double(indexWithLeastValue(listOfPoints,1, showResultInConsole)[0]).intValue()};
                 addPointToAClusterAndDeleteFromList(keyForAddingX,listOfClusters,listOfPoints,showResultInConsole);
-                if (showResultInConsole==true){
+                if (showResultInConsole==showResultInConsole){
                     System.out.println("point is added to a new one");
                 }
             }
@@ -130,7 +130,7 @@ public class GeneralMethods {
     public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
         ClusterSSE clusterSSE = new ClusterSSE();
         double totalSSE =0;
-      if (showResultInConsole==true){
+      if (true){
           // loop throug the clusters
           for (int x = 0; x<listOfClusters.size();x++){
               if (listOfClusters.get(x).getClusterPoints().size()==0 ){
@@ -175,7 +175,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole == true){
+        if (showResultInConsole == showResultInConsole){
             if (temp==true){
                 System.out.println("All clusters have at least one point. Value "+ temp);
             }else {
@@ -196,7 +196,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole == true){
+        if (showResultInConsole == showResultInConsole){
             if (temp==true){
                 System.out.println("All clusters have no points Value "+ temp);
             }else {
@@ -218,7 +218,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole==true){
+        if (showResultInConsole==showResultInConsole){
             System.out.println("Next empty cluster is "+ temp);
         }
         return temp;
@@ -235,7 +235,7 @@ public class GeneralMethods {
         int numberOfPointsBeforeAdding = listOfClusters.get(clusterNumber).getClusterPoints().size();
         listOfClusters.get(clusterNumber).addPointToCluster(listOfPoints.get(pointNumber));
         listOfPoints.remove(listOfPoints.get(pointNumber));
-        if (showResultInConsole == true){
+        if (showResultInConsole == showResultInConsole){
             System.out.println("Point # "+pointNumber +" has been successfully added to cluster " + clusterNumber + " and deleted from the original list");
             System.out.println("Size of the list before deletion is "+ sizeOfListBeforeDeletingAnElement+ " and after deletion is " + listOfPoints.size());
             System.out.println("Number of Points in cluster "+ clusterNumber + " before adding a new point " + numberOfPointsBeforeAdding + " and after adding the new point " +listOfClusters.get(clusterNumber).getClusterPoints().size() );
@@ -281,7 +281,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole==true){
+        if (showResultInConsole==showResultInConsole){
             System.out.println("Cluster # "+temp[0]);
             System.out.println("Point index in the list "+temp[1]);
             System.out.println("Value of function "+temp[2]);
@@ -324,7 +324,7 @@ public class GeneralMethods {
             temp.add(tempArray);
         }
         // show the result
-        if (showResultInConsole==true){
+        if (showResultInConsole==showResultInConsole){
             for (int x =0; x<temp.size(); x++){
                 System.out.println("Column "+x);
                 System.out.println("Smallest value is "+ temp.get(x)[0]);
@@ -368,10 +368,10 @@ public class GeneralMethods {
             temp.add(elemetToBeaddedToTheArray);
         }
         // Loop through the list for test purposes
-        if (showResultInConsole== true){
+        if (showResultInConsole== showResultInConsole){
             for (int x = 0; x<temp.size();x++){
                 System.out.println("Point # "+ temp.get(x)[0]);
-                // loop through each element in the arrary
+                // loop through each element in the array
                 for (int y = 1; y<temp.get(x).length;y++){
                     System.out.print(temp.get(x)[y]+",");
                 }
