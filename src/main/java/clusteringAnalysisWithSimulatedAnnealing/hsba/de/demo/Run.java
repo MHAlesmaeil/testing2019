@@ -22,12 +22,12 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters = 10;
+        int numberOfClusters = 3;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
-        boolean showResultInConsole = false;
+        boolean showResultInConsole = true;
         /**
          * https://vincentarelbundock.github.io/Rdatasets/datasets.html
         */
@@ -50,7 +50,7 @@ public class Run {
         } else if (clusteringMethod ==2){
             // Implement Simulated Annealing
             SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing();
-            simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,0.05,false);
+            simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,0.05,showResultInConsole);
         }
     }
 }

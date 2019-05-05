@@ -25,9 +25,9 @@ public class SingleLinkage {
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
 
         while (initialList.size()>1){
-            generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
+            generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,showResultInConsole);
         }
-        generalMethods.showFormedClusters(listOfCreatedClusters);
+        generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis

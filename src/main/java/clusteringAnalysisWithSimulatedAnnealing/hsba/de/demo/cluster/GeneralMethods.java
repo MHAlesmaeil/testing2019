@@ -10,8 +10,8 @@ import java.util.List;
 public class GeneralMethods {
     /**
      * This method convert a list of array of strings and return a list of array of double
-    */
-    public List<double[]> dataSetStringToDoubleWithoutHeaders(List<String[]> dataSetToBeConverted,boolean showResultInConsole ) throws Exception{
+     */
+    public List<double[]> dataSetStringToDoubleWithoutHeaders(List<String[]> dataSetToBeConverted, boolean showResultInConsole ) throws Exception{
         List<double[]> temp = new ArrayList<>();
         List<String []> tempString = dataSetToBeConverted;
         // for loop to call each row in the string dataset
@@ -33,7 +33,7 @@ public class GeneralMethods {
      * This method checks a list of arrays of double and return an array of double, which has the least SSE value, when it compared with the rest of array of double within the list
      *
      * Distance Method: 1 for Euclidean Distance and 2 for Manhattan Distance
-    */
+     */
     // TODO: 30.04.2019 this array must also load the position of y in case that the best solution found in the list of arrays and one cluster is still with no points
     public double [] indexWithLeastValue(List<double[]> listToCheck, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
@@ -56,10 +56,9 @@ public class GeneralMethods {
                         temp = new double[] {new Double(x), oldValue, new Double(y)};
                     }
                 }
-
             }
         }
-        if (showResultInConsole){
+        if (showResultInConsole==true){
             System.out.println("The index in the list "+ temp[0]);
             System.out.println("The Least value "+ temp[1]);
         }
@@ -68,9 +67,9 @@ public class GeneralMethods {
     /**
      * The main method in the Single Linkage
      * This method checks a list of arrays of double and decide which array from this list will be injected into which cluster and delete it from the list of arrays of double
-    */
+     */
     // return an array with the element index and the cluster number
-  public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
+    public List<Cluster> nextPointAndItsClusterAddAndDelete(List<Cluster> listOfClusters, List<double[]> listOfPoints, int numberOfCluster, int distanceMethodNumber, boolean showResultInConsole){
         DataProcessing dataProcessing = new DataProcessing();
         // create empty clusters
         dataProcessing.setCreatedClusters(numberOfCluster);
@@ -79,11 +78,11 @@ public class GeneralMethods {
 
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         // if cluster size is reached search in the current one
-        if (areAllClustersHavingAtLeastOnePoint(listOfClusters,showResultInConsole)==showResultInConsole){
+        if (areAllClustersHavingAtLeastOnePoint(listOfClusters,showResultInConsole)==true){
             double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber,showResultInConsole);
             int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
             addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
-            if (showResultInConsole){
+            if (showResultInConsole==true){
                 System.out.println("No empty cluster");
             }
         }
@@ -96,8 +95,8 @@ public class GeneralMethods {
              * In the first iteration when no cluster has no points, value of bestValueCluster is 0
              * which would cause of clustering the first point in a cluster, it would
              * not be probably fitting the single linkage method
-            */
-            if (areAllClusterHavingNoPointsAtAll(listOfClusters,showResultInConsole)==showResultInConsole){
+             */
+            if (areAllClusterHavingNoPointsAtAll(listOfClusters,showResultInConsole)==true){
                 bestValueCluster = 10*bestValueList;
             }
             // check which one gives the least value
@@ -105,7 +104,7 @@ public class GeneralMethods {
             if (bestValueCluster<bestValueList || bestValueCluster==bestValueList){
                 double [] temp = whichPointToWhichClusterPlusFuncValue(listOfClusters,listOfPoints,distanceMethodNumber, showResultInConsole);
                 int [] key = {new Double(temp[0]).intValue(),new Double(temp[1]).intValue()};
-                if (showResultInConsole){
+                if (showResultInConsole==true){
                     System.out.println("point "+ listOfPoints.get(new Double(temp[1]).intValue())[0] +"added to cluster "+ temp[0]);
                 }
                 addPointToAClusterAndDeleteFromList(key,listOfClusters,listOfPoints,showResultInConsole);
@@ -126,47 +125,47 @@ public class GeneralMethods {
     }
     /**
      * This Method shows the formed clusters in the console if the boolean showResultInConsole is true.
-    */
-    public void showFormedClusters (List<Cluster> listOfClusters){
+     */
+    public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
         ClusterSSE clusterSSE = new ClusterSSE();
         double totalSSE =0;
-      if (true){
-          // loop throug the clusters
-          for (int x = 0; x<listOfClusters.size();x++){
-              if (listOfClusters.get(x).getClusterPoints().size()==0 ){
-                  System.out.println("__________");
-                  System.out.println("##Cluster number "+ x + " has no points to be shown");
-              }else if(listOfClusters.get(x).getClusterPoints().size()==1){
-                  System.out.println("__________");
-                  System.out.println("##Cluster number "+ x + " has just one point");
-                  for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
-                      System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
-                  }
+        if (showResultInConsole==true){
+            // loop throug the clusters
+            for (int x = 0; x<listOfClusters.size();x++){
+                if (listOfClusters.get(x).getClusterPoints().size()==0 ){
+                    System.out.println("__________");
+                    System.out.println("##Cluster number "+ x + " has no points to be shown");
+                }else if(listOfClusters.get(x).getClusterPoints().size()==1){
+                    System.out.println("__________");
+                    System.out.println("##Cluster number "+ x + " has just one point");
+                    for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
+                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
+                    }
 
 
-                  System.out.println();
-              }
-              else{
-                  totalSSE += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
-                  System.out.println("__________");
-                  System.out.println("##Cluster number "+ x + " and its SSE value is "+ clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints()));
-                  // loop through each point within each cluster
-                  for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
-                      System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
-                  }
-                  System.out.println();
+                    System.out.println();
+                }
+                else{
+                    totalSSE += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
+                    System.out.println("__________");
+                    System.out.println("##Cluster number "+ x + " and its SSE value is "+ clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints()));
+                    // loop through each point within each cluster
+                    for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
+                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
+                    }
+                    System.out.println();
 
-              }
-          }
-          System.out.println("\n");
-          System.out.println("################################");
-          System.out.println("Total SSE is " + totalSSE);
-      }
+                }
+            }
+            System.out.println("\n");
+            System.out.println("################################");
+            System.out.println("Total SSE is " + totalSSE);
+        }
     }
     /**
      * This function checks if all created clusters have at least one point
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public boolean areAllClustersHavingAtLeastOnePoint(List<Cluster> listOfClusters, boolean showResultInConsole ){
         boolean temp = true;
         for (int x =0; x<listOfClusters.size();x++){
@@ -179,7 +178,7 @@ public class GeneralMethods {
             if (temp==true){
                 System.out.println("All clusters have at least one point. Value "+ temp);
             }else {
-                System.out.println("At least one cluster has no points. Value "+ temp);
+                System.out.println("At least on cluster has no points. Value "+ temp);
             }
         }
         return temp;
@@ -187,7 +186,7 @@ public class GeneralMethods {
     /**
      * This method to check if there is no points in any cluster
      * to generate the first solution from comparing the list of arrays of double
-    */
+     */
     public boolean areAllClusterHavingNoPointsAtAll(List<Cluster> listOfClusters, boolean showResultInConsole) {
         boolean temp = true;
         for (int x =0; x<listOfClusters.size();x++){
@@ -208,7 +207,7 @@ public class GeneralMethods {
     /**
      * This method return the next empty cluster. Empty here means that the cluster has no points
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public int nextEmptyCluser(List<Cluster> listOfClusters, boolean showResultInConsole){
         Integer temp = null;
         // loop through the clusters and return the first empty cluster
@@ -218,7 +217,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole){
+        if (showResultInConsole==true){
             System.out.println("Next empty cluster is "+ temp);
         }
         return temp;
@@ -226,7 +225,7 @@ public class GeneralMethods {
     /**
      * This method adds an array to a cluster from the list of arrays of double
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public void addPointToAClusterAndDeleteFromList(int[] keyClusterAndPoint, List<Cluster> listOfClusters,List<double[]> listOfPoints, boolean showResultInConsole){
         int [] keyCluster = keyClusterAndPoint;
         int clusterNumber = keyCluster[0];
@@ -235,7 +234,7 @@ public class GeneralMethods {
         int numberOfPointsBeforeAdding = listOfClusters.get(clusterNumber).getClusterPoints().size();
         listOfClusters.get(clusterNumber).addPointToCluster(listOfPoints.get(pointNumber));
         listOfPoints.remove(listOfPoints.get(pointNumber));
-        if (showResultInConsole==true){
+        if (showResultInConsole == true){
             System.out.println("Point # "+pointNumber +" has been successfully added to cluster " + clusterNumber + " and deleted from the original list");
             System.out.println("Size of the list before deletion is "+ sizeOfListBeforeDeletingAnElement+ " and after deletion is " + listOfPoints.size());
             System.out.println("Number of Points in cluster "+ clusterNumber + " before adding a new point " + numberOfPointsBeforeAdding + " and after adding the new point " +listOfClusters.get(clusterNumber).getClusterPoints().size() );
@@ -244,7 +243,7 @@ public class GeneralMethods {
     /**
      * This Method decides which array within list of arrays of double must injected in which cluster
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public double [] whichPointToWhichClusterPlusFuncValue(List<Cluster> listOfClusters,List<double[]> listOfPoints, int distanceMethodNumber, boolean showResultInConsole){
         DistanceMethod distanceMethod = new ChooseDistanceMethod().distenceMethodSwitcher(distanceMethodNumber);
         // initiate the variables
@@ -281,7 +280,7 @@ public class GeneralMethods {
                 break;
             }
         }
-        if (showResultInConsole){
+        if (showResultInConsole==true){
             System.out.println("Cluster # "+temp[0]);
             System.out.println("Point index in the list "+temp[1]);
             System.out.println("Value of function "+temp[2]);
@@ -291,7 +290,7 @@ public class GeneralMethods {
     /**
      * This method returns an array of double with the greatest value and smallest value of each column and it helps to normalize the list of arrays of double
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public List<double[]> smallestAndGreatestValues(List<double[]> listOfDouble, boolean showResultInConsole){
         List<double[]> temp = new ArrayList<>();
         // add a 0 column instead of the key of elements
@@ -324,7 +323,7 @@ public class GeneralMethods {
             temp.add(tempArray);
         }
         // show the result
-        if (showResultInConsole){
+        if (showResultInConsole==true){
             for (int x =0; x<temp.size(); x++){
                 System.out.println("Column "+x);
                 System.out.println("Smallest value is "+ temp.get(x)[0]);
@@ -337,7 +336,7 @@ public class GeneralMethods {
     }
     /**
      * This method returns the normalized value (between 0 and 1) of a double after giving the greatest and smallest value
-    */
+     */
     public double normalizeMe(double smallestValue, double greatestValue, double doubleToBeNormalized){
         double temp = 0;
         temp = (doubleToBeNormalized-smallestValue)/(greatestValue-smallestValue);
@@ -346,7 +345,7 @@ public class GeneralMethods {
     /**
      * This methods converts a list with double arrays to a normalized one
      * If the boolean showResultInConsole is true, then the result will be shown in the console
-    */
+     */
     public List<double[]> normalizeDoubleList(List<double[]> listToBeNormalized, boolean showResultInConsole){
         List<double[]> temp = new ArrayList<>();
         List<double[]> smallAndGreatestValuesList = smallestAndGreatestValues(listToBeNormalized,showResultInConsole);
@@ -368,10 +367,10 @@ public class GeneralMethods {
             temp.add(elemetToBeaddedToTheArray);
         }
         // Loop through the list for test purposes
-        if (showResultInConsole==true){
+        if (showResultInConsole== true){
             for (int x = 0; x<temp.size();x++){
                 System.out.println("Point # "+ temp.get(x)[0]);
-                // loop through each element in the array
+                // loop through each element in the arrary
                 for (int y = 1; y<temp.get(x).length;y++){
                     System.out.print(temp.get(x)[y]+",");
                 }
@@ -381,6 +380,7 @@ public class GeneralMethods {
 
         return temp;
     }
+
 
     /**
      * this method was not used
