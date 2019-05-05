@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataProcessing;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 
@@ -6,13 +6,13 @@ import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class Description:
+ * DataProcessing class creates the list of clusters
+ */
 public class DataProcessing {
-
     private List<Cluster> createdClusters;
-
     // dataset number is to be used to generate empty Clusters
-
     public List<Cluster> getCreatedClusters() {
         return createdClusters;
     }

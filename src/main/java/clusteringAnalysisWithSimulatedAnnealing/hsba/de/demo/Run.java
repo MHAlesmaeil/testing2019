@@ -22,7 +22,7 @@ public class Run {
         /**
          * Choose a number, which is greater than 2
         */
-        int numberOfClusters = 3;
+        int numberOfClusters = 10;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
@@ -31,13 +31,13 @@ public class Run {
         /**
          * https://vincentarelbundock.github.io/Rdatasets/datasets.html
         */
-        String pathToFileOfData = "C:/Java/TestFolder/mallcustomers.csv";
+        String pathToFileOfData = "C:/Java/TestFolder/amis.csv";
         /**
          * After reading the file of data, the points of data will be
          * Saved as a List of String arrays
         */
 
-        int numberOfIteration = 2000;
+        int numberOfIteration = 8230;
 
         double acceptanceTemperature = 0.001;
 

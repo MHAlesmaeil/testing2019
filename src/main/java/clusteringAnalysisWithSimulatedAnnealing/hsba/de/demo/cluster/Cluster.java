@@ -1,21 +1,25 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.*;
 
-
 public class Cluster {
-
+    /**
+     * Each Cluster has cluster center and number of points by default
+    */
     List<double[]> clusterPoints;
-    double[] cluserCenter ;
+    double[] clusterCenter;
 
     // constructor
     public Cluster() {
     }
+    public void addPointToCluster(double [] pointToBeAdded){
+        clusterPoints = getClusterPoints();
+        clusterPoints.add(pointToBeAdded);
+    }
 
+    /**
+     * Getter and Setter
+    */
     public List<double[]> getClusterPoints() {
         if (clusterPoints==null){
             clusterPoints = new ArrayList<>();
@@ -26,17 +30,14 @@ public class Cluster {
         this.clusterPoints = clusterPoints;
     }
 
-    public double[] getCluserCenter() {
-        return cluserCenter;
+    public double[] getClusterCenter() {
+        return clusterCenter;
     }
 
-    public void setCluserCenter(double[] cluserCenter) {
-        this.cluserCenter = cluserCenter;
+    public void setClusterCenter(double[] clusterCenter) {
+        this.clusterCenter = clusterCenter;
     }
 
-    public void addPointToCluster(double [] pointToBeAdded){
-        clusterPoints = getClusterPoints();
-        clusterPoints.add(pointToBeAdded);
-    }
+
 
 }
