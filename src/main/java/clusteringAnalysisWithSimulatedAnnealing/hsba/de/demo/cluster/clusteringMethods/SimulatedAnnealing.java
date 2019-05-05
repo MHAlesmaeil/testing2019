@@ -23,7 +23,7 @@ public class SimulatedAnnealing {
 
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
-        initialList = generalMethods.normalizeDoubleList(initialList, true);
+        initialList = generalMethods.normalizeDoubleList(initialList, showResultInConsole);
 
         simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
         double oldvalue = simAnMethods.costFunctionOfClusterList(listOfCreatedClusters);
@@ -32,7 +32,7 @@ public class SimulatedAnnealing {
 
             singleMarkovChainLength = singleMarkovChainLength-1;
         }
-        generalMethods.showFormedClusters(listOfCreatedClusters,true);
+        generalMethods.showFormedClusters(listOfCreatedClusters);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis

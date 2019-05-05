@@ -9,6 +9,7 @@ public class SimulatedAnnealingMethods {
     EuclideanDistance euclideanDistance = new EuclideanDistance();
     ClusterSSE clusterSSE = new ClusterSSE();
     Random random = new Random();
+    GeneralMethods generalMethods = new GeneralMethods();
     /**
      * Generate the initial center
     */
@@ -47,14 +48,10 @@ public class SimulatedAnnealingMethods {
         // assign points to clusters based on the clusters' centers
         assignPointsToClusters(listOfClsuters,listOfNormalizedPoints,showResultInConsole);
         // check that every cluster has at least two points, otherwise generate the centers again
-        for (int x = 0; x<listOfClsuters.size(); x++){
-            if (listOfClsuters.get(x).getClusterPoints().size()<2){
-                System.out.println("A center has been indicated which does not have at least two points");
-                generateInitialClusterCeneters(listOfClsuters,listOfNormalizedPoints,showResultInConsole);
-                break;
-            }
+        if (generalMethods.areAllClustersHavingAtLeastOnePoint(listOfClsuters,showResultInConsole)==false){
+            System.out.println("At least one cluster does not have the minimum amount of points");
+            generateInitialClusterCeneters(listOfClsuters,listOfNormalizedPoints,showResultInConsole);
         }
-        System.out.println("New Centers have been generated");
     }
     public void assignPointsToClusters(List<Cluster> listOfClusters, List<double[]> listOfPoints, boolean showResultInConsole){
         for (int x = 0; x<listOfClusters.size();x++){
@@ -112,12 +109,18 @@ public class SimulatedAnnealingMethods {
         // save old cluster values in case, that a revise is necessary
         double [] chosenCenterOldValues = listOfClusters.get(randomCluster).getCluserCenter();
         double sseValueOld = costFunctionOfClusterList(listOfClusters);
-        System.out.println("SSE Old is "+ sseValueOld);
+        if (showResultInConsole){
+            System.out.println("SSE Old is "+ sseValueOld);
+        }
+
         double [] alteredCenter = new double[chosenCenterOldValues.length];
         // alter the chosen cluster center and start from second values, as the one is not set to be optimized
         for (int x = 1; x<alteredCenter.length;x++){
             alteredCenter[x] = chosenCenterOldValues[x] + random.nextGaussian()* mutationFactor;
-            System.out.println("Old value is "+ chosenCenterOldValues[x]+" new value "+alteredCenter[x]);
+            if (showResultInConsole){
+                System.out.println("Old value is "+ chosenCenterOldValues[x]+" new value "+alteredCenter[x]);
+            }
+
         }
         // inject the new center instead the old one and calculate the sse value
         injectNewCenterInCluster(listOfClusters,randomCluster,alteredCenter,showResultInConsole);
@@ -125,24 +128,35 @@ public class SimulatedAnnealingMethods {
 
         assignPointsToClusters(listOfClusters,listOfNormalizedPoints,showResultInConsole);
         double sseValueNew = costFunctionOfClusterList(listOfClusters);
-        System.out.println("SSE new is "+ sseValueNew);
+        if (showResultInConsole){
+            System.out.println("SSE new is "+ sseValueNew);
+        }
         // if seeValueNew gives a greater value than the old one then reverse the process and later on accept it as to Metropolis criterion
         if (sseValueNew>sseValueOld){
-
-            System.out.println("No improvement and the chance to accept it is ");
+            if (showResultInConsole){
+                System.out.println("No improvement has been detected ");
+            }
             // check if the solution can be accepted
             if (canNewSolutionBeAccepted(sseValueOld,sseValueNew,acceptanceTemperature)){
-                System.out.println("However, the solution has been accepted");
+                if (showResultInConsole){
+                    System.out.println("However, the solution has been accepted");
+                }
             }else{
                 injectNewCenterInCluster(listOfClusters,randomCluster,chosenCenterOldValues,showResultInConsole);
                 assignPointsToClusters(listOfClusters,listOfNormalizedPoints,showResultInConsole);
-                System.out.println("Solution has been reversed");
+                if (showResultInConsole){
+                    System.out.println("Solution has been reversed");
+                }
+
             }
         }else if (sseValueNew<sseValueOld){
-            System.out.println("An improvement has been detected for cluster "+ randomCluster);
+            if (showResultInConsole){
+                System.out.println("An improvement has been detected for cluster "+ randomCluster);
+            }
         }else{
-            System.out.println("Both are equal, so keep changes");
-
+            if (showResultInConsole){
+                System.out.println("Both are equal, so keep changes");
+            }
         }
     }
     public boolean canNewSolutionBeAccepted(double oldValue, double newValue,double acceptanceTemperature){

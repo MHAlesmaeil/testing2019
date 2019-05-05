@@ -27,7 +27,7 @@ public class SingleLinkage {
         while (initialList.size()>1){
             generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,false);
         }
-        generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
+        generalMethods.showFormedClusters(listOfCreatedClusters);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
