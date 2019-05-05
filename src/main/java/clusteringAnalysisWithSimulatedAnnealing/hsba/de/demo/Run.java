@@ -12,7 +12,7 @@ public class Run {
          * Choose 1 for Single Linkage
          * Choose 2 for Simulated Annealing
         */
-        int clusteringMethod = 1;
+        int clusteringMethod = 2;
         /**
          * Only relevant if Single Linkage is selected
          * Choose 1 for Euclidean Distance
@@ -27,7 +27,7 @@ public class Run {
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
         */
-        boolean showResultInConsole = true;
+        boolean showResultInConsole = false;
         /**
          * https://vincentarelbundock.github.io/Rdatasets/datasets.html
         */

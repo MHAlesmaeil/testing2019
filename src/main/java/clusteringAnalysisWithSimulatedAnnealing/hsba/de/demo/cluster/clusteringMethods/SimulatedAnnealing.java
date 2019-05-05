@@ -32,7 +32,7 @@ public class SimulatedAnnealing {
 
             singleMarkovChainLength = singleMarkovChainLength-1;
         }
-        generalMethods.showFormedClusters(listOfCreatedClusters,showResultInConsole);
+        generalMethods.showFormedClusters(listOfCreatedClusters);
 
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis

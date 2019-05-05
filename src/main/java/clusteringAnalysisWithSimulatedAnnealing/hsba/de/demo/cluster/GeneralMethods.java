@@ -126,10 +126,10 @@ public class GeneralMethods {
     /**
      * This Method shows the formed clusters in the console if the boolean showResultInConsole is true.
      */
-    public void showFormedClusters (List<Cluster> listOfClusters, boolean showResultInConsole){
+    public void showFormedClusters (List<Cluster> listOfClusters){
         ClusterSSE clusterSSE = new ClusterSSE();
         double totalSSE =0;
-        if (showResultInConsole==true){
+        if (true){
             // loop throug the clusters
             for (int x = 0; x<listOfClusters.size();x++){
                 if (listOfClusters.get(x).getClusterPoints().size()==0 ){
