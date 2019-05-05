@@ -45,6 +45,15 @@ public class SimulatedAnnealingMethods {
 
         }
         // assign points to clusters based on the clusters' centers
+        assignPointsToClusters(listOfClsuters,listOfNormalizedPoints,showResultInConsole);
+        // check that every cluster has at least two points, otherwise generate the centers again
+        for (int x = 0; x<listOfClsuters.size(); x++){
+            if (listOfClsuters.get(x).getClusterPoints().size()<2){
+                System.out.println("A center has been indicated which does not have at least two points");
+                generateInitialClusterCeneters(listOfClsuters,listOfNormalizedPoints,showResultInConsole);
+                break;
+            }
+        }
         System.out.println("New Centers have been generated");
     }
     public void assignPointsToClusters(List<Cluster> listOfClusters, List<double[]> listOfPoints, boolean showResultInConsole){

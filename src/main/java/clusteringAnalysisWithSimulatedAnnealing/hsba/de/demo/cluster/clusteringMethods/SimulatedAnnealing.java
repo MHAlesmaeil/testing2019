@@ -26,12 +26,7 @@ public class SimulatedAnnealing {
         initialList = generalMethods.normalizeDoubleList(initialList, true);
 
         simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
-        simAnMethods.assignPointsToClusters(listOfCreatedClusters,initialList,showResultInConsole);
         double oldvalue = simAnMethods.costFunctionOfClusterList(listOfCreatedClusters);
-
-
-
-
         while (singleMarkovChainLength>1){
             simAnMethods.chooseRandomCenterAndAlterIt(listOfCreatedClusters,initialList,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
 
