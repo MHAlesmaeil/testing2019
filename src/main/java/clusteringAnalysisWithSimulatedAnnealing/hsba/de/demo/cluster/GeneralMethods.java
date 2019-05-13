@@ -190,7 +190,6 @@ public class GeneralMethods {
                 for (int z=0; z<listOfClusters.get(y).getClusterPoints().size();z++){
                     // calculate the value
                     newValue = distanceMethod.computeDistance(listOfPoints.get(x), listOfClusters.get(y).getClusterPoints().get(z));
-                    // TODO: 01.05.2019 load also the position of y to be able to added directly if the least value shown is in the list of list of arrays and a cluster is empty (has no points)
                     if (oldValue==-1){
                         // first solution
                         oldValue = newValue;
@@ -353,6 +352,27 @@ public class GeneralMethods {
             System.out.println("################################");
             System.out.println("Total SSE is " + totalSSE);
         }
+    }
+    public List<Cluster> normalizeListOfClusters (List<Cluster> listOfClusters){
+        List<Cluster> tempList= listOfClusters;
+        List<double[]> listOfDouble = new ArrayList<>();
+        // loop through the clusters and the points to the list of points
+        for (int x=0; x<tempList.size();x++){
+            listOfDouble.addAll(listOfClusters.get(x).getClusterPoints());
+        }
+        listOfDouble = normalizeDoubleList(listOfDouble,false);
+        // loop through each cluster and then each point to replaced with a normlized value
+        for (int x=0; x<tempList.size();x++){
+            for (int y =0; y<tempList.get(x).getClusterPoints().size();y++){
+                // through the key value add and replace each point in teh cluster with a normalized one from the normalize one
+                double pointId = tempList.get(x).clusterPoints.get(y)[0];
+                // remove the point from the cluster
+
+
+            }
+        }
+        return null;
+
     }
     /**
      * This function checks if all created clusters have at least one point
