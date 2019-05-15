@@ -8,7 +8,6 @@ public class Cluster {
     */
     List<double[]> clusterPoints;
     double[] clusterCenter;
-
     // constructor
     public Cluster() {
     }
@@ -16,7 +15,6 @@ public class Cluster {
         clusterPoints = getClusterPoints();
         clusterPoints.add(pointToBeAdded);
     }
-
     /**
      * Getter and Setter
     */

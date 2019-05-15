@@ -1,4 +1,4 @@
-package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation;
+package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 

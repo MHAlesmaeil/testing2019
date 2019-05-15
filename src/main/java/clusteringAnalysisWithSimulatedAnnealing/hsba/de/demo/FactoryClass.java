@@ -107,11 +107,13 @@ public class FactoryClass {
                             numberOfIteration = new Integer(inputString).intValue();
                             System.out.println("Enter Acceptance Temperature: e.g. 1");
                             inputString = scanner.nextLine();
-                            acceptanceTemperature = new Integer(inputString).intValue();
+                            acceptanceTemperature = new Double(inputString).doubleValue();
                             System.out.println("Enter mutation Factor: e.g. 0.05");
                             inputString = scanner.nextLine();
                             double mutationFactor =  new Double(inputString).doubleValue();
-
+                            System.out.println("Do you want to show log: Enter 'true' for yes or 'false' for no");
+                            inputString = scanner.nextLine();
+                            showResultInConsole = new Boolean(inputString).booleanValue();
                             SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing();
                             simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,mutationFactor,showResultInConsole);
                         }

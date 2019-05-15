@@ -3,7 +3,7 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clustering
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.GeneralMethods;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.SimulatedAnnealingMethods;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation.DataProcessing;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.DataProcessing;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -35,16 +35,16 @@ public class SimulatedAnnealing {
         // measure SSE of the first solution
         double oldvalue = simAnMethods.costFunctionOfClusterList(listOfCreatedClusters);
         // Start optimizing
-        while (singleMarkovChainLength>1){
+        while (singleMarkovChainLength>0){
             // call mean method of Simulated Annealing
             simAnMethods.chooseRandomCenterAndAlterIt(listOfCreatedClusters,initialList,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
             // decrease the number of iteration by one
-            singleMarkovChainLength = singleMarkovChainLength-1;
+            singleMarkovChainLength --;
         }
         // Stop timer
         Instant finish = Instant.now();
         // Show result after finishing
-        generalMethods.showFormedClusters(listOfCreatedClusters);
+        generalMethods.showFormedClustersSingleLinkage(listOfCreatedClusters);
         // calculate the time
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
         // Print out

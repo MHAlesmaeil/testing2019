@@ -130,6 +130,7 @@ public class SimulatedAnnealingMethods {
      * chooseRandomCenterAndAlterIt chooses a center random to start altering it
     */
     public void chooseRandomCenterAndAlterIt(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints,double acceptanceTemperature,double mutationFactor, boolean showResultInConsole){
+        // TODO: 15.05.2019 we need to add some lines that would 1. calculate SEE based on the altered centers 2. we need to let this function to remember the best result 
         int randomCluster = random.nextInt(listOfClusters.size());
         // save old cluster values in case, that a revise is necessary
         double [] chosenCenterOldValues = listOfClusters.get(randomCluster).getClusterCenter();
@@ -147,7 +148,6 @@ public class SimulatedAnnealingMethods {
             if (showResultInConsole){
                 System.out.println("Old value is "+ chosenCenterOldValues[x]+" new value "+alteredCenter[x]);
             }
-
         }
         // inject the new center instead the old one and calculate the sse value
         injectNewCenterInCluster(listOfClusters,randomCluster,alteredCenter,showResultInConsole);
@@ -180,7 +180,6 @@ public class SimulatedAnnealingMethods {
                     System.out.println("Solution has been reversed");
                 }
             }
-
         }
         // if new value is smaller than the old one, then accept the new solution
         else if (sseValueNew<sseValueOld){
@@ -202,9 +201,10 @@ public class SimulatedAnnealingMethods {
         // throw z value randomly
         double randomToMeasureAgainst = random.nextDouble();
         // calculate the Metropolis
-        double probabilityOfAcceptingNewSolution = Math.exp(-(Math.abs(oldValue-newValue)/acceptanceTemperature));
+        double probabilityOfAcceptingNewSolution = Math.exp(-((newValue-oldValue)/acceptanceTemperature));
         if (randomToMeasureAgainst>probabilityOfAcceptingNewSolution){
             return false;
+
         }else{
             return true;
         }

@@ -2,7 +2,7 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clustering
 
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.Cluster;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.GeneralMethods;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.data.dataPreperation.DataProcessing;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.DataProcessing;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -27,14 +27,14 @@ public class SingleLinkage {
         // empty clusters are created. Now, we need to call the points
         List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
         // Start optimizing
-        while (initialList.size()>1){
+        while (initialList.size()>0){
             // call the main method of Single Linkage
             generalMethods.nextPointAndItsClusterAddAndDelete(listOfCreatedClusters,initialList,numberOfCluter,distanceMethodNumber,showResultInConsole);
         }
         // Stop timer
         Instant finish = Instant.now();
         // show the result
-        generalMethods.showFormedClusters(listOfCreatedClusters);
+        generalMethods.showFormedClustersSingleLinkage(listOfCreatedClusters);
         // calculate the time
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
         // Print out
