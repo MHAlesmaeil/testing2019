@@ -67,7 +67,7 @@ public class FactoryClass {
                 System.out.println("Path is correct and has been accepted");
                 listOfPoints= execute(inputString);
                 if (listOfPoints.size()!=0){
-                    System.out.println("File has been read and number of points is: "+ listOfPoints.size());
+                    System.out.println("File has been read and number of points is: "+ (listOfPoints.size()-1));
                     boolean stopRunning2 = false;
                     while (stopRunning2==false){
                         System.out.println("Enter 1 to select Single Linkage, 2 to select Simulated Annealing, type 'back' to go to the previous options or 'stop' to stop the process");

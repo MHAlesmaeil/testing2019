@@ -11,6 +11,7 @@ import java.util.List;
  * GeneralMethods class has the main methods which used to implement Single Linkage (Section One) as well as some methods which also have been used while implementing Simulated Annealing (Section two)
  */
 public class GeneralMethods {
+
     /**
      * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      * Section One
@@ -344,9 +345,9 @@ public class GeneralMethods {
                     }
                     System.out.println();
                 } else {
-                    totalSSE += clusterSSE.computeSSE(normalizedListOfClusters.get(x).getClusterPoints());
+                    totalSSE += clusterSSE.computeSSEBasedOnMeanOfCluster(normalizedListOfClusters.get(x).getClusterPoints());
                     System.out.println("__________");
-                    System.out.println("##Cluster number " + x +" has "+normalizedListOfClusters.get(x).getClusterPoints().size()+ " points and its SSE value is " + clusterSSE.computeSSE(normalizedListOfClusters.get(x).getClusterPoints()));
+                    System.out.println("##Cluster number " + x +" has "+normalizedListOfClusters.get(x).getClusterPoints().size()+ " points and its SSE value is " + clusterSSE.computeSSEBasedOnMeanOfCluster(normalizedListOfClusters.get(x).getClusterPoints()));
                     // loop through each point within each cluster
                     for (int y = 0; y < normalizedListOfClusters.get(x).getClusterPoints().size(); y++) {
                         System.out.print(new Double(normalizedListOfClusters.get(x).getClusterPoints().get(y)[0]).intValue() + ", ");
@@ -359,42 +360,45 @@ public class GeneralMethods {
             System.out.println("Total SSE is " + totalSSE);
         }
     }
+    public void showFormedClustersSimulatedAnnealing(List<Cluster> listOfClusters) {
+        // TODO: 15.05.2019 the values need to be normalized before presenting them as we need to compare the result with the simulated annealing one
 
-    /*public void showFormedClustersSimulatedAnnealing(List<Cluster> listOfClusters){
-        // TODO: 15.05.2019 we need to compare later on and what the SSE based on centers and mean
         ClusterSSE clusterSSE = new ClusterSSE();
-        double totalSSE =0;
-        if (true){
-            // loop throug the clusters
-            for (int x = 0; x<listOfClusters.size();x++){
-                if (listOfClusters.get(x).getClusterPoints().size()==0 ){
-                    System.out.println("__________");
-                    System.out.println("##Cluster number "+ x + " has no points to be shown");
-                }else if(listOfClusters.get(x).getClusterPoints().size()==1){
-                    System.out.println("__________");
-                    System.out.println("##Cluster number "+ x + " has just one point");
-                    for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
-                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
-                    }
-                    System.out.println();
-                }
-                else{
-                    totalSSE += clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints());
-                    System.out.println("__________");
-                    System.out.println("##Cluster number "+ x + " and its SSE value is "+ clusterSSE.computeSSE(listOfClusters.get(x).getClusterPoints()));
-                    // loop through each point within each cluster
-                    for (int y=0; y<listOfClusters.get(x).getClusterPoints().size(); y++){
-                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue()+", ");
-                    }
-                    System.out.println();
 
+        double totalSSE = 0;
+        if (true) {
+            // loop throug the clusters
+            for (int x = 0; x < listOfClusters.size(); x++) {
+                if (listOfClusters.get(x).getClusterPoints().size() == 0) {
+                    System.out.println("__________");
+                    System.out.println("##Cluster number " + x + " has no points to be shown");
+                } else if (listOfClusters.get(x).getClusterPoints().size() == 1) {
+                    System.out.println("__________");
+                    System.out.println("##Cluster number " + x + " has just one point");
+                    for (int y = 0; y < listOfClusters.get(x).getClusterPoints().size(); y++) {
+                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue() + ", ");
+                    }
+                    System.out.println();
+                } else {
+                    totalSSE += clusterSSE.computeSSEBasedOnMeanOfCluster(listOfClusters.get(x).getClusterPoints());
+                    System.out.println("__________");
+                    System.out.println("##Cluster number " + x +" has "+listOfClusters.get(x).getClusterPoints().size()+ " points and its SSE-Mean value is " + clusterSSE.computeSSEBasedOnMeanOfCluster(listOfClusters.get(x).getClusterPoints())+ " and SSE-Center value is "+clusterSSE.computeSSEOfSingleClusterBasedOnCenterOfCluster(listOfClusters.get(x)));
+                    // loop through each point within each cluster
+                    for (int y = 0; y < listOfClusters.get(x).getClusterPoints().size(); y++) {
+                        System.out.print(new Double(listOfClusters.get(x).getClusterPoints().get(y)[0]).intValue() + ", ");
+                    }
+                    System.out.println();
                 }
             }
             System.out.println("\n");
-            System.out.println("################################");
-            System.out.println("Total SSE is " + totalSSE);
+            System.out.println("###############################");
+            System.out.println("Total SSE based On the means is " + clusterSSE.computeSSEOfListOfClustersBasedOnMeans(listOfClusters));
+            System.out.println("Total SSE based On the centers is " + clusterSSE.computeSSEOfListOfClustersBasedOnCenters(listOfClusters));
         }
-    }*/
+    }
+
+
+
     public List<Cluster> normalizeListOfClusters(List<Cluster> listOfClusters) {
         // store the injected list locally
         List<Cluster> tempList = new ArrayList<>();
