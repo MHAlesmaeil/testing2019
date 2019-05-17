@@ -141,7 +141,7 @@ public class SimulatedAnnealingMethods {
         return temp;
     }
     /**
-     * chooseRandomCenterAndAlterIt chooses a center random to start altering it
+     * chooseRandomCenterAndAlterItSMC chooses a center random to start altering it
     */
     List<double[]> bestCenters;
 
@@ -168,8 +168,8 @@ public class SimulatedAnnealingMethods {
         this.bestFoundCenterSEEValue = bestFoundCenterSEEValue;
     }
 
-    public void chooseRandomCenterAndAlterIt(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints, double acceptanceTemperature, double mutationFactor, boolean showResultInConsole){
-        // TODO: 15.05.2019 we need to add some lines that would 1. calculate SEE based on the altered centers 2. we need to let this function to remember the best result
+    public void chooseRandomCenterAndAlterItSMC(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints, double acceptanceTemperature, double mutationFactor, boolean showResultInConsole){
+
         // if a list of centers is empty, then inject the current centers
         if (getBestCenters().size()==0){
             for (int x = 0; x<listOfClusters.size(); x++){
@@ -239,7 +239,6 @@ public class SimulatedAnnealingMethods {
             }
 
         }else{
-
                 // show if requested
                 if (showResultInConsole){
                     System.out.println("No improvement has been detected ");
@@ -261,14 +260,15 @@ public class SimulatedAnnealingMethods {
                 }
         }
     }
+
     /**
      * Check if the new "not optimal" solution can be accepted
     */
-    public boolean canNewSolutionBeAccepted(double oldValue, double newValue,double acceptanceTemperature){
+    public boolean canNewSolutionBeAccepted(double oldValue, double newValue,double temperature){
         // throw z value randomly
         double randomToMeasureAgainst = random.nextDouble();
         // calculate the Metropolis
-        double probabilityOfAcceptingNewSolution = Math.exp(-((newValue-oldValue)/acceptanceTemperature));
+        double probabilityOfAcceptingNewSolution = Math.exp(-((newValue-oldValue)/temperature));
         if (randomToMeasureAgainst>probabilityOfAcceptingNewSolution){
             return false;
 

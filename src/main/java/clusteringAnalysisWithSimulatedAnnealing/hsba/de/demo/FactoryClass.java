@@ -1,10 +1,10 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SimulatedAnnealing;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SimulatedAnnealingMMC;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SimulatedAnnealingSMC;
 import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SingleLinkage;
 import com.opencsv.CSVReader;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -47,6 +47,11 @@ public class FactoryClass {
         int numberOfIteration = 8230;
 
         double acceptanceTemperature = 0.001;
+
+        double initialTemperature;
+        double finalTemperature;
+        double alphaValue;
+        int numberOfIterationPerGivenTemperature;
 
         List<String[]> listOfPoints = null;
         System.out.println("Welcome to Cluster Analysis");
@@ -96,9 +101,9 @@ public class FactoryClass {
                             SingleLinkage singleLinkage= new SingleLinkage();
                             singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
 
-                        }else{
+                        }else if (inputString.equals("2")){
                             // Simulated Annealing has been selected
-                            System.out.println("Simulated Annealing has been selected");
+                            System.out.println("Simulated Annealing SMC has been selected");
                             System.out.println("Enter the Number of clusters");
                             inputString = scanner.nextLine();
                             numberOfClusters = new Integer(inputString).intValue();
@@ -114,8 +119,39 @@ public class FactoryClass {
                             System.out.println("Do you want to show log: Enter 'true' for yes or 'false' for no");
                             inputString = scanner.nextLine();
                             showResultInConsole = new Boolean(inputString).booleanValue();
-                            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing();
-                            simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,mutationFactor,showResultInConsole);
+                            SimulatedAnnealingSMC simulatedAnnealingSMC = new SimulatedAnnealingSMC();
+                            simulatedAnnealingSMC.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,mutationFactor,showResultInConsole);
+                        }else {
+
+                            // Simulated Annealing has been selected
+                            System.out.println("Simulated Annealing MMC has been selected");
+                            System.out.println("Enter the Number of clusters");
+                            inputString = scanner.nextLine();
+                            numberOfClusters = new Integer(inputString).intValue();
+                            System.out.println("Enter Initial Temperature");
+                            inputString = scanner.nextLine();
+                            initialTemperature = new Double(inputString).doubleValue();
+
+                            System.out.println("Enter Final Temperature Temperature");
+                            inputString = scanner.nextLine();
+                            finalTemperature = new Double(inputString).doubleValue();
+
+                            System.out.println("Enter AlphaValue");
+                            inputString = scanner.nextLine();
+                            alphaValue = new Double(inputString).doubleValue();
+
+                            System.out.println("Enter the Number of Iteration per Given Temperature");
+                            inputString = scanner.nextLine();
+                            numberOfIterationPerGivenTemperature = new Integer(inputString).intValue();
+
+                            System.out.println("Enter mutation Factor: e.g. 0.05");
+                            inputString = scanner.nextLine();
+                            double mutationFactor =  new Double(inputString).doubleValue();
+                            System.out.println("Do you want to show log: Enter 'true' for yes or 'false' for no");
+                            inputString = scanner.nextLine();
+                            showResultInConsole = new Boolean(inputString).booleanValue();
+                            SimulatedAnnealingMMC simulatedAnnealingMMC = new SimulatedAnnealingMMC();
+                            simulatedAnnealingMMC.computeCluster(numberOfClusters,listOfPoints,initialTemperature,finalTemperature,alphaValue,mutationFactor,numberOfIterationPerGivenTemperature,showResultInConsole);
                         }
 
                     }

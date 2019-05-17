@@ -1,10 +1,5 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SimulatedAnnealing;
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.clusteringMethods.SingleLinkage;
-
-import java.util.List;
-
 public class Run {
     public static void main(String[] args) throws Exception {
         FactoryClass factoryClass = new FactoryClass();
@@ -51,7 +46,7 @@ public class Run {
             singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
         } else if (clusteringMethod ==2){
             // Implement Simulated Annealing
-            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing();
+            SimulatedAnnealingSMC simulatedAnnealing = new SimulatedAnnealingSMC();
             simulatedAnnealing.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,0.05,showResultInConsole);
         }*/
     }

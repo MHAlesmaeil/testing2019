@@ -11,7 +11,7 @@ import java.util.List;
  * Simulated Annealing class is an aggregated class for the methods in this project
 */
 
-public class SimulatedAnnealing {
+public class SimulatedAnnealingSMC {
     private DataProcessing dataProcessing = new DataProcessing();
     private GeneralMethods generalMethods = new GeneralMethods();
     private SimulatedAnnealingMethods simAnMethods = new SimulatedAnnealingMethods();
@@ -25,11 +25,11 @@ public class SimulatedAnnealing {
         // created clusters
         List<Cluster> listOfCreatedClusters = dataProcessing.getCreatedClusters();
         // empty clusters are created. Now, we need to call the points
-        List<double[]> initialList = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
+        List<double[]> listOfPoints = generalMethods.dataSetStringToDoubleWithoutHeaders(pointsToBeClustered,showResultInConsole);
         // normalize the values of imported list
-        initialList = generalMethods.normalizeDoubleList(initialList, showResultInConsole);
+        listOfPoints = generalMethods.normalizeDoubleList(listOfPoints, showResultInConsole);
         // generate clusters' centers
-        simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,initialList,showResultInConsole);
+        simAnMethods.generateInitialClusterCeneters(listOfCreatedClusters,listOfPoints,showResultInConsole);
         // measure SSE of the first solution
         double  initialValueCenter = clusterSSE.computeSSEOfListOfClustersBasedOnCenters(listOfCreatedClusters);
         double initialValueMean = clusterSSE.computeSSEOfListOfClustersBasedOnMeans(listOfCreatedClusters);
@@ -37,12 +37,12 @@ public class SimulatedAnnealing {
         // Start optimizing
         while (singleMarkovChainLength>0){
             // call mean method of Simulated Annealing
-            simAnMethods.chooseRandomCenterAndAlterIt(listOfCreatedClusters,initialList,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
+            simAnMethods.chooseRandomCenterAndAlterItSMC(listOfCreatedClusters,listOfPoints,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
             // decrease the number of iteration by one
             singleMarkovChainLength --;
         }
         // inject the final result of the best found centers
-        simAnMethods.injectCentersListInCluster(listOfCreatedClusters,initialList,showResultInConsole);
+        simAnMethods.injectCentersListInCluster(listOfCreatedClusters,listOfPoints,showResultInConsole);
 
         // Stop timer
         Instant finish = Instant.now();
