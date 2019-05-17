@@ -2,8 +2,10 @@ package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo;
 
 public class Run {
     public static void main(String[] args) throws Exception {
-        FactoryClass factoryClass = new FactoryClass();
-        factoryClass.run();
+        ParametersReader parametersReader = new ParametersReader();
+        parametersReader.run();
+        /*FactoryClass factoryClass = new FactoryClass();
+        factoryClass.run();*/
 /*
         *//**
          * Choose 1 for Single Linkage

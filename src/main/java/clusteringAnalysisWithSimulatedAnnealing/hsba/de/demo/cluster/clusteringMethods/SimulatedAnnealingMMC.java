@@ -55,6 +55,9 @@ public class SimulatedAnnealingMMC {
         // Print out
         System.out.println("Execution Time is "+ timeElapsed+ " (ms)");
         System.out.println("Initial SEE-Means value is " + initialValueMean+ " and initial SSE-Center value is "+ initialValueCenter);
+        System.out.println("########################################");
+        System.out.println("########################################");
+        System.out.println("");
 
     }
 }

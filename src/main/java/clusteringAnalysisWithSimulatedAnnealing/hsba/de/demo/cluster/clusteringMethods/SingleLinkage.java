@@ -17,7 +17,7 @@ public class SingleLinkage {
     private GeneralMethods generalMethods = new GeneralMethods();
 
 
-    public List<Cluster> computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
+    public void computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
         // Start timer
         Instant start = Instant.now();
         // create empty clusters
@@ -39,7 +39,9 @@ public class SingleLinkage {
         long timeElapsed = Duration.between(start, finish).toMillis();  //in millis
         // Print out
         System.out.println("Execution Time is "+ timeElapsed+ " (ms)");
-        return dataProcessing.getCreatedClusters();
+        System.out.println("########################################");
+        System.out.println("########################################");
+        System.out.println("");
     }
 
 }

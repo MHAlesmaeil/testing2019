@@ -25,16 +25,16 @@ public class FactoryClass {
          * Choose 1 for Euclidean Distance
          * Choose 2 for Manhattan Distance
          */
-        int distanceMehods = 1;
+        int distanceMehods;
         /**
          * Choose a number, which is greater than 2
          */
-        int numberOfClusters = 10;
+        int numberOfClusters;
         /**
          * Choose the Path to the file, where the data exists
          * For example: C:/Java/TestFolder/MallCustomers.csv
          */
-        boolean showResultInConsole = false;
+        boolean showResultInConsole;
         /**
          * https://vincentarelbundock.github.io/Rdatasets/datasets.html
          */
@@ -44,9 +44,9 @@ public class FactoryClass {
          * Saved as a List of String arrays
          */
 
-        int numberOfIteration = 8230;
+        int numberOfIteration;
 
-        double acceptanceTemperature = 0.001;
+        double acceptanceTemperature;
 
         double initialTemperature;
         double finalTemperature;
@@ -62,7 +62,6 @@ public class FactoryClass {
         while (stopRunning==false){
             System.out.println("Please notice that file extension must be '.csv'");
             Scanner scanner = new Scanner(System.in);
-
             String inputString = scanner.nextLine();
             if (inputString.equals("-1")||inputString.toLowerCase().contentEquals("stop")){
                 stopRunning = true;
@@ -121,7 +120,7 @@ public class FactoryClass {
                             showResultInConsole = new Boolean(inputString).booleanValue();
                             SimulatedAnnealingSMC simulatedAnnealingSMC = new SimulatedAnnealingSMC();
                             simulatedAnnealingSMC.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,mutationFactor,showResultInConsole);
-                        }else {
+                        }else if (inputString.equals("3")){
 
                             // Simulated Annealing has been selected
                             System.out.println("Simulated Annealing MMC has been selected");

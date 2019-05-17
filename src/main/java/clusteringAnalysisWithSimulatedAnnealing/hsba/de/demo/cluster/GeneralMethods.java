@@ -355,7 +355,6 @@ public class GeneralMethods {
                     System.out.println();
                 }
             }
-            System.out.println("\n");
             System.out.println("###############################");
             System.out.println("Total SSE is " + totalSSE);
         }
@@ -390,7 +389,6 @@ public class GeneralMethods {
                     System.out.println();
                 }
             }
-            System.out.println("\n");
             System.out.println("###############################");
             System.out.println("Total SSE based On the means is " + clusterSSE.computeSSEOfListOfClustersBasedOnMeans(listOfClusters));
             System.out.println("Total SSE based On the centers is " + clusterSSE.computeSSEOfListOfClustersBasedOnCenters(listOfClusters));
