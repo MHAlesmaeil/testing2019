@@ -37,7 +37,7 @@ public class SimulatedAnnealingSMC {
         // Start optimizing
         while (singleMarkovChainLength>0){
             // call mean method of Simulated Annealing
-            simAnMethods.chooseRandomCenterAndAlterItSMC(listOfCreatedClusters,listOfPoints,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
+            simAnMethods.chooseRandomCenterAndAlterIt(listOfCreatedClusters,listOfPoints,acceptanceTemperatureT0,mutationFactor,showResultInConsole);
             // decrease the number of iteration by one
             singleMarkovChainLength --;
         }

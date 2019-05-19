@@ -141,10 +141,11 @@ public class SimulatedAnnealingMethods {
         return temp;
     }
     /**
-     * chooseRandomCenterAndAlterItSMC chooses a center random to start altering it
+     * chooseRandomCenterAndAlterIt chooses a center randomly to start altering its values
     */
+    // list to remember the best centers
     List<double[]> bestCenters;
-
+    // setter and getter for best centers
     public List<double[]> getBestCenters() {
         if (bestCenters==null){
             bestCenters = new ArrayList<>();
@@ -159,7 +160,7 @@ public class SimulatedAnnealingMethods {
     // SSE value of the bestFoundcenter
     double bestFoundCenterSEEValue =-1;
 
-
+    // Getter and setter for the best SSE found centers
     public double getBestFoundCenterSEEValue() {
         return bestFoundCenterSEEValue;
     }
@@ -168,7 +169,7 @@ public class SimulatedAnnealingMethods {
         this.bestFoundCenterSEEValue = bestFoundCenterSEEValue;
     }
 
-    public void chooseRandomCenterAndAlterItSMC(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints, double acceptanceTemperature, double mutationFactor, boolean showResultInConsole){
+    public void chooseRandomCenterAndAlterIt(List<Cluster> listOfClusters, List<double[]> listOfNormalizedPoints, double acceptanceTemperature, double mutationFactor, boolean showResultInConsole){
 
         // if a list of centers is empty, then inject the current centers
         if (getBestCenters().size()==0){

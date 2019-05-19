@@ -13,10 +13,13 @@ import java.util.List;
  */
 
 public class SingleLinkage {
+    // creating instances of DataProcessing and GeneralMethods
     private DataProcessing dataProcessing = new DataProcessing();
     private GeneralMethods generalMethods = new GeneralMethods();
 
-
+    /**
+     * Main function to create clusters as to Single Linkage method
+    */
     public void computeCluster(int numberOfCluter, List<String[]> pointsToBeClustered, int distanceMethodNumber, boolean showResultInConsole) throws Exception {
         // Start timer
         Instant start = Instant.now();

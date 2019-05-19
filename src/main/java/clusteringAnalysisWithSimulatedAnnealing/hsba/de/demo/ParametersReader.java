@@ -12,38 +12,91 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ParametersReader {
-    public void run() throws Exception{
+/**
+ * This class aggregate the coded methods to be called then from the main method in the class run
+*/
 
+public class ParametersReader {
+
+    /**
+     * This is the main method in this class and the one which needed to optimize the clusters
+    */
+    public void run() throws Exception{
+        // create an empty list
         List<String[]> listOfPoints = null;
         /*System.out.println("Welcome to Cluster Analysis");
         System.out.println("You can enter '-1' or type 'Stop' to stop the processes");
         System.out.println("Please enter the path to the data-file (e.g. C:/Java/xxx.csv");*/
         boolean stopRunning = false;
-
+        // keep loop until it is true
         while (stopRunning==false){
-            System.out.println("Enter 1 to read the files from the default folder or 0 to enter the path manually");
+            System.out.println("Enter 1 to read the files from the default folder, 0 to enter the path manually or type 'help' to get information about the required files");
+            System.out.println("If you want to use the default folder which need to be created in 'C:/Java' and in this folder you can place the 2 files which are required 'Points.csv' and 'Parameters.csv'");
+            System.out.println("Note: All inputs are not case sensitive");
             Scanner scanner = new Scanner(System.in);
             String inputString = scanner.nextLine();
+            if (inputString.toLowerCase().equals("help")){
+               System.out.println("#################################");
+               System.out.println("########      HELP        #######");
+               System.out.println("#################################");
+               System.out.println("To use this tool you need to have two files:");
+               System.out.println("1. File which contains the points of dataset which needs to be in '.csv' format");
+               System.out.println("2. File which contains the parameter which also needs to be in '.csv' format");
+                System.out.println("#################################");
+                System.out.println("## Assumptions and Expectation ##");
+                System.out.println("#################################");
+               System.out.println("The assumption for the first file is: The file is in '.csv' format and " +
+                       "does have a header");
+               System.out.println("The assumption for the second file is:  Same as the first file as well" +
+                       " as it has the following pieces of information:{Please Note: Recommendations in this" +
+                       " section are based on the developer personal experiences, you are however encouraged " +
+                       "to choose you own values of the parameters}");
+               System.out.println("clusteringMethod,'2' {1: Single Linkage, 2: Simulated Annealing SMC," +
+                       " 3: Simulated Annealing MMC, 4: All the previous methods}\n" +
+                       "numberOfClusters,'5'{No specific recommendation}\n" +
+                       "distanceMethods,'1' {1: Euclidean Distance, 2: Manhattan Distance }\n" +
+                       "numberOfIterationSMC,'10' {This parameter will be multiplied with the number of " +
+                       "points in the dataset}\n" +
+                       "acceptanceTemperature,'0.5' {For a small dataset '0.5' is recommended}\n" +
+                       "initialTemperature,'2'{For a small dataset, '2.0' is recommended}\n" +
+                       "finalTemperature,'0.5' {For a small dataset, '0.5' is recommended}\n" +
+                       "coolingRate,'0.05' {No Specific recommendation}\n" +
+                       "mutationFactor,'0.01' {Between '0.05' and '0.01' is recommended}\n" +
+                       "showResultInConsole,'false' {For a large dataset, 'false' is recommended}\n" +
+                       "numberOfIterationPerGivenTemperature,'4' {This parameters will ensure to get a " +
+                       "certain number of iteration which is equal to number of points times this parameters}");
+               System.out.println("The order in which those parameters are placed is critical to let the tool " +
+                       "work as expected");
+               System.out.println("Last but not least, you can rename the dataset file as 'points.csv'" +
+                       " and parameters file as 'parameters.csv.' and place them in a folder as to the next " +
+                       "path 'C:/java/' so you can call everything automatically with selecting '1' in the first " +
+                       "menu. However if you don't want to follow the last tip, you can give the path of each " +
+                       "file manually by selecting '0'");
+               System.out.println("#################################");
+               System.out.println("######### Help Ends Here #######");
+               System.out.println("#################################");
+            }
+            // if 1 is selected then read automatically from the default folder with the default name
             if (inputString.equals("1")){
-                // read the file fromt he path C:/Java/points.csv and C:/Java/parameters.csv
+                // read the file from the default paths C:/Java/points.csv and C:/Java/parameters.csv
                 String filePath = "c:/java/points.csv";
                 String parameterPath = "C:/Java/parameters.csv";
+                // Check if the path goes to a csv file
                 if (checkPath(filePath)){
+                    // load the list of points
                     listOfPoints= execute(filePath);
                     System.out.println("File 'Points' has been found and accepted. Total number of points is: "+ (listOfPoints.size()-1));
                     if (checkPath(parameterPath)){
+                        // load the parameters
                        List<String[]> listOfParameters = execute(parameterPath);
                         System.out.println("File 'Parameters' has been found and total number of read parameters is "+ (listOfParameters.size()-1));
-
                         executreOrderInParametersFile(listOfParameters,listOfPoints);
-
-
                     }else{
-                        System.out.println("File 'Parameters' was not found. Please check again in 'C:/Java/Parameters'");
+                        // the path of the parameters is not correct
+                        System.out.println("File 'Parameters' was not found or not in the required format. Please check again in 'C:/Java/Parameters'");
                     }
                 }else{
-                    System.out.println("File 'Points' was not found. Please check again in 'C:/Java/Points.csv'");
+                    System.out.println("File 'Points' was not found or not in the required format. Please check again in 'C:/Java/Points.csv'");
                 }
 
             }else if (inputString.equals("0")){
