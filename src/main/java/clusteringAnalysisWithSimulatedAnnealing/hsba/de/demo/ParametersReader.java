@@ -45,8 +45,9 @@ public class ParametersReader {
                 System.out.println("#################################");
                 System.out.println("## Assumptions and Expectation ##");
                 System.out.println("#################################");
-               System.out.println("The assumption for the first file is: The file is in '.csv' format and " +
-                       "does have a header");
+               System.out.println("The assumption for the first file is: The file is in '.csv' format, it " +
+                       "does have a header, the values of the points are numerical and each point does have" +
+                       " a unique key which is the first value in the point array");
                System.out.println("The assumption for the second file is:  Same as the first file as well" +
                        " as it has the following pieces of information:{Please Note: Recommendations in this" +
                        " section are based on the developer personal experiences, you are however encouraged " +
