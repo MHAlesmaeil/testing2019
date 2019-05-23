@@ -11,14 +11,14 @@ public class ChooseDistanceMethod {
         DistanceMethod distanceMethod = null;
         // if 1, create an Euclidean Distance instance
         if (chosenMethod==1){
-            distanceMethod = new EuclideanDistance();
+            distanceMethod = new SquaredEuclideanDistance();
         }
         // if 2, create a Manhattan Distance
         else if(chosenMethod==2){
             distanceMethod = new ManhattanDistance();
         }else{
             // else, create Euclidean Distance as default method
-            distanceMethod = new EuclideanDistance();
+            distanceMethod = new SquaredEuclideanDistance();
         }
         return distanceMethod;
     }

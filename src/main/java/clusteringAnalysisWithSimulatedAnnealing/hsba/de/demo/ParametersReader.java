@@ -91,7 +91,7 @@ public class ParametersReader {
                         // load the parameters
                        List<String[]> listOfParameters = readListOfPoints(parameterPath);
                         System.out.println("File 'Parameters' has been found and total number of read parameters is "+ (listOfParameters.size()-1));
-                        executreOrderInParametersFile(listOfParameters,listOfPoints);
+                        executeOrdersInParametersFile(listOfParameters,listOfPoints);
                     }else{
                         // the path of the parameters is not correct
                         System.out.println("File 'Parameters' was not found or not in the required format. Please check again in 'C:/Java/Parameters'");
@@ -117,7 +117,7 @@ public class ParametersReader {
                         if (checkPath(inputString)){
                             List<String[]> listOfParameters = readListOfPoints(inputString);
                             System.out.println("Parameters file has been read");
-                            executreOrderInParametersFile(listOfParameters,listOfPoints);
+                            executeOrdersInParametersFile(listOfParameters,listOfPoints);
 
                         }else{
                             System.out.println("Parameters file is not compatible ");
@@ -182,13 +182,13 @@ public class ParametersReader {
     /**
      * Execute the orders in the parameters
     */
-    public void executreOrderInParametersFile(List<String[]> listOfParameters, List<String[]> listOfPoints)throws Exception{
+    public void executeOrdersInParametersFile(List<String[]> listOfParameters, List<String[]> listOfPoints)throws Exception{
         printOutParatmers(listOfParameters);
         SimulatedAnnealingMMC simulatedAnnealingMMC = new SimulatedAnnealingMMC();
         SimulatedAnnealingSMC simulatedAnnealingSMC = new SimulatedAnnealingSMC();
         SingleLinkage singleLinkage= new SingleLinkage();
         int clusteringMethod = new Integer(listOfParameters.get(1)[1]);
-        int distanceMehods = new Integer(listOfParameters.get(3)[1]);
+        int distanceMethods = new Integer(listOfParameters.get(3)[1]);
         int numberOfClusters = new Integer(listOfParameters.get(2)[1]);
         boolean showResultInConsole = new Boolean(listOfParameters.get(10)[1]);
         int numberOfIteration = new Integer(listOfParameters.get(4)[1])*listOfPoints.size();
@@ -196,13 +196,13 @@ public class ParametersReader {
         double initialTemperature = new Double(listOfParameters.get(6)[1]);
         double mutationFactor = new Double(listOfParameters.get(9)[1]);
         double finalTemperature = new Double(listOfParameters.get(7)[1]);
-        double alphaValue = new Double(listOfParameters.get(8)[1]);
+        double coolingRate = new Double(listOfParameters.get(8)[1]);
         int numberOfIterationPerGivenTemperature = new Integer(listOfParameters.get(11)[1]);
         if (clusteringMethod==1){
             // readListOfPoints single linkage
             System.out.println("Single Linkage is executing");
 
-            singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
+            singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMethods,showResultInConsole);
         }else if (clusteringMethod ==2){
             // readListOfPoints simulated annealing SMC
             System.out.println("Simulated Annealing SMC is executing");
@@ -212,15 +212,15 @@ public class ParametersReader {
             // readListOfPoints simulated annealing MMC
             System.out.println("Simulated Annealing MMC is executing");
 
-            simulatedAnnealingMMC.computeCluster(numberOfClusters,listOfPoints,initialTemperature,finalTemperature,alphaValue,mutationFactor,numberOfIterationPerGivenTemperature,showResultInConsole);
+            simulatedAnnealingMMC.computeCluster(numberOfClusters,listOfPoints,initialTemperature,finalTemperature,coolingRate,mutationFactor,numberOfIterationPerGivenTemperature,showResultInConsole);
         }else{
             System.out.println("All methods will be executed");
             System.out.println("Single Linkage is executing");
-            singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMehods,showResultInConsole);
+            singleLinkage.computeCluster(numberOfClusters,listOfPoints,distanceMethods,showResultInConsole);
             System.out.println("Simulated Annealing SMC is executing");
             simulatedAnnealingSMC.computeCluster(numberOfClusters,listOfPoints,numberOfIteration, acceptanceTemperature,mutationFactor,showResultInConsole);
             System.out.println("Simulated Annealing MMC is executing");
-            simulatedAnnealingMMC.computeCluster(numberOfClusters,listOfPoints,initialTemperature,finalTemperature,alphaValue,mutationFactor,numberOfIterationPerGivenTemperature,showResultInConsole);
+            simulatedAnnealingMMC.computeCluster(numberOfClusters,listOfPoints,initialTemperature,finalTemperature,coolingRate,mutationFactor,numberOfIterationPerGivenTemperature,showResultInConsole);
         }
     }
 

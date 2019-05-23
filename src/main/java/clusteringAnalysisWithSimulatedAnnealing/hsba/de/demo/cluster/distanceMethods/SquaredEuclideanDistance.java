@@ -1,7 +1,7 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods;
 
 
-public class EuclideanDistance implements DistanceMethod {
+public class SquaredEuclideanDistance implements DistanceMethod {
 
     @Override
     public double computeDistance(double[] firstArray, double[] secondArray) {

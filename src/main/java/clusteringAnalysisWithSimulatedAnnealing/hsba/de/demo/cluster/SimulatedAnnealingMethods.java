@@ -1,6 +1,6 @@
 package clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster;
 
-import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.EuclideanDistance;
+import clusteringAnalysisWithSimulatedAnnealing.hsba.de.demo.cluster.distanceMethods.SquaredEuclideanDistance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Random;
  * SimulatedAnnealingMethods class has the main methods which used to implement Simulated Annealing
  */
 public class SimulatedAnnealingMethods {
-    EuclideanDistance euclideanDistance = new EuclideanDistance();
+    SquaredEuclideanDistance squaredEuclideanDistance = new SquaredEuclideanDistance();
     ClusterSSE clusterSSE = new ClusterSSE();
     Random random = new Random();
     GeneralMethods generalMethods = new GeneralMethods();
@@ -95,7 +95,7 @@ public class SimulatedAnnealingMethods {
             // Loop through the centers of clusters
             for (int y = 0; y<listOfClusters.size(); y++){
                 // Measure the new distance
-                double tempDouble = euclideanDistance.computeDistance(listOfPoints.get(x),listOfClusters.get(y).getClusterCenter());
+                double tempDouble = squaredEuclideanDistance.computeDistance(listOfPoints.get(x),listOfClusters.get(y).getClusterCenter());
                 // First solution
                 if ( y == 0){
                     oldValue = tempDouble;
