@@ -30,8 +30,11 @@ public class ParametersReader {
         boolean stopRunning = false;
         // keep loop until it is true
         while (stopRunning==false){
-            System.out.println("Enter 1 to read the files from the default folder, 0 to enter the path manually or type 'help' to get information about the required files");
-            System.out.println("If you want to use the default folder which need to be created in 'C:/Java' and in this folder you can place the 2 files which are required 'Points.csv' and 'Parameters.csv'");
+            System.out.println("############################################################################################");
+            System.out.println("# WELCOME TO SIMULATED ANNEALING TOOL BASED ON CENTER PERTURBATION USING GAUSSIAN MUTATION #");
+            System.out.println("############################################################################################");
+            System.out.println("You can enter: \n 1 to read the files from the default folder,\n 0 to enter the path manually ,or\n type 'help' to get information about the required files");
+
             System.out.println("Note: All inputs are not case sensitive");
             Scanner scanner = new Scanner(System.in);
             String inputString = scanner.nextLine();
@@ -54,7 +57,7 @@ public class ParametersReader {
                        "to choose you own values of the parameters}");
                System.out.println("1- clusteringMethod,'2' {1: Single Linkage, 2: Simulated Annealing SMC," +
                        " 3: Simulated Annealing MMC, 4: All the previous methods}\n" +
-                       "2- numberOfClusters,'5'{No specific recommendation}\n" +
+                       "2- numberOfClusters,'5'{It must be an Integer. No specific recommendation}\n" +
                        "3- distanceMethods,'1' {1: Euclidean Distance, 2: Manhattan Distance }\n" +
                        "4- numberOfIterationSMC,'10' {This parameter will be multiplied with the number of " +
                        "points in the dataset}\n" +
@@ -64,8 +67,7 @@ public class ParametersReader {
                        "8- coolingRate,'0.05' {No Specific recommendation}\n" +
                        "9- mutationFactor,'0.01' {Between '0.05' and '0.01' is recommended}\n" +
                        "10- showResultInConsole,'false' {For a large dataset, 'false' is recommended}\n" +
-                       "11- numberOfIterationPerGivenTemperature,'4' {This parameters will ensure to get a " +
-                       "certain number of iteration which is equal to number of points times this parameters}");
+                       "11- numberOfIterationPerGivenTemperature,'4' {It must be an Integer and this parameter will be multiplied with the number of points in the dataset. No specific recommendation}");
                System.out.println("The order in which those parameters are placed is critical to let the tool " +
                        "work as expected");
                System.out.println("Last but not least, you can rename the dataset file as 'points.csv'" +
@@ -101,7 +103,8 @@ public class ParametersReader {
                 }
 
             }else if (inputString.equals("0")){
-                System.out.println("Please enter the path to the dataset. The file extension must '.csv'");
+                System.out.println("Please enter the path to the dataset. The file extension must '.csv'. For Example: 'C:/XXX/points.csv'");
+
                 inputString = scanner.nextLine();
                 if (inputString.equals("-1")||inputString.toLowerCase().contentEquals("stop")){
                     stopRunning = true;
@@ -112,7 +115,7 @@ public class ParametersReader {
                     listOfPoints= readListOfPoints(inputString);
                     if (listOfPoints.size()!=0){
                         System.out.println("File has been read and number of points is: "+ (listOfPoints.size()-1));
-                        System.out.println("Please enter the path to the parameters file");
+                        System.out.println("Please enter the path to the parameters file. The file extension must '.csv'. For Example: 'C:/XXX/parameters.csv'");
                         inputString = scanner.nextLine();
                         if (checkPath(inputString)){
                             List<String[]> listOfParameters = readListOfPoints(inputString);
